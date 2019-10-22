@@ -88,6 +88,11 @@ save([saveDir,'/coatingData_mt1.mat'],'coatingData_mt1')
 % 3 from 2019 07 16
 run('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/loadMtHeightData_mt_123_20190716.m')
 
+
+h2_naked = mt123naked00228.y2;
+
+h2_bg_naked = mt123naked00228.y3;
+
 % get path to save data in
 [saveDir]=fileparts(filename);
 
@@ -98,13 +103,7 @@ run('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/
 
 %%
 
-x2_naked = mt123naked00228.x2;
-h2_naked = mt123naked00228.y2;
-h2_naked(isnan(h2_naked))=[];
 
-x2_bg_naked = mt123naked00228.x3;
-h2_bg_naked = mt123naked00228.y3;
-h2_bg_naked(isnan(h2_bg_naked))=[];
 
 % figure; plot(h2_bg_naked)
 % %[xi2bgn,yi2bgn]=ginput(1);
