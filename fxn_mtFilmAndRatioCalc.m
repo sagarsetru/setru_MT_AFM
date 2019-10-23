@@ -137,5 +137,7 @@ outputData.errLmb_over_s = errLmb_over_s;
 outputData.yibgn = yibgn;
 outputData.yibgtp = yibgtp;
 
+outputData.lmb = lmb;
+
 end
 
