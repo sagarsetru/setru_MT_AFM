@@ -8,7 +8,7 @@ from pathlib import Path
 
 #fname = '/Users/sagarsetru/files.txt'
 #fname = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/files.txt'
-fname = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data processing/files.txt'
+fname = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/data processing/files.txt'
 
 # from https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
 with open(fname) as f:

@@ -1,0 +1,32 @@
+# Sagar Setru
+# 2019 06 03
+# script to write macros for ImageJ to save txt img as tif
+
+import glob
+import os
+from pathlib import Path
+
+fname = '/Users/sagarsetru/files.txt'
+# from https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
+with open(fname) as f:
+    txtfiles = f.readlines()
+txtfiles = [x.strip() for x in paths]
+
+closeLine = ['close();']
+
+counter = 1
+for txtfile in txtfiles:
+    counter += 1
+
+    print 'working on:'
+    print txtfile
+    print 'file ',counter,' out of ',len(txtfiles)
+    print ' '
+
+    txtfileNoExt = os.path.splitext(txtfiles)[0]
+
+    importLines[counter] = ['"Text Image... ", "open=['+txtfile+']");']
+    saveAsLines[counter] = ['saveAs("Tiff", "'+txtfileNoExt+'.tif");']
+
+    
+    
