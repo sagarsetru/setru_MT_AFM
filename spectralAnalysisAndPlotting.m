@@ -1,4 +1,4 @@
-function [P1s,f,maxF_all,indsForSpectra,avgSpectra,stdSpectra,maxAmplitude,maxF,spacing] = spectralAnalysisAndPlotting(c,indsForSpectra,f_cutoff,pix_to_nm,doSave,saveDir,saveString)
+function [P1s,f,maxF_all,indsForSpectra,avgSpectra,stdSpectra,maxAmplitude,maxF,spacing,initFreqPlotInd,f_cut,plottedSpectra,plottedFreq] = spectralAnalysisAndPlotting(c,indsForSpectra,f_cutoff,pix_to_nm,doSave,saveDir,saveString,doPause,my_col,startTime,endTime,indsForAverage)
 %spectralAnalysisAndPlotting.m - fxn to do fft of AFM line scans, saves
 %plots, spectra, frequencies
 % Sagar Setru, 2019 09 27
@@ -39,41 +39,55 @@ for j = 1:length(indsForSpectra)
     
     % get freq vector
     f_cut = f(initFreqPlotInd:end);
+    plottedSpectra{j} = a;
+    plottedFreq{j} = f_cut;
     
-    figure(2); hold on;
-    plot(f_cut,a)
-    
+    figure(2); hold on; box on;
+    plot(f_cut,a,'color',my_col(j,:))
+    if doPause
+        pause
+    end
     % get max frequency for this scan
     maxA_i = find(a==max(a));
     maxF_all(j) = f_cut(maxA_i);
     
 end
+
+colormap(my_col)
+colorbar('Ticks',[0, 1/4, 1/2, 3/4, 1],...
+        'TickLabels',{[num2str(round(startTime)),' min'],...
+        [num2str(round(startTime+((endTime-startTime)/4+4))),' min'],...
+        [num2str(round(startTime+((endTime-startTime)/2+4))),' min'],...
+        [num2str(round(startTime+(3*(endTime-startTime)/4+4))),' min'],...
+        [num2str(round(endTime)),' min']},...
+        'FontSize',12)
 %maxF_all
 
 % find index
 initFreqPlotInd = min(find(f>f_cutoff));
-
+% initFreqPlotInd=1;
 xafz = 14;
 yafz = 14;
 tvfz = 12;
-simplePlotFormat( 'f (nm^{-1})', '|P(f)|', xafz, yafz, tvfz )
+simplePlotFormat( 'frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz )
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','PowerSpectrum_',saveString])
 end
 
 if size(c,1) > 1
-    avgSpectra = mean(P1s');
-    stdSpectra = std(P1s');
+    avgSpectra = mean(P1s(:,indsForAverage)');
+    stdSpectra = std(P1s(:,indsForAverage)');
     
-    maxAmplitude = max(mean(P1s(initFreqPlotInd:end,:)'));
+    maxAmplitude = max(mean(P1s(initFreqPlotInd:end,indsForAverage)'));
     maxF = f(find(avgSpectra==maxAmplitude));
     spacing = 1/maxF;
 
-    figure; errorbar(f(initFreqPlotInd:end),avgSpectra(:,initFreqPlotInd:end),stdSpectra(:,initFreqPlotInd:end)/sqrt(size(P1s,2)))
+    figure; box on;
+    errorbar(f(initFreqPlotInd:end),avgSpectra(:,initFreqPlotInd:end),stdSpectra(:,initFreqPlotInd:end)/sqrt(size(P1s,2)))
     xafz = 14;
     yafz = 14;
     tvfz = 12;
-    simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)|', xafz, yafz, tvfz )
+    simplePlotFormat( 'Frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz )
     if doSave
         saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','AveragePowerSpectrum_',saveString])
     end
@@ -88,6 +102,7 @@ if doSave
     save([saveDir,'/','frequencies_',saveString,'.mat'],'f')
     save([saveDir,'/','maxFrequencies_',saveString,'.mat'],'maxF_all')
     save([saveDir,'/','f_cutoff_',saveString,'.mat'],'f_cutoff')
+    save([saveDir,'/','indsForAverage_',saveString,'.mat'],'indsForAverage')
     save([saveDir,'/','indsForSpectra_',saveString,'.mat'],'indsForSpectra')
     save([saveDir,'/','avgSpectra_',saveString,'.mat'],'avgSpectra')
     save([saveDir,'/','stdSpectra_',saveString,'.mat'],'stdSpectra')
