@@ -10,77 +10,17 @@ f_cutoff = .00099; %units nm^-1
 
 saveDirMain =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
 
-%% load naked MT, kinesin, ct tpx2, and tpx2 (init and final) spectra
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_nakedMT_20190715_137-143/c_cx_mt-x-182-148_cy_mt-y-82-156/avgSpectra_c_cx_mt-x-182-148_cy_mt-y-82-156.mat')
-avgSpectra_naked_1 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_nakedMT_20190715_137-143/c_cx_mt-x-182-148_cy_mt-y-82-156/stdSpectra_c_cx_mt-x-182-148_cy_mt-y-82-156.mat')
-stdSpectra_naked_1 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_nakedMT_20190715_137-143/c_cx_mt-x-182-148_cy_mt-y-82-156/spectra_c_cx_mt-x-182-148_cy_mt-y-82-156.mat')
-n_naked_1 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_nakedMT_20190715_137-143/c_cx_mt-x-182-148_cy_mt-y-82-156/frequencies_c_cx_mt-x-182-148_cy_mt-y-82-156.mat')
-f_naked_1 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/c_cx_mt-x-458-522_cy_mt-y-452-494/avgSpectra_c_cx_mt-x-458-522_cy_mt-y-452-494.mat')
-avgSpectra_naked_2 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/c_cx_mt-x-458-522_cy_mt-y-452-494/stdSpectra_c_cx_mt-x-458-522_cy_mt-y-452-494.mat')
-stdSpectra_naked_2 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/c_cx_mt-x-458-522_cy_mt-y-452-494/spectra_c_cx_mt-x-458-522_cy_mt-y-452-494.mat')
-n_naked_2 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/c_cx_mt-x-458-522_cy_mt-y-452-494/frequencies_c_cx_mt-x-458-522_cy_mt-y-452-494.mat')
-f_naked_2 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/xc2yc2_c_cx_mt-x-432-492_cy_mt-y-516-496/avgSpectra_c_cx_mt-x-432-492_cy_mt-y-516-496.mat')
-avgSpectra_naked_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/xc2yc2_c_cx_mt-x-432-492_cy_mt-y-516-496/stdSpectra_c_cx_mt-x-432-492_cy_mt-y-516-496.mat')
-stdSpectra_naked_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/xc2yc2_c_cx_mt-x-432-492_cy_mt-y-516-496/spectra_c_cx_mt-x-432-492_cy_mt-y-516-496.mat')
-n_naked_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/xc2yc2_c_cx_mt-x-432-492_cy_mt-y-516-496/frequencies_c_cx_mt-x-432-492_cy_mt-y-516-496.mat')
-f_naked_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
 %%
 
-
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/avgSpectra_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
-avgSpectra_kin_1 = avgSpectra;
+avgSpectra_kin_1 = avgSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/stdSpectra_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
-stdSpectra_kin_1 = stdSpectra;
+stdSpectra_kin_1 = stdSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/spectra_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
 n_kin_1 = size(P1s,2);
-spectra_kin_1 = P1s;
+spectra_kin_1 = P1s.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/frequencies_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
 f_kin_1=f;
@@ -94,14 +34,14 @@ clear f
 
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-93-182_cy_mt-y-176-150/avgSpectra_c_cx_mt-x-93-182_cy_mt-y-176-150.mat')
-avgSpectra_kin_2 = avgSpectra;
+avgSpectra_kin_2 = avgSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-93-182_cy_mt-y-176-150/stdSpectra_c_cx_mt-x-93-182_cy_mt-y-176-150.mat')
-stdSpectra_kin_2 = stdSpectra;
+stdSpectra_kin_2 = stdSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-93-182_cy_mt-y-176-150/spectra_c_cx_mt-x-93-182_cy_mt-y-176-150.mat')
 n_kin_2 = size(P1s,2);
-spectra_kin_2 = P1s;
+spectra_kin_2 = P1s.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-93-182_cy_mt-y-176-150/frequencies_c_cx_mt-x-93-182_cy_mt-y-176-150.mat')
 f_kin_2 = f;
@@ -115,14 +55,14 @@ clear f
 
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt2/Stack_kinesin_2019 07 16_expt2_298-300/c_cx_mt-x-192-322_cy_mt-y-134-253/avgSpectra_c_cx_mt-x-192-322_cy_mt-y-134-253.mat')
-avgSpectra_kin_3 = avgSpectra;
+avgSpectra_kin_3 = avgSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt2/Stack_kinesin_2019 07 16_expt2_298-300/c_cx_mt-x-192-322_cy_mt-y-134-253/stdSpectra_c_cx_mt-x-192-322_cy_mt-y-134-253.mat')
-stdSpectra_kin_3 = stdSpectra;
+stdSpectra_kin_3 = stdSpectra.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt2/Stack_kinesin_2019 07 16_expt2_298-300/c_cx_mt-x-192-322_cy_mt-y-134-253/spectra_c_cx_mt-x-192-322_cy_mt-y-134-253.mat')
 n_kin_3 = size(P1s,2);
-spectra_kin_3 = P1s;
+spectra_kin_3 = P1s.*1e9;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt2/Stack_kinesin_2019 07 16_expt2_298-300/c_cx_mt-x-192-322_cy_mt-y-134-253/frequencies_c_cx_mt-x-192-322_cy_mt-y-134-253.mat')
 f_kin_3 = f;
@@ -136,10 +76,10 @@ pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm dat
 fNameStruct = loadSpectralDataFromDir(pathName);
 
 load(fNameStruct.avgSpectra)
-avgSpectra_kin_4 = avgSpectra/1e9;
+avgSpectra_kin_4 = avgSpectra;
 
 load(fNameStruct.stdSpectra)
-stdSpectra_kin_4 = stdSpectra/1e9;
+stdSpectra_kin_4 = stdSpectra;
 
 load(fNameStruct.spectra)
 
@@ -162,7 +102,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_26-28_20191108_rigidBody/c_cx_mt-x-95-145_cy_mt-y-1-86';
@@ -195,7 +135,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_29-31_20191108_rigidBody/c_cx_mt-x-6-181_cy_mt-y-149-232';
@@ -228,7 +168,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_29-31_20191108_rigidBody/c_cx_mt-x-138-255_cy_mt-y-2-202';
@@ -261,7 +201,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_33-35_20191108_rigidBody/c_cx_mt-x-3-109_cy_mt-y-229-194';
@@ -294,7 +234,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_33-35_20191108_rigidBody/c_cx_mt-x-137-255_cy_mt-y-10-211';
@@ -327,7 +267,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_36-38_20191108_rigidBody/c_cx_mt-x-190-248_cy_mt-y-34-120';
 fNameStruct = loadSpectralDataFromDir(pathName);
@@ -359,7 +299,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 
@@ -393,7 +333,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 
@@ -427,7 +367,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_42-43_20191108_rigidBody/c_cx_mt-x-122-150_cy_mt-y-105-1';
@@ -460,7 +400,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_44-46_20191108_rigidBody/c_cx_mt-x-53-209_cy_mt-y-90-194';
@@ -493,7 +433,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_44-46_20191108_rigidBody/c_cx_mt-x-204-255_cy_mt-y-137-78';
@@ -526,7 +466,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-24-85_cy_mt-y-155-217';
@@ -559,7 +499,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-120-196_cy_mt-y-67-217';
@@ -592,7 +532,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_13-14_20191108/c_cx_mt-x-130-252_cy_mt-y-162-295';
@@ -625,7 +565,7 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
-
+clear f
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_15-17_20191108_rigidBody/c_cx_mt-x-34-254_cy_mt-y-5-234';
@@ -658,29 +598,10 @@ clear pathName
 clear avgSpectra
 clear stdSpectra
 clear P1s
+clear f
 
-%{
-fInd_kin_1 = min(find(f_kin_1>f_cutoff));
-fInd_kin_2 = min(find(f_kin_2>f_cutoff));
-fInd_kin_3 = min(find(f_kin_3>f_cutoff));
-fInd_kin_4 = min(find(f_kin_4>f_cutoff));
-fInd_kin_5 = min(find(f_kin_5>f_cutoff));
-fInd_kin_6 = min(find(f_kin_6>f_cutoff));
-fInd_kin_7 = min(find(f_kin_7>f_cutoff));
-fInd_kin_8 = min(find(f_kin_8>f_cutoff));
-fInd_kin_9 = min(find(f_kin_9>f_cutoff));
-fInd_kin_10 = min(find(f_kin_10>f_cutoff));
-fInd_kin_11 = min(find(f_kin_11>f_cutoff));
-fInd_kin_12 = min(find(f_kin_12>f_cutoff));
-fInd_kin_13 = min(find(f_kin_13>f_cutoff));
-fInd_kin_14 = min(find(f_kin_14>f_cutoff));
-fInd_kin_15 = min(find(f_kin_15>f_cutoff));
-fInd_kin_16 = min(find(f_kin_16>f_cutoff));
-fInd_kin_17 = min(find(f_kin_17>f_cutoff));
-fInd_kin_18 = min(find(f_kin_18>f_cutoff));
-fInd_kin_19 = min(find(f_kin_19>f_cutoff));
-%}
-%%
+%% kinesin spectra statistical analysis
+
 % generate cell of frequencies
 fAll_kin = {...
     f_kin_1(f_kin_1>f_cutoff),...
@@ -755,75 +676,3113 @@ spectraAll_kin = {...
 nboot = 10000;
 ci_alpha = .05; % default for 95% is .05
 
-[fLin_kin,spectraAll_lin_kin,avgSpectra_lin_kin,ci_lin_kin] = interpBootstrpSpectra(fAll_kin,spectraAll_kin,logIndAll_kin,nboot,ci_alpha);
+% do linear interp and bootstrap
+[fLin_kin,spectraAll_lin_kin,avgSpectra_lin_kin,ci_avgSpectra_lin_kin] = interpBootstrpSpectra(fAll_kin,spectraAll_kin,logIndAll_kin,nboot,ci_alpha);
 
-% get highest of the lowest frequencies sampled
-f_min_kin = max(cellfun(@min,fAll_kin));
-
-% get lowest of the highest frequencies sampled
-f_max_kin = min(cellfun(@max,fAll_kin));
-
-% get average spacing between frequencies sampled
-df_kin = mean(cellfun(@mean,cellfun(@diff,fAll_kin,'UniformOutput',false)));
-
-fLin_kin = [f_min_kin:df_kin:f_max_kin];
-
-% loop through cell of spectra and index
-for j = 1:numel(logIndAll_kin)
-    
-    spectraAll_kin{j} = spectraAll_kin{j}(logIndAll_kin{j},:);
-    
+subDir = 'spectra_kin';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
 end
-
-% initialize cell for linearized spectra
-spectraAll_lin_kin = cell(size(spectraAll_kin));
-
-% loop through spectra, interpolate all
-for j = 1:numel(spectraAll_kin)
-    
-    % get a set of spectra
-    spec = spectraAll_kin{j};
-    
-    % initialize matrix for linearized spectra
-    specLin = zeros(length(fLin_kin),size(spec,2));
-    
-    % loop through this set of spectra and interpolate
-    for k = 1:size(spec,2)
-        
-        specLin(:,k) = interp1(fAll_kin{j}(:),...
-            spec(:,k),...
-            fLin_kin(:),...
-            'linear','extrap');
-        
-    end
-    
-    % add to new cell
-    spectraAll_lin_kin{j} = specLin;
-    
-end
-
-% convert to mat
-spectraAll_lin_kin = cell2mat(spectraAll_lin_kin);
-
-%% perform bootstrap statistics
-
-% avgSpectra_kin_lin = mean(spectraAll_kin_lin,2);
-avgSpectra_lin_kin = bootstrp(nboot,@mean,spectraAll_lin_kin');
-ci_lin_kin = bootci(nboot,{@mean,spectraAll_lin_kin'},'alpha',ci_alpha);
-
 
 % save mat file of all linear kinesin spectra
-save([saveDirMain,'/spectraAll_kin_lin.mat'],'spectraAll_kin_lin')
+save([saveDirMain2,'/spectraAll_lin_kin.mat'],'spectraAll_lin_kin')
 
 % save mat file of kinesin linear indices
-save([saveDirMain,'/fLin_kin.mat'],'fLin_kin')
+save([saveDirMain2,'/fLin_kin.mat'],'fLin_kin')
+
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_kin'],'avgSpectra_lin_kin')
+save([saveDirMain2,'/ci_avgSpectra_lin_kin'],'ci_avgSpectra_lin_kin')
 
 
+%%
+
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/avgSpectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
+% avgSpectra_tpcterm_1 = avgSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/stdSpectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
+% stdSpectra_tpcterm_1 = stdSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/spectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
+% n_tpcterm_1 = size(P1s,2);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/frequencies_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
+% f_tpcterm_1 = f;
+% 
+% clear avgSpectra
+% clear stdSpectra
+% clear P1s
+% clear f
+% 
+% 
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/avgSpectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
+% avgSpectra_tpcterm_2 = avgSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/stdSpectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
+% stdSpectra_tpcterm_2 = stdSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/spectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
+% n_tpcterm_2 = size(P1s,2);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/frequencies_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
+% f_tpcterm_2 = f;
+% 
+% clear avgSpectra
+% clear stdSpectra
+% clear P1s
+% clear f
+% 
+% 
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/avgSpectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
+% avgSpectra_tpcterm_3 = avgSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/stdSpectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
+% stdSpectra_tpcterm_3 = stdSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/spectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
+% n_tpcterm_3 = size(P1s,2);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/frequencies_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
+% f_tpcterm_3 = f;
+% 
+% clear avgSpectra
+% clear stdSpectra
+% clear P1s
+% clear f
+% 
+% 
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/avgSpectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
+% avgSpectra_tpcterm_4 = avgSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/stdSpectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
+% stdSpectra_tpcterm_4 = stdSpectra;
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/spectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
+% n_tpcterm_4 = size(P1s,2);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/frequencies_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
+% f_tpcterm_4 = f;
+% 
+% clear avgSpectra
+% clear stdSpectra
+% clear P1s
+% clear f
+
+%% tpx2, conc2 (100-300nM)
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_1 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_1 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-112-182_cy_mt-y-288-250';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_2 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_2 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-189-228_cy_mt-y-287-236';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_3 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_3 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_4 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_4 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-180-144_cy_mt-y-234-287';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_5 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_5 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_6 = P1s.*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_6 = P1s.*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-14-253_cy_mt-y-143-123';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-106-232_cy_mt-y-161-192';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/c_cx_mt-x-113-128_cy_mt-y-7-120';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_9 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_9 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_181-183_strackReg/c_cx_mt-x-67-150_cy_mt-y-168-138';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_10 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_10 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_181-183_strackReg/c_cx_mt-x-211-247_cy_mt-y-126-63';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_11 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_11 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_181-183_strackReg/c_cx_mt-x-41-117_cy_mt-y-162-123';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_12 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_12 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_181-183_strackReg/c_cx_mt-x-4-149_cy_mt-y-75-121';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_13 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_13 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_184-186_strackReg/c_cx_mt-x-3-110_cy_mt-y-174-128';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_14 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_14 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_14 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_184-186_strackReg/c_cx_mt-x-229-204_cy_mt-y-132-251';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_15 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_15 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_15 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_184-186_strackReg/c_cx_mt-x-165-167_cy_mt-y-148-253';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_16 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_16 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_16 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_184-186_strackReg/c_cx_mt-x-110-76_cy_mt-y-162-235';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc2_17 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc2_17 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc2_17 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+%% tpx2 conc2 (100-300nM) stats analysis
+% generate cell of frequencies
+fAll_tpx2_conc2 = {...
+    f_tpx2_conc2_1(f_tpx2_conc2_1>f_cutoff),...
+    f_tpx2_conc2_2(f_tpx2_conc2_2>f_cutoff),...
+    f_tpx2_conc2_3(f_tpx2_conc2_3>f_cutoff),...
+    f_tpx2_conc2_4(f_tpx2_conc2_4>f_cutoff),...
+    f_tpx2_conc2_5(f_tpx2_conc2_5>f_cutoff),...
+    f_tpx2_conc2_6(f_tpx2_conc2_6>f_cutoff),...
+    f_tpx2_conc2_7(f_tpx2_conc2_7>f_cutoff),...
+    f_tpx2_conc2_8(f_tpx2_conc2_8>f_cutoff),...
+    f_tpx2_conc2_9(f_tpx2_conc2_9>f_cutoff),...
+    f_tpx2_conc2_10(f_tpx2_conc2_10>f_cutoff),...
+    f_tpx2_conc2_11(f_tpx2_conc2_11>f_cutoff),...
+    f_tpx2_conc2_12(f_tpx2_conc2_12>f_cutoff),...
+    f_tpx2_conc2_13(f_tpx2_conc2_13>f_cutoff),...
+    f_tpx2_conc2_14(f_tpx2_conc2_14>f_cutoff),...
+    f_tpx2_conc2_15(f_tpx2_conc2_15>f_cutoff),...
+    f_tpx2_conc2_16(f_tpx2_conc2_16>f_cutoff),...
+    f_tpx2_conc2_17(f_tpx2_conc2_17>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra below cutoff
+% frequency
+logIndAll_tpx2_conc2 = {...
+    (f_tpx2_conc2_1>f_cutoff),...
+    (f_tpx2_conc2_2>f_cutoff),...
+    (f_tpx2_conc2_3>f_cutoff),...
+    (f_tpx2_conc2_4>f_cutoff),...
+    (f_tpx2_conc2_5>f_cutoff),...
+    (f_tpx2_conc2_6>f_cutoff),...
+    (f_tpx2_conc2_7>f_cutoff),...
+    (f_tpx2_conc2_8>f_cutoff),...
+    (f_tpx2_conc2_9>f_cutoff),...
+    (f_tpx2_conc2_10>f_cutoff),...
+    (f_tpx2_conc2_11>f_cutoff),...
+    (f_tpx2_conc2_12>f_cutoff),...
+    (f_tpx2_conc2_13>f_cutoff),...
+    (f_tpx2_conc2_14>f_cutoff),...
+    (f_tpx2_conc2_15>f_cutoff),...
+    (f_tpx2_conc2_16>f_cutoff),...
+    (f_tpx2_conc2_17>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc2 = {...
+    spectra_tpx2_conc2_1,...
+    spectra_tpx2_conc2_2,...
+    spectra_tpx2_conc2_3,...
+    spectra_tpx2_conc2_4,...
+    spectra_tpx2_conc2_5,...
+    spectra_tpx2_conc2_6,...
+    spectra_tpx2_conc2_7,...
+    spectra_tpx2_conc2_8,...
+    spectra_tpx2_conc2_9,...
+    spectra_tpx2_conc2_10,...
+    spectra_tpx2_conc2_11,...
+    spectra_tpx2_conc2_12,...
+    spectra_tpx2_conc2_13,...
+    spectra_tpx2_conc2_14,...
+    spectra_tpx2_conc2_15,...
+    spectra_tpx2_conc2_16,...
+    spectra_tpx2_conc2_17,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+
+% do linear interp and bootstrap
+[fLin_tpx2_conc2,...
+    spectraAll_lin_tpx2_conc2,...
+    avgSpectra_lin_tpx2_conc2,...
+    ci_avgSpectra_lin_tpx2_conc2,...
+    avgMaxLmbd_tpx2_conc2,...
+    ci_avgMaxLmbda_tpx2_conc2] = interpBootstrpSpectra(fAll_tpx2_conc2,spectraAll_tpx2_conc2,logIndAll_tpx2_conc2,nboot,ci_alpha);
+
+subDir = 'spectra_tpx2_conc2';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc2esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc2.mat'],'spectraAll_lin_tpx2_conc2')
+ 
+% save mat file of tpx2_conc2esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc2.mat'],'fLin_tpx2_conc2')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc2'],'avgSpectra_lin_tpx2_conc2')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc2'],'ci_avgSpectra_lin_tpx2_conc2')
+
+
+
+%% load data for tpx2 conc1, 50-150nM
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_1 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_1 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-96-253_cy_mt-y-31-153';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_2 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_2 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-84-147_cy_mt-y-52-193';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_3 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_3 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-110-38_cy_mt-y-59-247';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_4 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_4 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-113-197_cy_mt-y-99-166';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_5 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_6 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_26-29_20191028_rigidBody/c_cx_mt-x-154-168_cy_mt-y-126-171';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_30-32_20191028_rigidBody/c_cx_mt-x-56-89_cy_mt-y-55-15';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_30-32_20191028_rigidBody/c_cx_mt-x-124-189_cy_mt-y-108-143';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_9 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_9 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_30-32_20191028_rigidBody/c_cx_mt-x-115-166_cy_mt-y-95-108';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_10 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_10 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_30-32_20191028_rigidBody/c_cx_mt-x-153-179_cy_mt-y-2-73';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_11 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_11 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-9-73_cy_mt-y-15-29';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_12 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_12 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-169-200_cy_mt-y-44-83';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_13 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_13 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-164-249_cy_mt-y-113-228';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_14 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_14 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_14 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_63-67_20191028_stackReg_rigidBody/c_cx_mt-x-32-122_cy_mt-y-144-112';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_15 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_15 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_15 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_63-67_20191028_stackReg_rigidBody/c_cx_mt-x-195-243_cy_mt-y-177-247';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_16 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_16 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_16 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-173-253_cy_mt-y-16-57';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_17 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_17 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_17 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_33-36_20191028_rigidBody/c_cx_mt-x-193-250_cy_mt-y-106-67';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_18 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_18 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_18 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+%% lin interp and bootstrap for conc1 (50-150nM tpx2)
+
+% generate cell of frequencies
+fAll_tpx2_conc1 = {...
+    f_tpx2_conc1_1(f_tpx2_conc1_1>f_cutoff),...
+    f_tpx2_conc1_2(f_tpx2_conc1_2>f_cutoff),...
+    f_tpx2_conc1_3(f_tpx2_conc1_3>f_cutoff),...
+    f_tpx2_conc1_4(f_tpx2_conc1_4>f_cutoff),...
+    f_tpx2_conc1_5(f_tpx2_conc1_5>f_cutoff),...
+    f_tpx2_conc1_6(f_tpx2_conc1_6>f_cutoff),...
+    f_tpx2_conc1_7(f_tpx2_conc1_7>f_cutoff),...
+    f_tpx2_conc1_8(f_tpx2_conc1_8>f_cutoff),...
+    f_tpx2_conc1_9(f_tpx2_conc1_9>f_cutoff),...
+    f_tpx2_conc1_10(f_tpx2_conc1_10>f_cutoff),...
+    f_tpx2_conc1_11(f_tpx2_conc1_11>f_cutoff),...
+    f_tpx2_conc1_12(f_tpx2_conc1_12>f_cutoff),...
+    f_tpx2_conc1_13(f_tpx2_conc1_13>f_cutoff),...
+    f_tpx2_conc1_14(f_tpx2_conc1_14>f_cutoff),...
+    f_tpx2_conc1_15(f_tpx2_conc1_15>f_cutoff),...
+    f_tpx2_conc1_16(f_tpx2_conc1_16>f_cutoff),...
+    f_tpx2_conc1_17(f_tpx2_conc1_17>f_cutoff),...
+    f_tpx2_conc1_18(f_tpx2_conc1_18>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_conc1 = {...
+    (f_tpx2_conc1_1>f_cutoff),...
+    (f_tpx2_conc1_2>f_cutoff),...
+    (f_tpx2_conc1_3>f_cutoff),...
+    (f_tpx2_conc1_4>f_cutoff),...
+    (f_tpx2_conc1_5>f_cutoff),...
+    (f_tpx2_conc1_6>f_cutoff),...
+    (f_tpx2_conc1_7>f_cutoff),...
+    (f_tpx2_conc1_8>f_cutoff),...
+    (f_tpx2_conc1_9>f_cutoff),...
+    (f_tpx2_conc1_10>f_cutoff),...
+    (f_tpx2_conc1_11>f_cutoff),...
+    (f_tpx2_conc1_12>f_cutoff),...
+    (f_tpx2_conc1_13>f_cutoff),...
+    (f_tpx2_conc1_14>f_cutoff),...
+    (f_tpx2_conc1_15>f_cutoff),...
+    (f_tpx2_conc1_16>f_cutoff),...
+    (f_tpx2_conc1_17>f_cutoff),...
+    (f_tpx2_conc1_18>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc1 = {...
+    spectra_tpx2_conc1_1,...
+    spectra_tpx2_conc1_2,...
+    spectra_tpx2_conc1_3,...
+    spectra_tpx2_conc1_4,...
+    spectra_tpx2_conc1_5,...
+    spectra_tpx2_conc1_6,...
+    spectra_tpx2_conc1_7,...
+    spectra_tpx2_conc1_8,...
+    spectra_tpx2_conc1_9,...
+    spectra_tpx2_conc1_10,...
+    spectra_tpx2_conc1_11,...
+    spectra_tpx2_conc1_12,...
+    spectra_tpx2_conc1_13,...
+    spectra_tpx2_conc1_14,...
+    spectra_tpx2_conc1_15,...
+    spectra_tpx2_conc1_16,...
+    spectra_tpx2_conc1_17,...
+    spectra_tpx2_conc1_18,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc1,...
+    spectraAll_lin_tpx2_conc1,...
+    avgSpectra_lin_tpx2_conc1,...
+    ci_avgSpectra_lin_tpx2_conc1,...
+    avgMaxLmbd_tpx2_conc1,...
+    ci_avgMaxLmbda_tpx2_conc1] = interpBootstrpSpectra(fAll_tpx2_conc1,spectraAll_tpx2_conc1,logIndAll_tpx2_conc1,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc1';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc1esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc1.mat'],'spectraAll_lin_tpx2_conc1')
+ 
+% save mat file of tpx2_conc1esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc1.mat'],'fLin_tpx2_conc1')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc1'],'avgSpectra_lin_tpx2_conc1')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc1'],'ci_avgSpectra_lin_tpx2_conc1')
+
+
+%% load data for 4x tpx2 conc (400-1200nM)
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-237-461_cy_mt-y-43-364';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_1 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_1 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_2 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_2 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_275-278_stackReg_affine/c_cx_mt-x-275-371_cy_mt-y-148-16';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_3 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_3 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_275-278_stackReg_affine/c_cx_mt-x-229-355_cy_mt-y-281-362';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_4 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_4 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_275-278_stackReg_affine/c_cx_mt-x-3-99_cy_mt-y-32-4';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_5 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_275-278_stackReg_affine/c_cx_mt-x-208-374_cy_mt-y-246-12';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_6 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/c_cx_mt-x-105-189_cy_mt-y-139-199';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc4_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc4_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc4_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+%% lin interp and bootstrap for conc4 (400-1200 nM)
+
+% generate cell of frequencies
+fAll_tpx2_conc4 = {...
+    f_tpx2_conc4_1(f_tpx2_conc4_1>f_cutoff),...
+    f_tpx2_conc4_2(f_tpx2_conc4_2>f_cutoff),...
+    f_tpx2_conc4_3(f_tpx2_conc4_3>f_cutoff),...
+    f_tpx2_conc4_4(f_tpx2_conc4_4>f_cutoff),...
+    f_tpx2_conc4_5(f_tpx2_conc4_5>f_cutoff),...
+    f_tpx2_conc4_6(f_tpx2_conc4_6>f_cutoff),...
+    f_tpx2_conc4_7(f_tpx2_conc4_7>f_cutoff)...
+%     f_tpx2_conc4_8(f_tpx2_conc4_8>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_conc4 = {...
+    (f_tpx2_conc4_1>f_cutoff),...
+    (f_tpx2_conc4_2>f_cutoff),...
+    (f_tpx2_conc4_3>f_cutoff),...
+    (f_tpx2_conc4_4>f_cutoff),...
+    (f_tpx2_conc4_5>f_cutoff),...
+    (f_tpx2_conc4_6>f_cutoff),...
+    (f_tpx2_conc4_7>f_cutoff)...
+%     (f_tpx2_conc4_8>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc4 = {...
+    spectra_tpx2_conc4_1,...
+    spectra_tpx2_conc4_2,...
+    spectra_tpx2_conc4_3,...
+    spectra_tpx2_conc4_4,...
+    spectra_tpx2_conc4_5,...
+    spectra_tpx2_conc4_6,...
+    spectra_tpx2_conc4_7...
+%     spectra_tpx2_conc4_8,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc4,...
+    spectraAll_lin_tpx2_conc4,...
+    avgSpectra_lin_tpx2_conc4,...
+    ci_avgSpectra_lin_tpx2_conc4,...
+    avgMaxLmbd_tpx2_conc4,...
+    ci_avgMaxLmbda_tpx2_conc4] = interpBootstrpSpectra(fAll_tpx2_conc4,spectraAll_tpx2_conc4,logIndAll_tpx2_conc4,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc4';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc4esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc4.mat'],'spectraAll_lin_tpx2_conc4')
+ 
+% save mat file of tpx2_conc4esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc4.mat'],'fLin_tpx2_conc4')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc4'],'avgSpectra_lin_tpx2_conc4')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc4'],'ci_avgSpectra_lin_tpx2_conc4')
+
+
+
+%% load data for conc3, 300-900 nM TPX2
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_114-116_affine/c_cx_mt-x-379-442_cy_mt-y-2-207';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_1 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_1 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_117-118_affine/c_cx_mt-x-65-305_cy_mt-y-233-445';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_2 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_2 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_119-120_affine/c_cx_mt-x-178-10_cy_mt-y-203-283';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_3 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_3 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-180-207_cy_mt-y-42-253';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_4 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_4 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-75-123_cy_mt-y-103-249';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_5 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-23-50_cy_mt-y-117-4';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_6 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-6-105_cy_mt-y-178-250';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_248-250_stackReg/c_cx_mt-x-170-369_cy_mt-y-121-176';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_248-250_stackReg/c_cx_mt-x-216-503_cy_mt-y-173-504';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_9 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_9 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_248-250_stackReg/c_cx_mt-x-260-464_cy_mt-y-334-506';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_10 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_10 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_119-120_affine/c_cx_mt-x-224-171_cy_mt-y-355-508';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_11 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_11 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_119-120_affine/c_cx_mt-x-234-355_cy_mt-y-352-315';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_12 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_12 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/c_cx_mt-x-27-237_cy_mt-y-244-71';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_13 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_13 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_117-118_affine/c_cx_mt-x-76-308_cy_mt-y-3-321';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_14 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_14 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc3_14 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+%% lin interp and bootstrp for conc3 (300-900nM)
+
+% generate cell of frequencies
+fAll_tpx2_conc3 = {...
+    f_tpx2_conc3_1(f_tpx2_conc3_1>f_cutoff),...
+    f_tpx2_conc3_2(f_tpx2_conc3_2>f_cutoff),...
+    f_tpx2_conc3_3(f_tpx2_conc3_3>f_cutoff),...
+    f_tpx2_conc3_4(f_tpx2_conc3_4>f_cutoff),...
+    f_tpx2_conc3_5(f_tpx2_conc3_5>f_cutoff),...
+    f_tpx2_conc3_6(f_tpx2_conc3_6>f_cutoff),...
+    f_tpx2_conc3_7(f_tpx2_conc3_7>f_cutoff),...
+    f_tpx2_conc3_8(f_tpx2_conc3_8>f_cutoff),...
+    f_tpx2_conc3_9(f_tpx2_conc3_9>f_cutoff),...
+    f_tpx2_conc3_10(f_tpx2_conc3_10>f_cutoff),...
+    f_tpx2_conc3_11(f_tpx2_conc3_11>f_cutoff),...
+    f_tpx2_conc3_12(f_tpx2_conc3_12>f_cutoff),...
+    f_tpx2_conc3_13(f_tpx2_conc3_13>f_cutoff),...
+    f_tpx2_conc3_14(f_tpx2_conc3_14>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_conc3 = {...
+    (f_tpx2_conc3_1>f_cutoff),...
+    (f_tpx2_conc3_2>f_cutoff),...
+    (f_tpx2_conc3_3>f_cutoff),...
+    (f_tpx2_conc3_4>f_cutoff),...
+    (f_tpx2_conc3_5>f_cutoff),...
+    (f_tpx2_conc3_6>f_cutoff),...
+    (f_tpx2_conc3_7>f_cutoff),...
+    (f_tpx2_conc3_8>f_cutoff),...
+    (f_tpx2_conc3_9>f_cutoff),...
+    (f_tpx2_conc3_10>f_cutoff),...
+    (f_tpx2_conc3_11>f_cutoff),...
+    (f_tpx2_conc3_12>f_cutoff),...
+    (f_tpx2_conc3_13>f_cutoff),...
+    (f_tpx2_conc3_14>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc3 = {...
+    spectra_tpx2_conc3_1,...
+    spectra_tpx2_conc3_2,...
+    spectra_tpx2_conc3_3,...
+    spectra_tpx2_conc3_4,...
+    spectra_tpx2_conc3_5,...
+    spectra_tpx2_conc3_6,...
+    spectra_tpx2_conc3_7,...
+    spectra_tpx2_conc3_8,...
+    spectra_tpx2_conc3_9,...
+    spectra_tpx2_conc3_10,...
+    spectra_tpx2_conc3_11,...
+    spectra_tpx2_conc3_12,...
+    spectra_tpx2_conc3_13,...
+    spectra_tpx2_conc3_14,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc3,...
+    spectraAll_lin_tpx2_conc3,...
+    avgSpectra_lin_tpx2_conc3,...
+    ci_avgSpectra_lin_tpx2_conc3,...
+    avgMaxLmbd_tpx2_conc3,...
+    ci_avgMaxLmbda_tpx2_conc3] = interpBootstrpSpectra(fAll_tpx2_conc3,spectraAll_tpx2_conc3,logIndAll_tpx2_conc3,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc3';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc3esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc3.mat'],'spectraAll_lin_tpx2_conc3')
+ 
+% save mat file of tpx2_conc3esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc3.mat'],'fLin_tpx2_conc3')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc3'],'avgSpectra_lin_tpx2_conc3')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc3'],'ci_avgSpectra_lin_tpx2_conc3')
+
+
+%% tpx2 initially coated
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-69-187_cy_mt-y-66-145';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_1 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_1 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-168-229_cy_mt-y-256-222';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_2 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_2 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-146-180_cy_mt-y-285-231';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_3 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_3 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-172_cy_mt-y-93-116';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_4 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_4 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_5 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/initCoated/c_cx_mt-x-2-159_cy_mt-y-153-254';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_6 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/initCoated/c_cx_mt-x-124-180_cy_mt-y-57-122';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/initCoated/c_cx_mt-x-161-210_cy_mt-y-29-93';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-120-202_cy_mt-y-103-171';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_9 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_9 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_10 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_10 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/initCoated/c_cx_mt-x-5-227_cy_mt-y-143-125';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_11 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_11 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/initCoated/c_cx_mt-x-111-245_cy_mt-y-162-195';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_12 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_12 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/initCoated/c_cx_mt-x-114-127_cy_mt-y-3-117';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_13 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_13 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/uncoated/c_cx_mt-x-117-114_cy_mt-y-71-3';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_14  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_14 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_14 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-51-23_cy_mt-y-3-117';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_15  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_15 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_15 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-74-124_cy_mt-y-103-246';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_16  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_16 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_16 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-183-207_cy_mt-y-45-253';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_17  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_17 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_17 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/initCoated/c_cx_mt-x-28-233_cy_mt-y-244-73';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_18  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_18 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_18 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-2-60_cy_mt-y-174-214';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_19  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_19 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_19 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/initCoated/c_cx_mt-x-118-215_cy_mt-y-105-41';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_20 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_20 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_20 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_395-420_20191031_units_nm/initCoated/c_cx_mt-x-254-187_cy_mt-y-29-131';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_21  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_21 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_21 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_395-420_20191031_units_nm/initCoated/c_cx_mt-x-173-159_cy_mt-y-2-118';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_22  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_22 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_22 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_395-420_20191031_units_nm/initCoated/c_cx_mt-x-35-112_cy_mt-y-2-74';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_23  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_23 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_23 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+%% tpx2_init spectra interp and bootstrap
+ 
+% generate cell of frequencies
+fAll_tpx2_init = {...
+    f_tpx2_init_1(f_tpx2_init_1>f_cutoff),...
+    f_tpx2_init_2(f_tpx2_init_2>f_cutoff),...
+    f_tpx2_init_3(f_tpx2_init_3>f_cutoff),...
+    f_tpx2_init_4(f_tpx2_init_4>f_cutoff),...
+    f_tpx2_init_5(f_tpx2_init_5>f_cutoff),...
+    f_tpx2_init_6(f_tpx2_init_6>f_cutoff),...
+    f_tpx2_init_7(f_tpx2_init_7>f_cutoff),...
+    f_tpx2_init_8(f_tpx2_init_8>f_cutoff),...
+    f_tpx2_init_9(f_tpx2_init_9>f_cutoff),...
+    f_tpx2_init_10(f_tpx2_init_10>f_cutoff),...
+    f_tpx2_init_11(f_tpx2_init_11>f_cutoff),...
+    f_tpx2_init_12(f_tpx2_init_12>f_cutoff),...
+    f_tpx2_init_13(f_tpx2_init_13>f_cutoff),...
+    f_tpx2_init_14(f_tpx2_init_14>f_cutoff),...
+    f_tpx2_init_15(f_tpx2_init_15>f_cutoff),...
+    f_tpx2_init_16(f_tpx2_init_16>f_cutoff),...
+    f_tpx2_init_17(f_tpx2_init_17>f_cutoff),...
+    f_tpx2_init_18(f_tpx2_init_18>f_cutoff),...
+    f_tpx2_init_19(f_tpx2_init_19>f_cutoff),...
+    f_tpx2_init_20(f_tpx2_init_20>f_cutoff),...
+    f_tpx2_init_21(f_tpx2_init_21>f_cutoff),...
+    f_tpx2_init_22(f_tpx2_init_22>f_cutoff),...
+    f_tpx2_init_23(f_tpx2_init_23>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_init = {...
+    (f_tpx2_init_1>f_cutoff),...
+    (f_tpx2_init_2>f_cutoff),...
+    (f_tpx2_init_3>f_cutoff),...
+    (f_tpx2_init_4>f_cutoff),...
+    (f_tpx2_init_5>f_cutoff),...
+    (f_tpx2_init_6>f_cutoff),...
+    (f_tpx2_init_7>f_cutoff),...
+    (f_tpx2_init_8>f_cutoff),...
+    (f_tpx2_init_9>f_cutoff),...
+    (f_tpx2_init_10>f_cutoff),...
+    (f_tpx2_init_11>f_cutoff),...
+    (f_tpx2_init_12>f_cutoff),...
+    (f_tpx2_init_13>f_cutoff),...
+    (f_tpx2_init_14>f_cutoff),...
+    (f_tpx2_init_15>f_cutoff),...
+    (f_tpx2_init_16>f_cutoff),...
+    (f_tpx2_init_17>f_cutoff),...
+    (f_tpx2_init_18>f_cutoff),...
+    (f_tpx2_init_19>f_cutoff),...
+    (f_tpx2_init_20>f_cutoff),...
+    (f_tpx2_init_21>f_cutoff),...
+    (f_tpx2_init_22>f_cutoff),...
+    (f_tpx2_init_23>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_init = {...
+    spectra_tpx2_init_1,...
+    spectra_tpx2_init_2,...
+    spectra_tpx2_init_3,...
+    spectra_tpx2_init_4,...
+    spectra_tpx2_init_5,...
+    spectra_tpx2_init_6,...
+    spectra_tpx2_init_7,...
+    spectra_tpx2_init_8,...
+    spectra_tpx2_init_9,...
+    spectra_tpx2_init_10,...
+    spectra_tpx2_init_11,...
+    spectra_tpx2_init_12,...
+    spectra_tpx2_init_13,...
+    spectra_tpx2_init_14,...
+    spectra_tpx2_init_15,...
+    spectra_tpx2_init_16,...
+    spectra_tpx2_init_17,...
+    spectra_tpx2_init_18,...
+    spectra_tpx2_init_19,...
+    spectra_tpx2_init_20,...
+    spectra_tpx2_init_21,...
+    spectra_tpx2_init_22,...
+    spectra_tpx2_init_23,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_init,spectraAll_lin_tpx2_init,avgSpectra_lin_tpx2_init,ci_avgSpectra_lin_tpx2_init] = interpBootstrpSpectra(fAll_tpx2_init,spectraAll_tpx2_init,logIndAll_tpx2_init,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_init';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_initesin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_init.mat'],'spectraAll_lin_tpx2_init')
+ 
+% save mat file of tpx2_initesin linear indices
+save([saveDirMain2,'/fLin_tpx2_init.mat'],'fLin_tpx2_init')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_init'],'avgSpectra_lin_tpx2_init')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_init'],'ci_avgSpectra_lin_tpx2_init')
+
+
+
+%% load naked MT
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_nakedMT_20190715_137-143/c_cx_mt-x-182-148_cy_mt-y-82-156';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_1 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_1 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_1 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/c_cx_mt-x-458-522_cy_mt-y-452-494';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_2 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_2 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_2 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_nakedMT_20190713_0-4/xc2yc2_c_cx_mt-x-432-492_cy_mt-y-516-496';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_3 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_3 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_3 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f 
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/uncoated/c_cx_mt-x-3-84_cy_mt-y-27-43';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_4 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_4 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_4 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f 
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/uncoated/c_cx_mt-x-2-148_cy_mt-y-166-252';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_5 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_5 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f 
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/uncoated/c_cx_mt-x-154-203_cy_mt-y-22-90';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_6 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_6 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f 
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/uncoated/c_cx_mt-x-115-157_cy_mt-y-60-96';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_7 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_7 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f 
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-108-183_cy_mt-y-95-156';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_8 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_8 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_9 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_9 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/uncoated/c_cx_mt-x-2-144_cy_mt-y-109-95';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_10 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_10 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/uncoated/c_cx_mt-x-41-183_cy_mt-y-114-148';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_11 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_11 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_187-189_strackReg/uncoated/c_cx_mt-x-189-253_cy_mt-y-3-137';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_12 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_12 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_187-189_strackReg/uncoated/c_cx_mt-x-1-80_cy_mt-y-117-137';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_13 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_13 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_187-189_strackReg/uncoated/c_cx_mt-x-80-169_cy_mt-y-181-165';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_14 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_14 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_14 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_187-189_strackReg/uncoated/c_cx_mt-x-2-41_cy_mt-y-179-172';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_15 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_15 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_15 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_227-228_units_nm/uncoated/c_cx_mt-x-3-100_cy_mt-y-200-148';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_16 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_16 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_16 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_227-228_units_nm/uncoated/c_cx_mt-x-229-255_cy_mt-y-2-164';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_17 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_17 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_17 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_227-228_units_nm/uncoated/c_cx_mt-x-205-255_cy_mt-y-90-246';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_18 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_18 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_18 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_251-252_units_nm/uncoated/c_cx_mt-x-91-168_cy_mt-y-27-181';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_19 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_19 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_19 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_251-252_units_nm/uncoated/c_cx_mt-x-109-172_cy_mt-y-113-253';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_20 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_20 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_20 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_251-252_units_nm/uncoated/c_cx_mt-x-120-165_cy_mt-y-99-189';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_21 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_21 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_21 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_251-252_units_nm/uncoated/c_cx_mt-x-120-156_cy_mt-y-109-183';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_22 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_22 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_22 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+%% uncoated spectra interp and bootstrap
+ 
+% generate cell of frequencies
+fAll_uncoated = {...
+    f_uncoated_1(f_uncoated_1>f_cutoff),...
+    f_uncoated_2(f_uncoated_2>f_cutoff),...
+    f_uncoated_3(f_uncoated_3>f_cutoff),...
+    f_uncoated_4(f_uncoated_4>f_cutoff),...
+    f_uncoated_5(f_uncoated_5>f_cutoff),...
+    f_uncoated_6(f_uncoated_6>f_cutoff),...
+    f_uncoated_7(f_uncoated_7>f_cutoff),...
+    f_uncoated_8(f_uncoated_8>f_cutoff),...
+    f_uncoated_9(f_uncoated_9>f_cutoff),...
+    f_uncoated_10(f_uncoated_10>f_cutoff),...
+    f_uncoated_11(f_uncoated_11>f_cutoff),...
+    f_uncoated_12(f_uncoated_12>f_cutoff),...
+    f_uncoated_13(f_uncoated_13>f_cutoff),...
+    f_uncoated_14(f_uncoated_14>f_cutoff),...
+    f_uncoated_15(f_uncoated_15>f_cutoff),...
+    f_uncoated_16(f_uncoated_16>f_cutoff),...
+    f_uncoated_17(f_uncoated_17>f_cutoff),...
+    f_uncoated_18(f_uncoated_18>f_cutoff),...
+    f_uncoated_19(f_uncoated_19>f_cutoff),...
+    f_uncoated_20(f_uncoated_20>f_cutoff),...
+    f_uncoated_21(f_uncoated_21>f_cutoff),...
+    f_uncoated_22(f_uncoated_22>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_uncoated = {...
+    (f_uncoated_1>f_cutoff),...
+    (f_uncoated_2>f_cutoff),...
+    (f_uncoated_3>f_cutoff),...
+    (f_uncoated_4>f_cutoff),...
+    (f_uncoated_5>f_cutoff),...
+    (f_uncoated_6>f_cutoff),...
+    (f_uncoated_7>f_cutoff),...
+    (f_uncoated_8>f_cutoff),...
+    (f_uncoated_9>f_cutoff),...
+    (f_uncoated_10>f_cutoff),...
+    (f_uncoated_11>f_cutoff),...
+    (f_uncoated_12>f_cutoff),...
+    (f_uncoated_13>f_cutoff),...
+    (f_uncoated_14>f_cutoff),...
+    (f_uncoated_15>f_cutoff),...
+    (f_uncoated_16>f_cutoff),...
+    (f_uncoated_17>f_cutoff),...
+    (f_uncoated_18>f_cutoff),...
+    (f_uncoated_19>f_cutoff),...
+    (f_uncoated_20>f_cutoff),...
+    (f_uncoated_21>f_cutoff),...
+    (f_uncoated_22>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_uncoated = {...
+    spectra_uncoated_1,...
+    spectra_uncoated_2,...
+    spectra_uncoated_3,...
+    spectra_uncoated_4,...
+    spectra_uncoated_5,...
+    spectra_uncoated_6,...
+    spectra_uncoated_7,...
+    spectra_uncoated_8,...
+    spectra_uncoated_9,...
+    spectra_uncoated_10,...
+    spectra_uncoated_11,...
+    spectra_uncoated_12,...
+    spectra_uncoated_13,...
+    spectra_uncoated_14,...
+    spectra_uncoated_15,...
+    spectra_uncoated_16,...
+    spectra_uncoated_17,...
+    spectra_uncoated_18,...
+    spectra_uncoated_19,...
+    spectra_uncoated_20,...
+    spectra_uncoated_21,...
+    spectra_uncoated_22,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_uncoated,spectraAll_lin_uncoated,avgSpectra_lin_uncoated,ci_avgSpectra_lin_uncoated] = interpBootstrpSpectra(fAll_uncoated,spectraAll_uncoated,logIndAll_uncoated,nboot,ci_alpha);
+ 
+subDir = 'spectra_uncoated';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear uncoatedesin spectra
+save([saveDirMain2,'/spectraAll_lin_uncoated.mat'],'spectraAll_lin_uncoated')
+ 
+% save mat file of uncoatedesin linear indices
+save([saveDirMain2,'/fLin_uncoated.mat'],'fLin_uncoated')
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_uncoated'],'avgSpectra_lin_uncoated')
+save([saveDirMain2,'/ci_avgSpectra_lin_uncoated'],'ci_avgSpectra_lin_uncoated')
+
+
+ 
 %% do plotting
 
-kinColor = 'b';
 
+% load all data
+% kin
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_kin/avgSpectra_lin_kin.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_kin/ci_avgSpectra_lin_kin.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_kin/fLin_kin.mat')
+
+% tpx2_conc_1
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/avgSpectra_lin_tpx2_conc1.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/ci_avgSpectra_lin_tpx2_conc1.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/fLin_tpx2_conc1.mat')
+
+% tpx2_conc_2
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc2/avgSpectra_lin_tpx2_conc2.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc2/ci_avgSpectra_lin_tpx2_conc2.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc2/fLin_tpx2_conc2.mat')
+
+% tpx2_conc_3
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc3/avgSpectra_lin_tpx2_conc3.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc3/ci_avgSpectra_lin_tpx2_conc3.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc3/fLin_tpx2_conc3.mat')
+
+% tpx2_conc_4
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc4/avgSpectra_lin_tpx2_conc4.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc4/ci_avgSpectra_lin_tpx2_conc4.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc4/fLin_tpx2_conc4.mat')
+
+% tpx2 init
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_init/avgSpectra_lin_tpx2_init.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_init/ci_avgSpectra_lin_tpx2_init.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_init/fLin_tpx2_init.mat')
+
+% uncoated
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_uncoated/avgSpectra_lin_uncoated.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_uncoated/ci_avgSpectra_lin_uncoated.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_uncoated/fLin_uncoated.mat')
+
+
+
+
+%%
+% all tpx2 concentrations
+
+% set colors
+tpx2_conc2Color = 'b';
+tpx2_conc1Color = 'g';
+tpx2_conc3Color = 'm';
+tpx2_conc4Color = 'r';
+
+
+% set linewidth for mean curve
+lw = 2;
+
+% set opacity value for 95% conf interval
 alphaValCi = .25;
+
+% set xLims
+xMin = 0;
+xMax = 0.06;
+
 
 xafz = 24;
 yafz = 24;
@@ -835,1369 +3794,214 @@ doLatex = 1;
 figure; 
 box on;
 hold on;
-shadedplot(fLin_kin,ci_lin_kin(1,:),ci_lin_kin(2,:),alphaValCi,kinColor,kinColor);
+
+plot(fLin_tpx2_conc1,mean(avgSpectra_lin_tpx2_conc1),tpx2_conc1Color,'LineWidth',lw)
+plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2),tpx2_conc2Color,'LineWidth',lw)
+plot(fLin_tpx2_conc3,mean(avgSpectra_lin_tpx2_conc3),tpx2_conc3Color,'LineWidth',lw)
+plot(fLin_tpx2_conc4,mean(avgSpectra_lin_tpx2_conc4),tpx2_conc4Color,'LineWidth',lw)
+% plot(fLin_kin,mean(avgSpectra_lin_kin),kinColor,'LineWidth',lw)
+
+
+shadedplot(fLin_tpx2_conc1,ci_avgSpectra_lin_tpx2_conc1(1,:),ci_avgSpectra_lin_tpx2_conc1(2,:),alphaValCi,tpx2_conc1Color,tpx2_conc1Color);
+shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:),ci_avgSpectra_lin_tpx2_conc2(2,:),alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+shadedplot(fLin_tpx2_conc3,ci_avgSpectra_lin_tpx2_conc3(1,:),ci_avgSpectra_lin_tpx2_conc3(2,:),alphaValCi,tpx2_conc3Color,tpx2_conc3Color);
+shadedplot(fLin_tpx2_conc4,ci_avgSpectra_lin_tpx2_conc4(1,:),ci_avgSpectra_lin_tpx2_conc4(2,:),alphaValCi,tpx2_conc4Color,tpx2_conc4Color);
+% shadedplot(fLin_kin,ci_avgSpectra_lin_kin(1,:),ci_avgSpectra_lin_kin(2,:),alphaValCi,kinColor,kinColor);
+
+simplePlotFormat( 'Spatial frequency (nm$^{-1}$)', 'Power (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
+
+legend({'50-150 nM TPX2',...
+    '100-300 nM TPX2',...
+    '300-900 nM TPX2',...
+    '400-1200 nM TPX2'},...
+    'Interpreter','latex',...
+    'FontSize',16,...
+    'Position',[.67 .74 .1 .1])
+
+set(gca, 'XScale', 'log')
+% xlim([xMin xMax])
+
+%
+% kinesin and 100-300nM only 
+%
+
+kinColor = 'k';
+
+figure; 
+box on;
 hold on;
-plot(fLin_kin,mean(avgSpectra_lin_kin),kinColor,'LineWidth',2)
-% p1 = plot(fLin_kin,spectraAll_kin_lin,'b.');
+
+% plot(fLin_tpx2_conc1,mean(avgSpectra_lin_tpx2_conc1),tpx2_conc1Color,'LineWidth',lw)
+plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2),tpx2_conc2Color,'LineWidth',lw)
+% plot(fLin_tpx2_conc3,mean(avgSpectra_lin_tpx2_conc3),tpx2_conc3Color,'LineWidth',lw)
+% plot(fLin_tpx2_conc4,mean(avgSpectra_lin_tpx2_conc4),tpx2_conc4Color,'LineWidth',lw)
+plot(fLin_kin,mean(avgSpectra_lin_kin),kinColor,'LineWidth',lw)
+
+
+% shadedplot(fLin_tpx2_conc1,ci_avgSpectra_lin_tpx2_conc1(1,:),ci_avgSpectra_lin_tpx2_conc1(2,:),alphaValCi,tpx2_conc1Color,tpx2_conc1Color);
+shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:),ci_avgSpectra_lin_tpx2_conc2(2,:),alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+% shadedplot(fLin_tpx2_conc3,ci_avgSpectra_lin_tpx2_conc3(1,:),ci_avgSpectra_lin_tpx2_conc3(2,:),alphaValCi,tpx2_conc3Color,tpx2_conc3Color);
+% shadedplot(fLin_tpx2_conc4,ci_avgSpectra_lin_tpx2_conc4(1,:),ci_avgSpectra_lin_tpx2_conc4(2,:),alphaValCi,tpx2_conc4Color,tpx2_conc4Color);
+shadedplot(fLin_kin,ci_avgSpectra_lin_kin(1,:),ci_avgSpectra_lin_kin(2,:),alphaValCi,kinColor,kinColor);
+
+simplePlotFormat( 'Spatial frequency (nm$^{-1}$)', 'Power (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
+
+legend({'100-300 nM TPX2',...
+    '500 nM Kinesin-1'},...
+    'Interpreter','latex',...
+    'FontSize',16,...
+    'Position',[.61 .74 .1 .1])
+
+set(gca, 'XScale', 'log')
+% xlim([xMin xMax])
+%%
+%
+% all four tpx2 conc, kinesin, init coated, uncoated
+%
+
+% set colors
+kinColor = 'c';
+tpx2_conc2Color = 'b';
+tpx2_conc1Color = 'g';
+tpx2_conc3Color = 'm';
+tpx2_conc4Color = 'r';
+tpx2_initColor = 'k';
+uncoatedColor = [0.6350    0.0780    0.1840];
+
+% kinColor = [0 0 1];
+% tpx2_conc2Color = [0 .5 0];
+% tpx2_conc1Color = [1 0 0];
+% tpx2_conc3Color = [0 .75 .75];
+% tpx2_conc4Color = [.75 0 .75];
+% tpx2_initColor = [.75 .75 0];
+% uncoatedColor = [.25 .25 .25];
+
+% kinColor=[         0    0.4470    0.7410];
+% tpx2_conc2Color=[    0.8500    0.3250    0.0980];
+% tpx2_conc1Color=[    0.9290    0.6940    0.1250];
+% tpx2_conc3Color=[   0.4940    0.1840    0.5560];
+% tpx2_conc4Color=[    0.4660    0.6740    0.1880];
+% uncoatedColor=[   0.3010    0.7450    0.9330];
+% tpx2_initColor=[    0.6350    0.0780    0.1840];
+
+% set linewidth for mean curve
+lw = 2;
+
+% set opacity value for 95% conf interval
+alphaValCi = .25;
+
+% set xLims
+xMin = 0;
+xMax = 0.06;
+
+
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+doLatex = 1;
+
+
+figure; 
+box on;
+hold on;
+
+plot(fLin_uncoated,mean(avgSpectra_lin_uncoated),'Color',uncoatedColor,'LineWidth',lw)
+plot(fLin_tpx2_init,mean(avgSpectra_lin_tpx2_init),'Color',tpx2_initColor,'LineWidth',lw)
+
+plot(fLin_tpx2_conc1,mean(avgSpectra_lin_tpx2_conc1),'Color',tpx2_conc1Color,'LineWidth',lw)
+plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2),'Color',tpx2_conc2Color,'LineWidth',lw)
+plot(fLin_tpx2_conc3,mean(avgSpectra_lin_tpx2_conc3),'Color',tpx2_conc3Color,'LineWidth',lw)
+plot(fLin_tpx2_conc4,mean(avgSpectra_lin_tpx2_conc4),'Color',tpx2_conc4Color,'LineWidth',lw)
+
+plot(fLin_kin,mean(avgSpectra_lin_kin),'Color',kinColor,'LineWidth',lw)
+
+
+
+shadedplot(fLin_uncoated,ci_avgSpectra_lin_uncoated(1,:),ci_avgSpectra_lin_uncoated(2,:),alphaValCi,uncoatedColor,uncoatedColor);
+shadedplot(fLin_tpx2_init,ci_avgSpectra_lin_tpx2_init(1,:),ci_avgSpectra_lin_tpx2_init(2,:),alphaValCi,tpx2_initColor,tpx2_initColor);
+
+shadedplot(fLin_tpx2_conc1,ci_avgSpectra_lin_tpx2_conc1(1,:),ci_avgSpectra_lin_tpx2_conc1(2,:),alphaValCi,tpx2_conc1Color,tpx2_conc1Color);
+shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:),ci_avgSpectra_lin_tpx2_conc2(2,:),alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+shadedplot(fLin_tpx2_conc3,ci_avgSpectra_lin_tpx2_conc3(1,:),ci_avgSpectra_lin_tpx2_conc3(2,:),alphaValCi,tpx2_conc3Color,tpx2_conc3Color);
+shadedplot(fLin_tpx2_conc4,ci_avgSpectra_lin_tpx2_conc4(1,:),ci_avgSpectra_lin_tpx2_conc4(2,:),alphaValCi,tpx2_conc4Color,tpx2_conc4Color);
+
+shadedplot(fLin_kin,ci_avgSpectra_lin_kin(1,:),ci_avgSpectra_lin_kin(2,:),alphaValCi,kinColor,kinColor);
 
 
 simplePlotFormat( 'Spatial frequency (nm$^{-1}$)', 'Power (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
 
-
-% plot(fLin_kin,ci_kin_lin(1,:))
-% plot(fLin_kin,ci_kin_lin(2,:))
-
-%%
-
-f1=f_kin_1(fInd_kin_1:end);
-a1=avgSpectra_kin_1(:,fInd_kin_1:end);
-s1 = stdSpectra_kin_1(:,fInd_kin_1:end)./sqrt(n_kin_1);
-a1ikin = interp1(f1(:),a1(:),fLin_kin(:),'linear','extrap');
-s1ikin = interp1(f1(:),s1(:),fLin_kin(:),'linear','extrap');
-
-
-%%
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/avgSpectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
-avgSpectra_tpcterm_1 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/stdSpectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
-stdSpectra_tpcterm_1 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/spectra_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
-n_tpcterm_1 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/frequencies_c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
-f_tpcterm_1 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/avgSpectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
-avgSpectra_tpcterm_2 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/stdSpectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
-stdSpectra_tpcterm_2 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/spectra_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
-n_tpcterm_2 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-119-200_cy_mt-y-247-185/frequencies_c_cx_mt-x-119-200_cy_mt-y-247-185.mat')
-f_tpcterm_2 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/avgSpectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
-avgSpectra_tpcterm_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/stdSpectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
-stdSpectra_tpcterm_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/spectra_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
-n_tpcterm_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-4-45_cy_mt-y-99-5/frequencies_c_cx_mt-x-4-45_cy_mt-y-99-5.mat')
-f_tpcterm_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/avgSpectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
-avgSpectra_tpcterm_4 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/stdSpectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
-stdSpectra_tpcterm_4 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/spectra_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
-n_tpcterm_4 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt2 3x tpx2-cTerm 300nM 900nM/expt2_tifStacks/Stack_expt2_20191031_3xTpx2Cterm_224-226_stackReg/c_cx_mt-x-101-195_cy_mt-y-169-132/frequencies_c_cx_mt-x-101-195_cy_mt-y-169-132.mat')
-f_tpcterm_4 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-%load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-56-231_cy_mt-y-54-169/avgSpectra_c_cx_mt-x-56-231_cy_mt-y-54-169.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171/avgSpectra_c_cx_mt-x-74-232_cy_mt-y-66-171.mat')
-avgSpectra_tpx2_1 = avgSpectra;
-
-%load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-56-231_cy_mt-y-54-169/stdSpectra_c_cx_mt-x-56-231_cy_mt-y-54-169.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171/stdSpectra_c_cx_mt-x-74-232_cy_mt-y-66-171.mat')
-stdSpectra_tpx2_1 = stdSpectra;
-
-%load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-56-231_cy_mt-y-54-169/spectra_c_cx_mt-x-56-231_cy_mt-y-54-169.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171/spectra_c_cx_mt-x-74-232_cy_mt-y-66-171.mat')
-n_tpx2_1 = size(P1s,2);
-spectra_tpx2_1 = P1s;
-
-%load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-56-231_cy_mt-y-54-169/frequencies_c_cx_mt-x-56-231_cy_mt-y-54-169.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171/frequencies_c_cx_mt-x-74-232_cy_mt-y-66-171.mat')
-f_tpx2_1 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-74-232_cy_mt-y-66-171';
-fNameStruct = loadSpectralDataFromDir(pathName);
-
-load(fNameStruct.spectra)
-spectra_tpx2_1 = P1s;
-
-load(fNameStruct.f)
-f_tpx2_1 = f;
-
-clear fNameStruct
-clear pathName
-
-
-
-% calculate the rayleigh-plateau wavelengths for the tpx2 scans
-fInd_tpx2_1 = min(find(f_tpx2_1>f_cutoff));
-
-
-
-%{
-
-% get appropriate spacing for linearly interpolated data
-% combine all linearly interpolated data into cell
-fAll_long_tpx2 = {diff(f_tpx2_1(fInd_tpx2_1:end));...
-    diff(f_tpx2_2(fInd_tpx2_2:end));...
-    diff(f_tpx2_3(fInd_tpx2_3:end));...
-    diff(f_tpx2_4(fInd_tpx2_4:end));...
-    diff(f_tpx2_5(fInd_tpx2_5:end));...
-    diff(f_tpx2_6(fInd_tpx2_6:end))};
-
-% get the average delta F
-meanDeltaF = mean(cellfun(@mean, fAll_long_tpx2));
-
-% get the min avg delta F
-minDeltaF = min(cellfun(@mean, fAll_long_tpx2));
-
-fLin_tpx2 = [f_min_tpx2:meanDeltaF:f_max_tpx2];
-fLin_tpx2 = [f_min_tpx2:minDeltaF:f_max_tpx2];
-
-%}
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-96-253_cy_mt-y-31-153/avgSpectra_c_cx_mt-x-96-253_cy_mt-y-31-153.mat')
-avgSpectra_tpx2_2 = avgSpectra./1e9;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-96-253_cy_mt-y-31-153/stdSpectra_c_cx_mt-x-96-253_cy_mt-y-31-153.mat')
-stdSpectra_tpx2_2 = stdSpectra./1e9;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-96-253_cy_mt-y-31-153/spectra_c_cx_mt-x-96-253_cy_mt-y-31-153.mat')
-n_tpx2_2 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-96-253_cy_mt-y-31-153/frequencies_c_cx_mt-x-96-253_cy_mt-y-31-153.mat')
-f_tpx2_2 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-69-187_cy_mt-y-66-145/avgSpectra_c_cx_mt-x-69-187_cy_mt-y-66-145.mat')
-avgSpectra_tpx2_1i = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-69-187_cy_mt-y-66-145/stdSpectra_c_cx_mt-x-69-187_cy_mt-y-66-145.mat')
-stdSpectra_tpx2_1i = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-69-187_cy_mt-y-66-145/spectra_c_cx_mt-x-69-187_cy_mt-y-66-145.mat')
-n_tpx2_1i = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-69-187_cy_mt-y-66-145/frequencies_c_cx_mt-x-69-187_cy_mt-y-66-145.mat')
-f_tpx2_1i = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-168-229_cy_mt-y-256-222/avgSpectra_c_cx_mt-x-168-229_cy_mt-y-256-222.mat')
-avgSpectra_tpx2_2i = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-168-229_cy_mt-y-256-222/stdSpectra_c_cx_mt-x-168-229_cy_mt-y-256-222.mat')
-stdSpectra_tpx2_2i = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-168-229_cy_mt-y-256-222/spectra_c_cx_mt-x-168-229_cy_mt-y-256-222.mat')
-n_tpx2_2i = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-168-229_cy_mt-y-256-222/frequencies_c_cx_mt-x-168-229_cy_mt-y-256-222.mat')
-f_tpx2_2i = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-%%{
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-189-228_cy_mt-y-287-236/avgSpectra_c_cx_mt-x-189-228_cy_mt-y-287-236.mat')
-avgSpectra_tpx2_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-189-228_cy_mt-y-287-236/stdSpectra_c_cx_mt-x-189-228_cy_mt-y-287-236.mat')
-stdSpectra_tpx2_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-189-228_cy_mt-y-287-236/spectra_c_cx_mt-x-189-228_cy_mt-y-287-236.mat')
-n_tpx2_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-189-228_cy_mt-y-287-236/frequencies_c_cx_mt-x-189-228_cy_mt-y-287-236.mat')
-f_tpx2_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-%}
-
-%{
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-224-190_cy_mt-y-240-286/avgSpectra_c_cx_mt-x-224-190_cy_mt-y-240-286.mat')
-avgSpectra_tpx2_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-224-190_cy_mt-y-240-286/stdSpectra_c_cx_mt-x-224-190_cy_mt-y-240-286.mat')
-stdSpectra_tpx2_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-224-190_cy_mt-y-240-286/spectra_c_cx_mt-x-224-190_cy_mt-y-240-286.mat')
-n_tpx2_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-224-190_cy_mt-y-240-286/frequencies_c_cx_mt-x-224-190_cy_mt-y-240-286.mat')
-f_tpx2_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-%}
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132/avgSpectra_c_cx_mt-x-219-209_cy_mt-y-3-132.mat')
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-218-197_cy_mt-y-7-250/avgSpectra_c_cx_mt-x-218-197_cy_mt-y-7-250.mat')
-avgSpectra_tpx2_4 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132/stdSpectra_c_cx_mt-x-219-209_cy_mt-y-3-132.mat')
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-218-197_cy_mt-y-7-250/stdSpectra_c_cx_mt-x-218-197_cy_mt-y-7-250.mat')
-stdSpectra_tpx2_4 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132/spectra_c_cx_mt-x-219-209_cy_mt-y-3-132.mat')
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-218-197_cy_mt-y-7-250/spectra_c_cx_mt-x-218-197_cy_mt-y-7-250.mat')
-n_tpx2_4 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132/frequencies_c_cx_mt-x-219-209_cy_mt-y-3-132.mat')
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-218-197_cy_mt-y-7-250/frequencies_c_cx_mt-x-218-197_cy_mt-y-7-250.mat')
-f_tpx2_4 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-148-179_cy_mt-y-285-238/avgSpectra_c_cx_mt-x-148-179_cy_mt-y-285-238.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-180-144_cy_mt-y-234-287/avgSpectra_c_cx_mt-x-180-144_cy_mt-y-234-287.mat')
-avgSpectra_tpx2_5 = avgSpectra;
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-148-179_cy_mt-y-285-238/stdSpectra_c_cx_mt-x-148-179_cy_mt-y-285-238.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-180-144_cy_mt-y-234-287/stdSpectra_c_cx_mt-x-180-144_cy_mt-y-234-287.mat')
-stdSpectra_tpx2_5 = stdSpectra;
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-148-179_cy_mt-y-285-238/spectra_c_cx_mt-x-148-179_cy_mt-y-285-238.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-180-144_cy_mt-y-234-287/spectra_c_cx_mt-x-180-144_cy_mt-y-234-287.mat')
-n_tpx2_5 = size(P1s,2);
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-148-179_cy_mt-y-285-238/frequencies_c_cx_mt-x-148-179_cy_mt-y-285-238.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-180-144_cy_mt-y-234-287/frequencies_c_cx_mt-x-180-144_cy_mt-y-234-287.mat')
-f_tpx2_5 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-146-180_cy_mt-y-285-231/avgSpectra_c_cx_mt-x-146-180_cy_mt-y-285-231.mat')
-avgSpectra_tpx2_5i = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-146-180_cy_mt-y-285-231/stdSpectra_c_cx_mt-x-146-180_cy_mt-y-285-231.mat')
-stdSpectra_tpx2_5i = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-146-180_cy_mt-y-285-231/spectra_c_cx_mt-x-146-180_cy_mt-y-285-231.mat')
-n_tpx2_5i = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-146-180_cy_mt-y-285-231/frequencies_c_cx_mt-x-146-180_cy_mt-y-285-231.mat')
-f_tpx2_5i = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-178-115_cy_mt-y-119-94/avgSpectra_c_cx_mt-x-178-115_cy_mt-y-119-94.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117/avgSpectra_c_cx_mt-x-114-179_cy_mt-y-92-117.mat')
-avgSpectra_tpx2_6 = avgSpectra;
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-178-115_cy_mt-y-119-94/stdSpectra_c_cx_mt-x-178-115_cy_mt-y-119-94.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117/stdSpectra_c_cx_mt-x-114-179_cy_mt-y-92-117.mat')
-stdSpectra_tpx2_6 = stdSpectra;
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-178-115_cy_mt-y-119-94/spectra_c_cx_mt-x-178-115_cy_mt-y-119-94.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117/spectra_c_cx_mt-x-114-179_cy_mt-y-92-117.mat')
-n_tpx2_6 = size(P1s,2);
-
-% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-178-115_cy_mt-y-119-94/frequencies_c_cx_mt-x-178-115_cy_mt-y-119-94.mat')
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117/frequencies_c_cx_mt-x-114-179_cy_mt-y-92-117.mat')
-f_tpx2_6 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-172_cy_mt-y-93-116/avgSpectra_c_cx_mt-x-114-172_cy_mt-y-93-116.mat')
-avgSpectra_tpx2_6i = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-172_cy_mt-y-93-116/stdSpectra_c_cx_mt-x-114-172_cy_mt-y-93-116.mat')
-stdSpectra_tpx2_6i = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-172_cy_mt-y-93-116/spectra_c_cx_mt-x-114-172_cy_mt-y-93-116.mat')
-n_tpx2_6i = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-172_cy_mt-y-93-116/frequencies_c_cx_mt-x-114-172_cy_mt-y-93-116.mat')
-f_tpx2_6i = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
+legend({'Uncoated MT',...
+    'TPX2 initial coating',...
+    '50-150 nM TPX2',...
+    '100-300 nM TPX2',...
+    '300-900 nM TPX2',...
+    '400-1200 nM TPX2',...
+    '500 nM Kinesin-1'},...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'Position',[.67 .7 .1 .1])
+
+set(gca, 'XScale', 'log')
+xlim([xMin xMax])
 
 
 
 %%
+%
+% all four tpx2 conc, kinesin, init coated, uncoated
+%
 
+% set colors
+kinColor = 'c';
+tpx2_conc2Color = 'b';
+tpx2_conc1Color = 'g';
+tpx2_conc3Color = 'm';
+tpx2_conc4Color = 'r';
+tpx2_initColor = 'y';
+uncoatedColor = 'k';
 
+% set linewidth for mean curve
+lw = 2;
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-112-182_cy_mt-y-288-250/avgSpectra_c_cx_mt-x-112-182_cy_mt-y-288-250.mat')
-avgSpectra_tpx2_12nm_1 = avgSpectra;
+% set opacity value for 95% conf interval
+alphaValCi = .25;
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-112-182_cy_mt-y-288-250/stdSpectra_c_cx_mt-x-112-182_cy_mt-y-288-250.mat')
-stdSpectra_tpx2_12nm_1 = stdSpectra;
+% set xLims
+xMin = 0;
+xMax = 0.06;
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-112-182_cy_mt-y-288-250/spectra_c_cx_mt-x-112-182_cy_mt-y-288-250.mat')
-n_tpx2_12nm_1 = size(P1s,2);
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/c_cx_mt-x-112-182_cy_mt-y-288-250/frequencies_c_cx_mt-x-112-182_cy_mt-y-288-250.mat')
-f_tpx2_12nm_1 = f;
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+doLatex = 1;
 
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
 
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/avgSpectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
-avgSpectra_tpx2_12nm_2 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/stdSpectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
-stdSpectra_tpx2_12nm_2 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/spectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
-n_tpx2_12nm_2 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/frequencies_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
-f_tpx2_12nm_2 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230/avgSpectra_c_cx_mt-x-7-124_cy_mt-y-156-230.mat')
-avgSpectra_tpx2_12nm_2i = avgSpectra./1e9;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230/stdSpectra_c_cx_mt-x-7-124_cy_mt-y-156-230.mat')
-stdSpectra_tpx2_12nm_2i = stdSpectra./1e9;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230/spectra_c_cx_mt-x-7-124_cy_mt-y-156-230.mat')
-n_tpx2_12nm_2i = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230/frequencies_c_cx_mt-x-7-124_cy_mt-y-156-230.mat')
-f_tpx2_12nm_2i = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-84-147_cy_mt-y-52-193/avgSpectra_c_cx_mt-x-84-147_cy_mt-y-52-193.mat')
-avgSpectra_tpx2_12nm_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-84-147_cy_mt-y-52-193/stdSpectra_c_cx_mt-x-84-147_cy_mt-y-52-193.mat')
-stdSpectra_tpx2_12nm_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-84-147_cy_mt-y-52-193/spectra_c_cx_mt-x-84-147_cy_mt-y-52-193.mat')
-n_tpx2_12nm_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_60-62_20191028_stackReg_rigidBody/c_cx_mt-x-84-147_cy_mt-y-52-193/frequencies_c_cx_mt-x-84-147_cy_mt-y-52-193.mat')
-f_tpx2_12nm_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-110-38_cy_mt-y-59-247/avgSpectra_c_cx_mt-x-110-38_cy_mt-y-59-247.mat')
-avgSpectra_tpx2_12nm_4 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-110-38_cy_mt-y-59-247/stdSpectra_c_cx_mt-x-110-38_cy_mt-y-59-247.mat')
-stdSpectra_tpx2_12nm_4 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-110-38_cy_mt-y-59-247/spectra_c_cx_mt-x-110-38_cy_mt-y-59-247.mat')
-n_tpx2_12nm_4 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_68-72_20191028_stackReg_rigidBody/c_cx_mt-x-110-38_cy_mt-y-59-247/frequencies_c_cx_mt-x-110-38_cy_mt-y-59-247.mat')
-f_tpx2_12nm_4 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-%%
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490/avgSpectra_c_cx_mt-x-167-329_cy_mt-y-2-490.mat')
-avgSpectra_tpx2_20nm_1 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490/stdSpectra_c_cx_mt-x-167-329_cy_mt-y-2-490.mat')
-stdSpectra_tpx2_20nm_1 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490/spectra_c_cx_mt-x-167-329_cy_mt-y-2-490.mat')
-n_tpx2_20nm_1 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490/frequencies_c_cx_mt-x-167-329_cy_mt-y-2-490.mat')
-f_tpx2_20nm_1 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-237-461_cy_mt-y-43-364/avgSpectra_c_cx_mt-x-237-461_cy_mt-y-43-364.mat')
-avgSpectra_tpx2_20nm_2 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-237-461_cy_mt-y-43-364/stdSpectra_c_cx_mt-x-237-461_cy_mt-y-43-364.mat')
-stdSpectra_tpx2_20nm_2 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-237-461_cy_mt-y-43-364/spectra_c_cx_mt-x-237-461_cy_mt-y-43-364.mat')
-n_tpx2_20nm_2 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-237-461_cy_mt-y-43-364/frequencies_c_cx_mt-x-237-461_cy_mt-y-43-364.mat')
-f_tpx2_20nm_2 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/avgSpectra_c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
-avgSpectra_tpx2_20nm_3 = avgSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/stdSpectra_c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
-stdSpectra_tpx2_20nm_3 = stdSpectra;
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/spectra_c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
-n_tpx2_20nm_3 = size(P1s,2);
-
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/frequencies_c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
-f_tpx2_20nm_3 = f;
-
-clear avgSpectra
-clear stdSpectra
-clear P1s
-clear f
-
-
-
-
-%%
-
-doSave = 0;
-
-% define cutoff frequency for plotting
-f_cutoff = .00099; %units nm^-1
-
-% calculate the rayleigh-plateau wavelengths for the tpx2 scans
-
-fInd_tpx2_1 = min(find(f_tpx2_1>f_cutoff));
-maxAmplitude_tpx2_1 = max(avgSpectra_tpx2_1(:,fInd_tpx2_1:end));
-maxF_tpx2_1 = f_tpx2_1(avgSpectra_tpx2_1==maxAmplitude_tpx2_1);
-spacing_tpx2_1 = 1/maxF_tpx2_1;
-
-fInd_tpx2_1i = min(find(f_tpx2_1i>f_cutoff));
-maxAmplitude_tpx2_1i = max(avgSpectra_tpx2_1i(:,fInd_tpx2_1i:end));
-maxF_tpx2_1i = f_tpx2_1i(avgSpectra_tpx2_1i==maxAmplitude_tpx2_1i);
-spacing_tpx2_1i = 1/maxF_tpx2_1i;
-
-fInd_tpx2_2 = min(find(f_tpx2_2>f_cutoff));
-maxAmplitude_tpx2_2 = max(avgSpectra_tpx2_2(:,fInd_tpx2_2:end));
-maxF_tpx2_2 = f_tpx2_2(avgSpectra_tpx2_2==maxAmplitude_tpx2_2);
-spacing_tpx2_2 = 1/maxF_tpx2_2;
-
-fInd_tpx2_2i = min(find(f_tpx2_2i>f_cutoff));
-maxAmplitude_tpx2_2i = max(avgSpectra_tpx2_2i(:,fInd_tpx2_2i:end));
-maxF_tpx2_2i = f_tpx2_2i(avgSpectra_tpx2_2i==maxAmplitude_tpx2_2i);
-spacing_tpx2_2i = 1/maxF_tpx2_2i;
-
-fInd_tpx2_3 = min(find(f_tpx2_3>f_cutoff));
-maxAmplitude_tpx2_3 = max(avgSpectra_tpx2_3(:,fInd_tpx2_3:end));
-maxF_tpx2_3 = f_tpx2_3(avgSpectra_tpx2_3==maxAmplitude_tpx2_3);
-spacing_tpx2_3 = 1/maxF_tpx2_3;
-
-fInd_tpx2_4 = min(find(f_tpx2_4>f_cutoff));
-maxAmplitude_tpx2_4 = max(avgSpectra_tpx2_4(:,fInd_tpx2_4:end));
-maxF_tpx2_4 = f_tpx2_4(avgSpectra_tpx2_4==maxAmplitude_tpx2_4);
-spacing_tpx2_4 = 1/maxF_tpx2_4;
-
-fInd_tpx2_5 = min(find(f_tpx2_5>f_cutoff));
-maxAmplitude_tpx2_5 = max(avgSpectra_tpx2_5(:,fInd_tpx2_5:end));
-maxF_tpx2_5 = f_tpx2_5(avgSpectra_tpx2_5==maxAmplitude_tpx2_5);
-spacing_tpx2_5 = 1/maxF_tpx2_5;
-
-fInd_tpx2_5i = min(find(f_tpx2_5i>f_cutoff));
-maxAmplitude_tpx2_5i = max(avgSpectra_tpx2_5i(:,fInd_tpx2_5i:end));
-maxF_tpx2_5i = f_tpx2_5i(avgSpectra_tpx2_5i==maxAmplitude_tpx2_5i);
-spacing_tpx2_5i = 1/maxF_tpx2_5i;
-
-fInd_tpx2_6 = min(find(f_tpx2_6>f_cutoff));
-maxAmplitude_tpx2_6 = max(avgSpectra_tpx2_6(:,fInd_tpx2_6:end));
-maxF_tpx2_6 = f_tpx2_6(avgSpectra_tpx2_6==maxAmplitude_tpx2_6);
-spacing_tpx2_6 = 1/maxF_tpx2_6;
-
-fInd_tpx2_6i = min(find(f_tpx2_6i>f_cutoff));
-maxAmplitude_tpx2_6i = max(avgSpectra_tpx2_6i(:,fInd_tpx2_6i:end));
-maxF_tpx2_6i = f_tpx2_6i(avgSpectra_tpx2_6i==maxAmplitude_tpx2_6i);
-spacing_tpx2_6i = 1/maxF_tpx2_6i;
-
-% define marker styles
-tpx2_ms = ':';
-tpx2_i_ms = ':';
-kin_ms = ':';
-naked_ms = ':';
-
-% define colors
-tpx2_c = [0, 0.5, 0];
-tpx2_i_c = [0.5 , 0, 0];
-kin_c = [0, 0, 1];
-naked_c = [0.25, 0.25, 0.25];
-
-% define linewidth
-lw = 1.25;
-
-% define marker, marker size, and linewidth for lambda rp
-rp_m = '^';
-rp_lw = 2;
-rp_ms = 15;
-
-figure; hold on; box on;
-% do initial plotting for legends: tpx2, tpx2init, kinesin, naked microtubule
-
-% tpx2 coated
-errorbar(f_tpx2_1(fInd_tpx2_1:end),avgSpectra_tpx2_1(:,fInd_tpx2_1:end),stdSpectra_tpx2_1(:,fInd_tpx2_1:end)./sqrt(n_tpx2_1),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-
-% tpx2 coated init
-errorbar(f_tpx2_1i(fInd_tpx2_1i:end),avgSpectra_tpx2_1i(:,fInd_tpx2_1i:end),stdSpectra_tpx2_1i(:,fInd_tpx2_1i:end)./sqrt(n_tpx2_1i),tpx2_i_ms,'color',tpx2_i_c,'LineWidth',lw)
-
-% kinesin coated
-fInd_kin_1 = min(find(f_kin_1>f_cutoff));
-errorbar(f_kin_1(fInd_kin_1:end),avgSpectra_kin_1(:,fInd_kin_1:end),stdSpectra_kin_1(:,fInd_kin_1:end)./sqrt(n_kin_1),kin_ms,'color',kin_c,'LineWidth',lw)
-
-% naked microtubule
-fInd_naked_1 = min(find(f_naked_1>f_cutoff));
-errorbar(f_naked_1(fInd_naked_1:end),avgSpectra_naked_1(:,fInd_naked_1:end),stdSpectra_naked_1(:,fInd_naked_1:end)./sqrt(n_naked_1),naked_ms,'color',naked_c,'LineWidth',lw)
-
-% plot each rayleigh plateau wavelength on the relevant MTs
-plot(maxF_tpx2_1,maxAmplitude_tpx2_1,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(maxF_tpx2_2,maxAmplitude_tpx2_2,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(maxF_tpx2_3,maxAmplitude_tpx2_3,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(maxF_tpx2_4,maxAmplitude_tpx2_4,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(maxF_tpx2_5,maxAmplitude_tpx2_5,rp_m,'MarkerSize',rp_ms,'color',[0.3010, 0.7450, 0.9330],'LineWidth',rp_lw)
-plot(maxF_tpx2_6,maxAmplitude_tpx2_6,rp_m,'MarkerSize',rp_ms,'color',[0.6350, 0.0780, 0.1840],'LineWidth',rp_lw)
-
-% plot other kinesin
-fInd_kin_3 = min(find(f_kin_3>f_cutoff));
-errorbar(f_kin_3(fInd_kin_3:end),avgSpectra_kin_3(:,fInd_kin_3:end),stdSpectra_kin_3(:,fInd_kin_3:end)./sqrt(n_kin_3),kin_ms,'color',kin_c,'LineWidth',lw)
-
-% plot other tpx2 initial coating mt spectra
-errorbar(f_tpx2_2i(fInd_tpx2_2i:end),avgSpectra_tpx2_2i(:,fInd_tpx2_2i:end),stdSpectra_tpx2_2i(:,fInd_tpx2_2i:end)./sqrt(n_tpx2_2i),tpx2_i_ms,'color',tpx2_i_c,'LineWidth',lw)
-errorbar(f_tpx2_5i(fInd_tpx2_5i:end),avgSpectra_tpx2_5i(:,fInd_tpx2_5i:end),stdSpectra_tpx2_5i(:,fInd_tpx2_5i:end)./sqrt(n_tpx2_5i),tpx2_i_ms,'color',tpx2_i_c,'LineWidth',lw)
-errorbar(f_tpx2_6i(fInd_tpx2_6i:end),avgSpectra_tpx2_6i(:,fInd_tpx2_6i:end),stdSpectra_tpx2_6i(:,fInd_tpx2_6i:end)./sqrt(n_tpx2_6i),tpx2_i_ms,'color',tpx2_i_c,'LineWidth',lw)
-
-
-% plot the other tpx2 coated mt spectra
-errorbar(f_tpx2_2(fInd_tpx2_2:end),avgSpectra_tpx2_2(:,fInd_tpx2_2:end),stdSpectra_tpx2_2(:,fInd_tpx2_2:end)./sqrt(n_tpx2_2),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-errorbar(f_tpx2_3(fInd_tpx2_3:end),avgSpectra_tpx2_3(:,fInd_tpx2_3:end),stdSpectra_tpx2_3(:,fInd_tpx2_3:end)./sqrt(n_tpx2_3),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-errorbar(f_tpx2_4(fInd_tpx2_4:end),avgSpectra_tpx2_4(:,fInd_tpx2_4:end),stdSpectra_tpx2_4(:,fInd_tpx2_4:end)./sqrt(n_tpx2_4),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-errorbar(f_tpx2_5(fInd_tpx2_5:end),avgSpectra_tpx2_5(:,fInd_tpx2_5:end),stdSpectra_tpx2_5(:,fInd_tpx2_5:end)./sqrt(n_tpx2_5),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-errorbar(f_tpx2_6(fInd_tpx2_6:end),avgSpectra_tpx2_6(:,fInd_tpx2_6:end),stdSpectra_tpx2_6(:,fInd_tpx2_6:end)./sqrt(n_tpx2_6),tpx2_ms,'color',tpx2_c,'LineWidth',lw)
-
-% plot the other kinesin mt spectra
-fInd_kin_2 = min(find(f_kin_2>f_cutoff));
-errorbar(f_kin_2(fInd_kin_2:end),avgSpectra_kin_2(:,fInd_kin_2:end),stdSpectra_kin_2(:,fInd_kin_2:end)./sqrt(n_kin_2),kin_ms,'color',kin_c,'LineWidth',lw)
-
-% plot the other naked mt spectra
-fInd_naked_2 = min(find(f_naked_2>f_cutoff));
-errorbar(f_naked_2(fInd_naked_2:end),avgSpectra_naked_2(:,fInd_naked_2:end),stdSpectra_naked_2(:,fInd_naked_2:end)./sqrt(n_naked_2),naked_ms,'color',naked_c,'LineWidth',lw)
-
-fInd_naked_3 = min(find(f_naked_3>f_cutoff));
-errorbar(f_naked_3(fInd_naked_3:end),avgSpectra_naked_3(:,fInd_naked_3:end),stdSpectra_naked_3(:,fInd_naked_3:end)./sqrt(n_naked_3),naked_ms,'color',naked_c,'LineWidth',lw)
-
-% tpx2 c term
-fInd_tpcterm_1 = min(find(f_tpcterm_1>f_cutoff));
-fInd_tpcterm_2 = min(find(f_tpcterm_2>f_cutoff));
-fInd_tpcterm_3 = min(find(f_tpcterm_3>f_cutoff));
-fInd_tpcterm_4 = min(find(f_tpcterm_4>f_cutoff));
-
-% tpx2 fl 20nm coating
-fInd_tpx2_20nm_1 = min(find(f_tpx2_20nm_1>f_cutoff));
-fInd_tpx2_20nm_2 = min(find(f_tpx2_20nm_2>f_cutoff));
-fInd_tpx2_20nm_3 = min(find(f_tpx2_20nm_3>f_cutoff));
-
-% tpx2 fl 12nm coating
-fInd_tpx2_12nm_1 = min(find(f_tpx2_12nm_1>f_cutoff));
-fInd_tpx2_12nm_2 = min(find(f_tpx2_12nm_2>f_cutoff));
-fInd_tpx2_12nm_3 = min(find(f_tpx2_12nm_3>f_cutoff));
-fInd_tpx2_12nm_4 = min(find(f_tpx2_12nm_4>f_cutoff));
-
-% more initial coatings
-fInd_tpx2_12nm_2i = min(find(f_tpx2_12nm_2i>f_cutoff));
-
-
-
-
-%{
-set(gca, 'XScale','log')
-
-legend('TPX2 after beading up',...
-    'TPX2 upon initial coating',...
-    'Kinesin-1',...
-    'Naked MT',...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_1)),' nm'],...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_2)),' nm'],...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_3)),' nm'],...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_4)),' nm'],...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_5)),' nm'],...
-    ['\lambda_{RP} = ',num2str(round(spacing_tpx2_6)),' nm'])
-
-legend('boxoff');
-
-xafz = 14;
-yafz = 14;
-tvfz = 12;
-simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)| +/- SEM', xafz, yafz, tvfz )
-
-if doSave
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,['amplitude spectra TPX2 final vs TPX2 init vs Kinesin1 vs Naked MT'])
-end
-
-%}
-
-%% average all tpx2 12nm spectra
-
-fAll_tpx2_12nm = [f_tpx2_12nm_1(fInd_tpx2_12nm_1:end),...
-    f_tpx2_12nm_2(fInd_tpx2_12nm_2:end),...
-    f_tpx2_12nm_3(fInd_tpx2_12nm_3:end),...
-    f_tpx2_12nm_4(fInd_tpx2_12nm_4:end)];
- 
-fAll_tpx2_12nm = sort(fAll_tpx2_12nm);
-f_min_tpx2_12nm = min(fAll_tpx2_12nm);
-f_max_tpx2_12nm = max(fAll_tpx2_12nm);
- 
-fLin_tpx2_12nm = [f_min_tpx2_12nm:mean(diff(fAll_tpx2_12nm)):f_max_tpx2_12nm];
-fLin_tpx2_12nm = [f_min_tpx2_12nm:.001:f_max_tpx2_12nm];
-%.001;
-
-f1=f_tpx2_12nm_1(fInd_tpx2_12nm_1:end);
-f2=f_tpx2_12nm_2(fInd_tpx2_12nm_2:end);
-f3=f_tpx2_12nm_3(fInd_tpx2_12nm_3:end);
-f4=f_tpx2_12nm_4(fInd_tpx2_12nm_4:end);
- 
-a1=avgSpectra_tpx2_12nm_1(:,fInd_tpx2_12nm_1:end);
-a2=avgSpectra_tpx2_12nm_2(:,fInd_tpx2_12nm_2:end);
-a3=avgSpectra_tpx2_12nm_3(:,fInd_tpx2_12nm_3:end);
-a4=avgSpectra_tpx2_12nm_4(:,fInd_tpx2_12nm_4:end);
- 
-s1 = stdSpectra_tpx2_12nm_1(:,fInd_tpx2_12nm_1:end)./sqrt(n_tpx2_12nm_1);
-s2 = stdSpectra_tpx2_12nm_2(:,fInd_tpx2_12nm_2:end)./sqrt(n_tpx2_12nm_2);
-s3 = stdSpectra_tpx2_12nm_3(:,fInd_tpx2_12nm_3:end)./sqrt(n_tpx2_12nm_3);
-s4 = stdSpectra_tpx2_12nm_4(:,fInd_tpx2_12nm_4:end)./sqrt(n_tpx2_12nm_4);
- 
-a1itpx2_12nm = interp1(f1(:),a1(:),fLin_tpx2_12nm(:),'linear','extrap');
-a2itpx2_12nm = interp1(f2(:),a2(:),fLin_tpx2_12nm(:),'linear','extrap');
-a3itpx2_12nm = interp1(f3(:),a3(:),fLin_tpx2_12nm(:),'linear','extrap');
-a4itpx2_12nm = interp1(f4(:),a4(:),fLin_tpx2_12nm(:),'linear','extrap');
- 
-s1itpx2_12nm = interp1(f1(:),s1(:),fLin_tpx2_12nm(:),'linear','extrap');
-s2itpx2_12nm = interp1(f2(:),s2(:),fLin_tpx2_12nm(:),'linear','extrap');
-s3itpx2_12nm = interp1(f3(:),s3(:),fLin_tpx2_12nm(:),'linear','extrap');
-s4itpx2_12nm = interp1(f4(:),s4(:),fLin_tpx2_12nm(:),'linear','extrap');
- 
- 
-aMeantpx2_12nm = mean([a1itpx2_12nm a2itpx2_12nm a3itpx2_12nm a4itpx2_12nm],2);
-sMeantpx2_12nm = mean([s1itpx2_12nm s2itpx2_12nm s3itpx2_12nm s4itpx2_12nm],2);
-
-%% average all tpx2 final spectra, 15-18nm
-
-fAll_tpx2 = [f_tpx2_1(fInd_tpx2_1:end),...
-    f_tpx2_2(fInd_tpx2_2:end),...
-    f_tpx2_3(fInd_tpx2_3:end),...
-    f_tpx2_4(fInd_tpx2_4:end),...
-    f_tpx2_5(fInd_tpx2_5:end),...
-    f_tpx2_6(fInd_tpx2_6:end)];
-
-fAll_tpx2 = sort(fAll_tpx2);
-f_min_tpx2 = min(fAll_tpx2);
-f_max_tpx2 = max(fAll_tpx2);
-
-% get appropriate spacing for linearly interpolated data
-% combine all linearly interpolated data into cell
-fAll_long_tpx2 = {diff(f_tpx2_1(fInd_tpx2_1:end));...
-    diff(f_tpx2_2(fInd_tpx2_2:end));...
-    diff(f_tpx2_3(fInd_tpx2_3:end));...
-    diff(f_tpx2_4(fInd_tpx2_4:end));...
-    diff(f_tpx2_5(fInd_tpx2_5:end));...
-    diff(f_tpx2_6(fInd_tpx2_6:end))};
-
-% get the average delta F
-% meanDeltaF = mean(cellfun(@mean, fAll_long_tpx2));
-% 
-% % get the min avg delta F
-% minDeltaF = min(cellfun(@mean, fAll_long_tpx2));
-% 
-% 
-% 
-% fLin_tpx2 = [f_min_tpx2:meanDeltaF:f_max_tpx2];
-% fLin_tpx2 = [f_min_tpx2:minDeltaF:f_max_tpx2];
-
-fLin_tpx2 = [f_min_tpx2:.001:f_max_tpx2];
-
-f2=f_tpx2_2(fInd_tpx2_2:end);
-f3=f_tpx2_3(fInd_tpx2_3:end);
-f4=f_tpx2_4(fInd_tpx2_4:end);
-f5=f_tpx2_5(fInd_tpx2_5:end);
-f6=f_tpx2_6(fInd_tpx2_6:end);
-
-a2=avgSpectra_tpx2_2(:,fInd_tpx2_2:end);
-a3=avgSpectra_tpx2_3(:,fInd_tpx2_3:end);
-a4=avgSpectra_tpx2_4(:,fInd_tpx2_4:end);
-a5=avgSpectra_tpx2_5(:,fInd_tpx2_5:end);
-a6=avgSpectra_tpx2_6(:,fInd_tpx2_6:end);
-
-s2 = stdSpectra_tpx2_2(:,fInd_tpx2_2:end)./sqrt(n_tpx2_2);
-s3 = stdSpectra_tpx2_3(:,fInd_tpx2_3:end)./sqrt(n_tpx2_3);
-s4 = stdSpectra_tpx2_4(:,fInd_tpx2_4:end)./sqrt(n_tpx2_4);
-s5 = stdSpectra_tpx2_5(:,fInd_tpx2_5:end)./sqrt(n_tpx2_5);
-s6 = stdSpectra_tpx2_6(:,fInd_tpx2_6:end)./sqrt(n_tpx2_6);
-
-a2iTpx2 = interp1(f2(:),a2(:),fLin_tpx2(:),'linear','extrap');
-a3iTpx2 = interp1(f3(:),a3(:),fLin_tpx2(:),'linear','extrap');
-a4iTpx2 = interp1(f4(:),a4(:),fLin_tpx2(:),'linear','extrap');
-a5iTpx2 = interp1(f5(:),a5(:),fLin_tpx2(:),'linear','extrap');
-a6iTpx2 = interp1(f6(:),a6(:),fLin_tpx2(:),'linear','extrap');
-
-s2iTpx2 = interp1(f2(:),s2(:),fLin_tpx2(:),'linear','extrap');
-s3iTpx2 = interp1(f3(:),s3(:),fLin_tpx2(:),'linear','extrap');
-s4iTpx2 = interp1(f4(:),s4(:),fLin_tpx2(:),'linear','extrap');
-s5iTpx2 = interp1(f5(:),s5(:),fLin_tpx2(:),'linear','extrap');
-s6iTpx2 = interp1(f6(:),s6(:),fLin_tpx2(:),'linear','extrap');
-
-
-f1=f_tpx2_1(fInd_tpx2_1:end);
-a1=avgSpectra_tpx2_1(:,fInd_tpx2_1:end);
-s1 = stdSpectra_tpx2_1(:,fInd_tpx2_1:end)./sqrt(n_tpx2_1);
-a1iTpx2 = interp1(f1(:),a1(:),fLin_tpx2(:),'linear','extrap');
-s1iTpx2 = interp1(f1(:),s1(:),fLin_tpx2(:),'linear','extrap');
-
-sp1 = spectra_tpx2_1(fInd_tpx2_1:end,:);
-sp1i = zeros(length(fLin_tpx2),size(sp1,2));
-%loop over spectra, interpolate each
-for j = 1:size(sp1,2)
-    sp1i(:,j) = interp1(f1(:),sp1(:,j),fLin_tpx2(:),'linear','extrap');
-end
-
-
-
-aMeanTpx2 = mean([a1iTpx2 a2iTpx2 a3iTpx2 a4iTpx2 a5iTpx2 a6iTpx2],2);
-sMeanTpx2 = mean([s1iTpx2 s2iTpx2 s3iTpx2 s4iTpx2 s5iTpx2 s6iTpx2],2);
-
-% aMeanTpx2 = mean([a1iTpx2 a3iTpx2 a4iTpx2 a5iTpx2 a6iTpx2],2);
-% sMeanTpx2 = mean([s1iTpx2 s3iTpx2 s4iTpx2 s5iTpx2 s6iTpx2],2);
-
-aMaxTpx2 = max(aMeanTpx2);
-aMaxTpx2Ind = find(aMeanTpx2==aMaxTpx2);
-fMaxTpx2 = fLin_tpx2(aMaxTpx2Ind);
-
-%% average all tpx2_20nm spectra
- 
-fAll_tpx2_20nm = [f_tpx2_20nm_1(fInd_tpx2_20nm_1:end),...
-    f_tpx2_20nm_2(fInd_tpx2_20nm_2:end),...
-    f_tpx2_20nm_3(fInd_tpx2_20nm_3:end)];
- 
-fAll_tpx2_20nm = sort(fAll_tpx2_20nm);
-f_min_tpx2_20nm = min(fAll_tpx2_20nm);
-f_max_tpx2_20nm = max(fAll_tpx2_20nm);
- 
-fLin_tpx2_20nm = [f_min_tpx2_20nm:mean(diff(fAll_tpx2_20nm)):f_max_tpx2_20nm];
-
-fLin_tpx2_20nm = [f_min_tpx2_20nm:.001:f_max_tpx2_20nm];
-
-
-f1=f_tpx2_20nm_1(fInd_tpx2_20nm_1:end);
-f2=f_tpx2_20nm_2(fInd_tpx2_20nm_2:end);
-f3=f_tpx2_20nm_3(fInd_tpx2_20nm_3:end);
- 
-a1=avgSpectra_tpx2_20nm_1(:,fInd_tpx2_20nm_1:end);
-a2=avgSpectra_tpx2_20nm_2(:,fInd_tpx2_20nm_2:end);
-a3=avgSpectra_tpx2_20nm_3(:,fInd_tpx2_20nm_3:end);
- 
-s1 = stdSpectra_tpx2_20nm_1(:,fInd_tpx2_20nm_1:end)./sqrt(n_tpx2_20nm_1);
-s2 = stdSpectra_tpx2_20nm_2(:,fInd_tpx2_20nm_2:end)./sqrt(n_tpx2_20nm_2);
-s3 = stdSpectra_tpx2_20nm_3(:,fInd_tpx2_20nm_3:end)./sqrt(n_tpx2_20nm_3);
- 
-a1itpx2_20nm = interp1(f1(:),a1(:),fLin_tpx2_20nm(:),'linear','extrap');
-a2itpx2_20nm = interp1(f2(:),a2(:),fLin_tpx2_20nm(:),'linear','extrap');
-a3itpx2_20nm = interp1(f3(:),a3(:),fLin_tpx2_20nm(:),'linear','extrap');
- 
-s1itpx2_20nm = interp1(f1(:),s1(:),fLin_tpx2_20nm(:),'linear','extrap');
-s2itpx2_20nm = interp1(f2(:),s2(:),fLin_tpx2_20nm(:),'linear','extrap');
-s3itpx2_20nm = interp1(f3(:),s3(:),fLin_tpx2_20nm(:),'linear','extrap');
- 
-aMeantpx2_20nm = mean([a1itpx2_20nm a2itpx2_20nm a3itpx2_20nm],2);
-sMeantpx2_20nm = mean([s1itpx2_20nm s2itpx2_20nm s3itpx2_20nm],2);
-
-aMaxtpx2_20nm = max(aMeantpx2_20nm(3:end));
-aMaxtpx2_20nmInd = find(aMeantpx2_20nm==aMaxtpx2_20nm);
-fMaxtpx2_20nm = fLin_tpx2_20nm(aMaxtpx2_20nmInd);
-
-
-%% average all tpx2 init spectra
- 
-fAll_tpx2i = [f_tpx2_1i(fInd_tpx2_1i:end),...
-    f_tpx2_2i(fInd_tpx2_2i:end),...
-    f_tpx2_5i(fInd_tpx2_5i:end),...
-    f_tpx2_6i(fInd_tpx2_6i:end),...
-    f_tpx2_12nm_2i(fInd_tpx2_12nm_2i:end),...
-    ];
- 
-fAll_tpx2i = sort(fAll_tpx2i);
-f_min_tpx2i = min(fAll_tpx2i);
-f_max_tpx2i = max(fAll_tpx2i);
- 
-fLin_tpx2i = [f_min_tpx2i:mean(diff(fAll_tpx2i)):f_max_tpx2i];
-
-fLin_tpx2i = [f_min_tpx2i:.001:f_max_tpx2i];
-
-f1=f_tpx2_1i(fInd_tpx2_1i:end);
-f2=f_tpx2_2i(fInd_tpx2_2i:end);
-f5=f_tpx2_5i(fInd_tpx2_5i:end);
-f6=f_tpx2_6i(fInd_tpx2_6i:end);
-f3=f_tpx2_12nm_2i(fInd_tpx2_12nm_2i:end);
- 
-a1=avgSpectra_tpx2_1i(:,fInd_tpx2_1i:end);
-a2=avgSpectra_tpx2_2i(:,fInd_tpx2_2i:end);
-a5=avgSpectra_tpx2_5i(:,fInd_tpx2_5i:end);
-a6=avgSpectra_tpx2_6i(:,fInd_tpx2_6i:end);
-a3=avgSpectra_tpx2_12nm_2i(:,fInd_tpx2_12nm_2i:end); 
-
-s1 = stdSpectra_tpx2_1i(:,fInd_tpx2_1i:end)./sqrt(n_tpx2_1i);
-s2 = stdSpectra_tpx2_2i(:,fInd_tpx2_2i:end)./sqrt(n_tpx2_2i);
-s5 = stdSpectra_tpx2_5i(:,fInd_tpx2_5i:end)./sqrt(n_tpx2_5i);
-s6 = stdSpectra_tpx2_6i(:,fInd_tpx2_6i:end)./sqrt(n_tpx2_6i);
-s3 = stdSpectra_tpx2_12nm_2i(:,fInd_tpx2_12nm_2i:end)./sqrt(n_tpx2_12nm_2i); 
-
-a1iTpx2i = interp1(f1(:),a1(:),fLin_tpx2i(:),'linear','extrap');
-a2iTpx2i = interp1(f2(:),a2(:),fLin_tpx2i(:),'linear','extrap');
-a5iTpx2i = interp1(f5(:),a5(:),fLin_tpx2i(:),'linear','extrap');
-a6iTpx2i = interp1(f6(:),a6(:),fLin_tpx2i(:),'linear','extrap');
-a3iTpx2i = interp1(f3(:),a3(:),fLin_tpx2i(:),'linear','extrap');
-
-
-s1iTpx2i = interp1(f1(:),s1(:),fLin_tpx2i(:),'linear','extrap');
-s2iTpx2i = interp1(f2(:),s2(:),fLin_tpx2i(:),'linear','extrap');
-s5iTpx2i = interp1(f5(:),s5(:),fLin_tpx2i(:),'linear','extrap');
-s6iTpx2i = interp1(f6(:),s6(:),fLin_tpx2i(:),'linear','extrap');
-s3iTpx2i = interp1(f3(:),s3(:),fLin_tpx2i(:),'linear','extrap');
- 
-aMeanTpx2i = mean([a1iTpx2i a2iTpx2i a3iTpx2i a5iTpx2i a6iTpx2i],2);
-sMeanTpx2i = mean([s1iTpx2i s2iTpx2i s3iTpx2i s5iTpx2i s6iTpx2i],2);
-
-%% average all kin spectra
-
-fAll_kin = [f_kin_1(fInd_kin_1:end),...
-    f_kin_2(fInd_kin_2:end),...
-    f_kin_3(fInd_kin_3:end),...
-    f_kin_4(fInd_kin_4:end),...
-    f_kin_5(fInd_kin_5:end),...
-    f_kin_6(fInd_kin_6:end),...
-    f_kin_7(fInd_kin_7:end),...
-    f_kin_8(fInd_kin_8:end),...
-    f_kin_9(fInd_kin_9:end),...
-    f_kin_10(fInd_kin_10:end),...
-    f_kin_11(fInd_kin_11:end),...
-    f_kin_12(fInd_kin_12:end),...
-    f_kin_13(fInd_kin_13:end),...
-    f_kin_14(fInd_kin_14:end),...
-    f_kin_15(fInd_kin_15:end),...
-    f_kin_16(fInd_kin_16:end),...
-    f_kin_17(fInd_kin_17:end),...
-    f_kin_18(fInd_kin_18:end),...
-    f_kin_19(fInd_kin_19:end),...
-    ];
- 
-fAll_kin = sort(fAll_kin);
-f_min_kin = min(fAll_kin);
-f_max_kin = max(fAll_kin);
- 
-fLin_kin = [f_min_kin:mean(diff(f_kin_19)):f_max_kin];
-
-fLin_kin = [f_min_kin:.001:f_max_kin];
-
-
-f1=f_kin_1(fInd_kin_1:end);
-a1=avgSpectra_kin_1(:,fInd_kin_1:end);
-s1 = stdSpectra_kin_1(:,fInd_kin_1:end)./sqrt(n_kin_1);
-a1ikin = interp1(f1(:),a1(:),fLin_kin(:),'linear','extrap');
-s1ikin = interp1(f1(:),s1(:),fLin_kin(:),'linear','extrap');
-
-
-f2=f_kin_2(fInd_kin_2:end);
-a2=avgSpectra_kin_2(:,fInd_kin_2:end);
-s2 = stdSpectra_kin_2(:,fInd_kin_2:end)./sqrt(n_kin_2);
-a2ikin = interp1(f2(:),a2(:),fLin_kin(:),'linear','extrap');
-s2ikin = interp1(f2(:),s2(:),fLin_kin(:),'linear','extrap');
-
-
-f3=f_kin_3(fInd_kin_3:end);
-a3=avgSpectra_kin_3(:,fInd_kin_3:end);
-s3 = stdSpectra_kin_3(:,fInd_kin_3:end)./sqrt(n_kin_3);
-a3ikin = interp1(f3(:),a3(:),fLin_kin(:),'linear','extrap');
-s3ikin = interp1(f3(:),s3(:),fLin_kin(:),'linear','extrap');
-
-f4=f_kin_4(fInd_kin_4:end);
-a4=avgSpectra_kin_4(:,fInd_kin_4:end);
-s4 = stdSpectra_kin_4(:,fInd_kin_4:end)./sqrt(n_kin_4);
-a4ikin = interp1(f4(:),a4(:),fLin_kin(:),'linear','extrap');
-s4ikin = interp1(f4(:),s4(:),fLin_kin(:),'linear','extrap');
-
-f5=f_kin_5(fInd_kin_5:end);
-a5=avgSpectra_kin_5(:,fInd_kin_5:end);
-s5 = stdSpectra_kin_5(:,fInd_kin_5:end)./sqrt(n_kin_5);
-a5ikin = interp1(f5(:),a5(:),fLin_kin(:),'linear','extrap');
-s5ikin = interp1(f5(:),s5(:),fLin_kin(:),'linear','extrap');
-
-f6=f_kin_6(fInd_kin_6:end);
-a6=avgSpectra_kin_6(:,fInd_kin_6:end);
-s6 = stdSpectra_kin_6(:,fInd_kin_6:end)./sqrt(n_kin_6);
-a6ikin = interp1(f6(:),a6(:),fLin_kin(:),'linear','extrap');
-s6ikin = interp1(f6(:),s6(:),fLin_kin(:),'linear','extrap');
-
-f7=f_kin_7(fInd_kin_7:end);
-a7=avgSpectra_kin_7(:,fInd_kin_7:end);
-s7 = stdSpectra_kin_7(:,fInd_kin_7:end)./sqrt(n_kin_7);
-a7ikin = interp1(f7(:),a7(:),fLin_kin(:),'linear','extrap');
-s7ikin = interp1(f7(:),s7(:),fLin_kin(:),'linear','extrap');
-
-f8=f_kin_8(fInd_kin_8:end);
-a8=avgSpectra_kin_8(:,fInd_kin_8:end);
-s8 = stdSpectra_kin_8(:,fInd_kin_8:end)./sqrt(n_kin_8);
-a8ikin = interp1(f8(:),a8(:),fLin_kin(:),'linear','extrap');
-s8ikin = interp1(f8(:),s8(:),fLin_kin(:),'linear','extrap');
-
-f9=f_kin_9(fInd_kin_9:end);
-a9=avgSpectra_kin_9(:,fInd_kin_9:end);
-s9 = stdSpectra_kin_9(:,fInd_kin_9:end)./sqrt(n_kin_9);
-a9ikin = interp1(f9(:),a9(:),fLin_kin(:),'linear','extrap');
-s9ikin = interp1(f9(:),s9(:),fLin_kin(:),'linear','extrap');
-
-f10=f_kin_10(fInd_kin_10:end);
-a10=avgSpectra_kin_10(:,fInd_kin_10:end);
-s10 = stdSpectra_kin_10(:,fInd_kin_10:end)./sqrt(n_kin_10);
-a10ikin = interp1(f10(:),a10(:),fLin_kin(:),'linear','extrap');
-s10ikin = interp1(f10(:),s10(:),fLin_kin(:),'linear','extrap');
-
-f11=f_kin_11(fInd_kin_11:end);
-a11=avgSpectra_kin_11(:,fInd_kin_11:end);
-s11 = stdSpectra_kin_11(:,fInd_kin_11:end)./sqrt(n_kin_11);
-a11ikin = interp1(f11(:),a11(:),fLin_kin(:),'linear','extrap');
-s11ikin = interp1(f11(:),s11(:),fLin_kin(:),'linear','extrap');
-
-f12=f_kin_12(fInd_kin_12:end);
-a12=avgSpectra_kin_12(:,fInd_kin_12:end);
-s12 = stdSpectra_kin_12(:,fInd_kin_12:end)./sqrt(n_kin_12);
-a12ikin = interp1(f12(:),a12(:),fLin_kin(:),'linear','extrap');
-s12ikin = interp1(f12(:),s12(:),fLin_kin(:),'linear','extrap');
-
-f13=f_kin_13(fInd_kin_13:end);
-a13=avgSpectra_kin_13(:,fInd_kin_13:end);
-s13 = stdSpectra_kin_13(:,fInd_kin_13:end)./sqrt(n_kin_13);
-a13ikin = interp1(f13(:),a13(:),fLin_kin(:),'linear','extrap');
-s13ikin = interp1(f13(:),s13(:),fLin_kin(:),'linear','extrap');
-
-f14=f_kin_14(fInd_kin_14:end);
-a14=avgSpectra_kin_14(:,fInd_kin_14:end);
-s14 = stdSpectra_kin_14(:,fInd_kin_14:end)./sqrt(n_kin_14);
-a14ikin = interp1(f14(:),a14(:),fLin_kin(:),'linear','extrap');
-s14ikin = interp1(f14(:),s14(:),fLin_kin(:),'linear','extrap');
-
-f15=f_kin_15(fInd_kin_15:end);
-a15=avgSpectra_kin_15(:,fInd_kin_15:end);
-s15 = stdSpectra_kin_15(:,fInd_kin_15:end)./sqrt(n_kin_15);
-a15ikin = interp1(f15(:),a15(:),fLin_kin(:),'linear','extrap');
-s15ikin = interp1(f15(:),s15(:),fLin_kin(:),'linear','extrap');
-
-f16=f_kin_16(fInd_kin_16:end);
-a16=avgSpectra_kin_16(:,fInd_kin_16:end);
-s16 = stdSpectra_kin_16(:,fInd_kin_16:end)./sqrt(n_kin_16);
-a16ikin = interp1(f16(:),a16(:),fLin_kin(:),'linear','extrap');
-s16ikin = interp1(f16(:),s16(:),fLin_kin(:),'linear','extrap');
-
-f17=f_kin_17(fInd_kin_17:end);
-a17=avgSpectra_kin_17(:,fInd_kin_17:end);
-s17 = stdSpectra_kin_17(:,fInd_kin_17:end)./sqrt(n_kin_17);
-a17ikin = interp1(f17(:),a17(:),fLin_kin(:),'linear','extrap');
-s17ikin = interp1(f17(:),s17(:),fLin_kin(:),'linear','extrap');
-
-f18=f_kin_18(fInd_kin_18:end);
-a18=avgSpectra_kin_18(:,fInd_kin_18:end);
-s18 = stdSpectra_kin_18(:,fInd_kin_18:end)./sqrt(n_kin_18);
-a18ikin = interp1(f18(:),a18(:),fLin_kin(:),'linear','extrap');
-s18ikin = interp1(f18(:),s18(:),fLin_kin(:),'linear','extrap');
-
-f19=f_kin_19(fInd_kin_19:end);
-a19=avgSpectra_kin_19(:,fInd_kin_19:end);
-s19 = stdSpectra_kin_19(:,fInd_kin_19:end)./sqrt(n_kin_19);
-a19ikin = interp1(f19(:),a19(:),fLin_kin(:),'linear','extrap');
-s19ikin = interp1(f19(:),s19(:),fLin_kin(:),'linear','extrap');
-
- 
-aMeankin = mean([a1ikin,...
-    a2ikin,...
-    a3ikin,...
-    a4ikin,...
-    a5ikin,...
-    a6ikin,...
-    a7ikin,...
-    a8ikin,...
-    a9ikin,...
-    a10ikin,...
-    a11ikin,...
-    a12ikin,...
-    a13ikin,...
-    a14ikin,...
-    a15ikin,...
-    a16ikin,...
-    a17ikin,...
-    a18ikin,...
-    a19ikin,...
-    ],2);
-
-sMeankin = mean([s1ikin,...
-    s2ikin,...
-    s3ikin,...
-    s4ikin,...
-    s5ikin,...
-    s6ikin,...
-    s7ikin,...
-    s8ikin,...
-    s9ikin,...
-    s10ikin,...
-    s11ikin,...
-    s12ikin,...
-    s13ikin,...
-    s14ikin,...
-    s15ikin,...
-    s16ikin,...
-    s17ikin,...
-    s18ikin,...
-    s19ikin,...
-    ],2);
-
-%% average all tpx2 c term spectra
-
-fAll_tpcterm = [f_tpcterm_1(fInd_tpcterm_1:end),...
-    f_tpcterm_2(fInd_tpcterm_2:end),...
-    f_tpcterm_3(fInd_tpcterm_3:end),...
-    f_tpcterm_4(fInd_tpcterm_4:end)];
- 
-fAll_tpcterm = sort(fAll_tpcterm);
-f_min_tpcterm = min(fAll_tpcterm);
-f_max_tpcterm = max(fAll_tpcterm);
- 
-fLin_tpcterm = [f_min_tpcterm:mean(diff(fAll_tpcterm)):f_max_tpcterm];
-fLin_tpcterm = [f_min_tpcterm:.001:f_max_tpcterm];
-
-
-f1=f_tpcterm_1(fInd_tpcterm_1:end);
-f2=f_tpcterm_2(fInd_tpcterm_2:end);
-f3=f_tpcterm_3(fInd_tpcterm_3:end);
-f4=f_tpcterm_4(fInd_tpcterm_4:end);
- 
-a1=avgSpectra_tpcterm_1(:,fInd_tpcterm_1:end);
-a2=avgSpectra_tpcterm_2(:,fInd_tpcterm_2:end);
-a3=avgSpectra_tpcterm_3(:,fInd_tpcterm_3:end);
-a4=avgSpectra_tpcterm_4(:,fInd_tpcterm_4:end);
-
-s1 = stdSpectra_tpcterm_1(:,fInd_tpcterm_1:end)./sqrt(n_tpcterm_1);
-s2 = stdSpectra_tpcterm_2(:,fInd_tpcterm_2:end)./sqrt(n_tpcterm_2);
-s3 = stdSpectra_tpcterm_3(:,fInd_tpcterm_3:end)./sqrt(n_tpcterm_3);
-s4 = stdSpectra_tpcterm_4(:,fInd_tpcterm_4:end)./sqrt(n_tpcterm_4);
-
-a1itpcterm = interp1(f1(:),a1(:),fLin_tpcterm(:),'linear','extrap');
-a2itpcterm = interp1(f2(:),a2(:),fLin_tpcterm(:),'linear','extrap');
-a3itpcterm = interp1(f3(:),a3(:),fLin_tpcterm(:),'linear','extrap');
-a4itpcterm = interp1(f4(:),a4(:),fLin_tpcterm(:),'linear','extrap');
-
-s1itpcterm = interp1(f1(:),s1(:),fLin_tpcterm(:),'linear','extrap');
-s2itpcterm = interp1(f2(:),s2(:),fLin_tpcterm(:),'linear','extrap');
-s3itpcterm = interp1(f3(:),s3(:),fLin_tpcterm(:),'linear','extrap');
-s4itpcterm = interp1(f4(:),s4(:),fLin_tpcterm(:),'linear','extrap');
-
-
-aMeantpcterm = mean([a1itpcterm a2itpcterm a3itpcterm a4itpcterm],2);
-sMeantpcterm = mean([s1itpcterm s2itpcterm s3itpcterm s4itpcterm],2);
-
-
-
-%% average all naked spectra
- 
-fAll_naked = [f_naked_1(fInd_naked_1:end),...
-    f_naked_2(fInd_naked_2:end),...
-    f_naked_3(fInd_naked_3:end)];
- 
-fAll_naked = sort(fAll_naked);
-f_min_naked = min(fAll_naked);
-f_max_naked = max(fAll_naked);
- 
-fLin_naked = [f_min_naked:mean(diff(fAll_naked)):f_max_naked];
-fLin_naked = [f_min_naked:.001:f_max_naked];
-
-
-f1=f_naked_1(fInd_naked_1:end);
-f2=f_naked_2(fInd_naked_2:end);
-f3=f_naked_3(fInd_naked_3:end);
- 
-a1=avgSpectra_naked_1(:,fInd_naked_1:end);
-a2=avgSpectra_naked_2(:,fInd_naked_2:end);
-a3=avgSpectra_naked_3(:,fInd_naked_3:end);
- 
-s1 = stdSpectra_naked_1(:,fInd_naked_1:end)./sqrt(n_naked_1);
-s2 = stdSpectra_naked_2(:,fInd_naked_2:end)./sqrt(n_naked_2);
-s3 = stdSpectra_naked_3(:,fInd_naked_3:end)./sqrt(n_naked_3);
- 
-a1inaked = interp1(f1(:),a1(:),fLin_naked(:),'linear','extrap');
-a2inaked = interp1(f2(:),a2(:),fLin_naked(:),'linear','extrap');
-a3inaked = interp1(f3(:),a3(:),fLin_naked(:),'linear','extrap');
- 
- 
-s1inaked = interp1(f1(:),s1(:),fLin_naked(:),'linear','extrap');
-s2inaked = interp1(f2(:),s2(:),fLin_naked(:),'linear','extrap');
-s3inaked = interp1(f3(:),s3(:),fLin_naked(:),'linear','extrap');
- 
-aMeannaked = mean([a1inaked a2inaked a3inaked],2);
-sMeannaked = mean([s1inaked s2inaked s3inaked],2);
-
-
-%%
-
-saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
-
-doSave = 0;
-
-lw = 1.2;
-
-figure;
-hold on;
+figure; 
 box on;
+hold on;
+
+plot(fLin_kin,mean(avgSpectra_lin_kin),kinColor,'LineWidth',lw)
+plot(fLin_uncoated,mean(avgSpectra_lin_uncoated),uncoatedColor,'LineWidth',lw)
+plot(fLin_tpx2_init,mean(avgSpectra_lin_tpx2_init),tpx2_initColor,'LineWidth',lw)
+
+shadedplot(fLin_kin,ci_avgSpectra_lin_kin(1,:),ci_avgSpectra_lin_kin(2,:),alphaValCi,kinColor,kinColor);
+shadedplot(fLin_tpx2_init,ci_avgSpectra_lin_tpx2_init(1,:),ci_avgSpectra_lin_tpx2_init(2,:),alphaValCi,tpx2_initColor,tpx2_initColor);
+shadedplot(fLin_uncoated,ci_avgSpectra_lin_uncoated(1,:),ci_avgSpectra_lin_uncoated(2,:),alphaValCi,uncoatedColor,uncoatedColor);
 
 
-%%{
-% plot avg wavelength pulled out of all data
-plot(fMaxTpx2,aMaxTpx2*1e9,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(fMaxtpx2_20nm,aMaxtpx2_20nm,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(.00468,.9888,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
+simplePlotFormat( 'Spatial frequency (nm$^{-1}$)', 'Power (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
+
+legend({'500 nM Kinesin-1',...
+    'TPX2 initial coating',...
+    'Uncoated MT'},...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'Position',[.63 .72 .1 .1])
+
+set(gca, 'XScale', 'log')
+% xlim([xMin xMax])
 
 
-
-% plot average tpx2 15-16 nm coating final spectra
-indMaxPlot = max(find(fLin_tpx2<10));
-errorbar(fLin_tpx2(1:indMaxPlot),...
-    aMeanTpx2(1:indMaxPlot)*1e9,...
-    sMeanTpx2(1:indMaxPlot)*1e9,...
-    'LineWidth',...
-    lw)
-% saveDirMain;
-
-plottedAvg15nmTpx2Spectra = aMeanTpx2(1:indMaxPlot)*1e9;
-plottedStd15nmTpx2Spectra = sMeanTpx2(1:indMaxPlot)*1e9;
-plottedFreqs15nmTpx2 = fLin_tpx2(1:indMaxPlot);
-
-save([saveDirMain,'/avg15nmTpx2Spectra.mat'],'plottedAvg15nmTpx2Spectra')
-save([saveDirMain,'/std15nmTpx2Spectra.mat'],'plottedStd15nmTpx2Spectra')
-save([saveDirMain,'/wavenumbers_Avg15nmTpx2Spectra.mat'],'plottedFreqs15nmTpx2')
-
-% plot average tpx2 12-13nm coating final spectra
-indMaxPlot = max(find(fLin_tpx2_12nm<10));
-errorbar(fLin_tpx2_12nm(1:indMaxPlot),...
-    aMeantpx2_12nm(1:indMaxPlot),...
-    sMeantpx2_12nm(1:indMaxPlot),...
-    'LineWidth',...
-    lw)
-
-
-% plot average tpx2 20nm coating final spectra
-indMaxPlot = max(find(fLin_tpx2_20nm<10));
-errorbar(fLin_tpx2_20nm(1:indMaxPlot),...
-    aMeantpx2_20nm(1:indMaxPlot),...
-    sMeantpx2_20nm(1:indMaxPlot),...
-    'LineWidth',...
-    lw)
-
-%%{
-%}
-% plot average tpx2 initial spectra
-indMaxPlot = max(find(fLin_tpx2i<10));
-errorbar(fLin_tpx2i(1:indMaxPlot),...
-    aMeanTpx2i(1:indMaxPlot)*1e9,...
-    sMeanTpx2i(1:indMaxPlot)*1e9,...
-    'LineWidth',...
-    lw)
-
-plottedAvgInitTpx2Spectra = aMeanTpx2i(1:indMaxPlot)*1e9;
-plottedStdInitTpx2Spectra = sMeanTpx2i(1:indMaxPlot)*1e9;
-plottedFreqsInitTpx2 = fLin_tpx2i(1:indMaxPlot);
-
-save([saveDirMain,'/avgInitTpx2Spectra.mat'],'plottedAvgInitTpx2Spectra')
-save([saveDirMain,'/stdInitTpx2Spectra.mat'],'plottedStdInitTpx2Spectra')
-save([saveDirMain,'/wavenumbers_AvgInitTpx2Spectra.mat'],'plottedFreqsInitTpx2')
-
-
-% plot average tpx2 cterm spectra
-indMaxPlot = max(find(fLin_tpcterm<10));
-errorbar(fLin_tpcterm(1:indMaxPlot),...
-    aMeantpcterm(1:indMaxPlot),...
-    sMeantpcterm(1:indMaxPlot),...
-    'LineWidth',...
-    lw)
-
-% plot average kinesin spectra
-indMaxPlot = max(find(fLin_kin<10));
-errorbar(fLin_kin(1:indMaxPlot),...
-    aMeankin(1:indMaxPlot)*1e9,...
-    sMeankin(1:indMaxPlot)*1e9,...
-    'LineWidth',...
-    lw)
-
-plottedAvgKinSpectra = aMeankin(1:indMaxPlot)*1e9;
-plottedStdKinSpectra = sMeankin(1:indMaxPlot)*1e9;
-plottedFreqsKin = fLin_kin(1:indMaxPlot);
-
-save([saveDirMain,'/avgKinSpectra.mat'],'plottedAvgKinSpectra')
-save([saveDirMain,'/stdKinSpectra.mat'],'plottedStdKinSpectra')
-save([saveDirMain,'/wavenumbers_AvgKinSpectra.mat'],'plottedFreqsKin')
-
-
-
-% plot average naked mt spectra
-indMaxPlot = max(find(fLin_naked<.026));
-errorbar(fLin_naked(1:indMaxPlot),...
-    aMeannaked(1:indMaxPlot)*1e9,...
-    sMeannaked(1:indMaxPlot)*1e9,...
-    'LineWidth',...
-    lw)
-
-plottedAvgNakedSpectra = aMeannaked(1:indMaxPlot)*1e9;
-plottedStdNakedSpectra = sMeannaked(1:indMaxPlot)*1e9;
-plottedFreqsNaked = fLin_naked(1:indMaxPlot);
-
-save([saveDirMain,'/avgNakedSpectra.mat'],'plottedAvgNakedSpectra')
-save([saveDirMain,'/stdNakedSpectra.mat'],'plottedStdNakedSpectra')
-save([saveDirMain,'/wavenumbers_AvgNakedSpectra.mat'],'plottedFreqsNaked')
-
-
-%}
-set(gca, 'XScale','log')
-
-%%{
-legend(['Avg. \lambda_{RP} = ',num2str(round( ((1/fMaxTpx2)/1e3)*100 )/100 ),' \mum'],...
-    ['Avg. \lambda_{RP} = ',num2str(round( ((1/fMaxtpx2_20nm)/1e3)*100 )/100 ),' \mum'],...
-    ['Avg. \lambda_{RP} = ',num2str(.21),' \mum'],...
-    'TPX2, 15-18nm film, after instability (n=6)',...
-    'TPX2, 12-13nm film, after instability (n=4)',...
-    'TPX2, 22-23nm film, after instability (n=3)',...  
-    'TPX2, initial coating (n=4)',...
-    'TPX2-CT (n=4)',...
-    'Kinesin1 (n=3)',...
-    'Naked MT (n=3)')
-%}
-
-%{
-legend('TPX2, initial coating (n=5)',...
-    'TPX2-CT (n=4)',...
-    'Kinesin1 (n=3)',...
-    'Naked MT (n=3)')
-%}
-
-legend('boxoff');
-
-xafz = 14;
-yafz = 14;
-tvfz = 12;
-simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)| +/- average SEM (nm/Hz)', xafz, yafz, tvfz )
-
-if doSave
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2_20nm TPX2_15nm TPX2_12nm TPX2init TPX2cTerm kinesin1 naked mt'])
-    
-    %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2_20nm TPX2_15nm TPX2_12nm'])
-
-    %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2init TPX2cTerm kinesin1 naked mt'])
-
-end
