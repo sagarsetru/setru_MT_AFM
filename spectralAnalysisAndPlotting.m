@@ -69,16 +69,27 @@ initFreqPlotInd = min(find(f>f_cutoff));
 xafz = 14;
 yafz = 14;
 tvfz = 12;
-simplePlotFormat( 'frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz )
+simplePlotFormat( 'frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz, 2, 0 )
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','PowerSpectrum_',saveString])
 end
 
 if size(c,1) > 1
-    avgSpectra = mean(P1s(:,indsForAverage)');
-    stdSpectra = std(P1s(:,indsForAverage)');
     
-    maxAmplitude = max(mean(P1s(initFreqPlotInd:end,indsForAverage)'));
+    if numel(indsForAverage) > 1
+        avgSpectra = mean(P1s(:,indsForAverage)');
+        stdSpectra = std(P1s(:,indsForAverage)');
+    else
+        avgSpectra = P1s(:,indsForAverage)';
+        stdSpectra = [];
+    end
+    
+    if numel(indsForAverage) > 1
+        maxAmplitude = max(mean(P1s(initFreqPlotInd:end,indsForAverage)'));
+    else
+        maxAmplitude = max(P1s(initFreqPlotInd:end,indsForAverage)');
+    end
+    
     maxF = f(find(avgSpectra==maxAmplitude));
     spacing = 1/maxF;
 
@@ -87,7 +98,7 @@ if size(c,1) > 1
     xafz = 14;
     yafz = 14;
     tvfz = 12;
-    simplePlotFormat( 'Frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz )
+    simplePlotFormat( 'Frequency (nm^{-1})', 'Power (nm/Hz)', xafz, yafz, tvfz, 2, 0 )
     if doSave
         saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','AveragePowerSpectrum_',saveString])
     end
@@ -95,6 +106,8 @@ else
     maxAmplitude = max(P1s(initFreqPlotInd:end));
     maxF = f(find(P1s==maxAmplitude));
     spacing = 1/maxF;
+    avgSpectra = P1s(:,indsForAverage)';
+    stdSpectra = [];
 end
 
 if doSave
