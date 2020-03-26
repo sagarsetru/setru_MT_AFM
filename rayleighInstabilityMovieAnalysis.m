@@ -13,6 +13,7 @@ fullFileName = uipickfiles;
 %fullFileName = {'../data/2019 07 16/expt1/Stack_225-261.tif'}
 %fullFileName = {'../data/2019 07 13/Stack_tpx2_20190713_68-89.tif'}
 verbose = 1;
+%
 [img] = readTifStackToMatrix(fullFileName{1}, verbose);
 
 [pathname,fname] = fileparts(fullFileName{1});
@@ -67,16 +68,13 @@ end
 
 %% pick line profile
 %imgIndPick = 3;
-%imgIndPick = 1;
-imgIndPick = size(img2,3);
-%imgIndPick = 2;
+imgIndPick = 1;
+% imgIndPick = size(img2,3);
+% imgIndPick = 2;
 
 figure(10); imagesc(img2(:,:,imgIndPick));
 [xi,yi] = ginput(2);
 close(figure(10));
-
-
-%
 
 ctest = improfile(img2(:,:,1),xi,yi);
 cx1 = zeros(size(img2,3),size(ctest,1));
@@ -89,9 +87,10 @@ for j = 1:size(img2,3)
 end
 
 %% plot line profile along img
-indShow = size(img2,3);
+indShow = 2;
+% indShow = size(img2,3);
 % indShow = 7;
-% indShow = 4;
+% indShow = 6;
 figure; imagesc(img2(:,:,indShow));
 hold on;
 plot(cx1(end,:),cy1(end,:),'g','LineWidth',2)
@@ -111,7 +110,11 @@ saveString_c = ['c_',saveString_cx,'_',saveString_cy];
 
 %saveDir2 = [saveDir1,'/controlScans_',saveString_c];
 %saveDir2 = [saveDir1,'/xc2yc2_',saveString_c];
+
 saveDir2 = [saveDir1,'/',saveString_c];
+% saveDir2 = [saveDir1,'/uncoated/',saveString_c];
+% saveDir2 = [saveDir1,'/forPub/',saveString_c];
+
 
 if ~isdir(saveDir2)
     mkdir(saveDir2)
@@ -126,45 +129,7 @@ save([saveDir2,'/',saveString_c,'.mat'],'c')
 
 
 startTime = 0;
-endTime = 97.75; %min
-
-% for 4x tpx2 fl 2019 10 31, pan 2
-% startTime = 0;
-% endTime = 13; %min
-% for kinesin, expt 2, frames 298-300
-% startTime = 60; %min, 1:47 - 2:47
-% endTime = 65; %min, 2:52
-
-% for tpx2 satured, 2019 07 16
-% startTime = -21.67;
-% startTime = 0;
-% endTime = 134.33; % min
-
-% for kinesin saturated, 20190715, frames 197-202
-% startTime = 152; %min (times: 21:03 - 18:31)
-% endTime = 174; %min (times: 21:25 - 18:31)
-
-% for naked mt, 20190715, frames 137-143
-% startTime = 0; %min, time 16:27
-% endTime = 26; %min, time 16:53
-
-% for naked mt, 20190713, frames 0-4
-% startTime = 0; %min, time 1533
-% endTime = 38; %min, time 1611
-
-% for tpx2 satured, 20190713, frames 68-89
-% startTime = 0; %min, time: 22:41
-% endTime = 89; %min, time: 00:10 (following day)
-
-% for tpx2 satured, 20190713, frames 98-113
-%startTime = 137; %min, (time: 00:58 - 22:41
-%endTime = 198; %min, time: 01:59 
-
-% 2019 07 13 frames 90-91
-% startTime = 94;% min, time 00:15
-% endTime = 98; %min, time 00:19
-
-% 2019 07 12 frame 30
+endTime = 0; %min
 
 my_col = jet(round(size(c,1)));
 
@@ -174,60 +139,56 @@ nLines = size(c,1);
 
 %%
 
-doSave = 1;
-doSmooth = 1;
+% tIndsPlot = [3:39];
+% tIndsPlot = [1:17];
+
+doSave = 0;
+doSmooth = 0; % set to 1 FOR PUB
 % define fraction of line scan to smooth over
-smoothWindowFraction = 2; 
+smoothWindowFraction = 3; 
+% smoothWindowFraction = 2; 
 
-% if any values above this number, remove them;
-plot_yCutoff = 60;
+% FOR PUBLICATION, see:
+%     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261_affine/c_cx_mt-x-22-184_cy_mt-y-51-160'
 
-doYLim = 0;
-ylimMin = 0;
+% tIndsPlot = [6,8,37];
+% tIndsPlot = [6,8,21];
+tIndsPlot = [1:4];
+SmoothPub1 = 5;
+SmoothPub2 = 5;
+SmoothPub3 = 5;
+lwPub = 2;
+
+doYLim = 1;
+ylimMin = 20; % FOR PUB
+% ylimMin = 0;
 ylimMax = 50;
 doXLim = 1;
 
 
-tIndsPlot = [1:4];
-%tIndsPlot = [6:37];
-% tIndsPlot = [1:23];
+
+% if any values above this number, remove them;
+plot_yCutoff = 60;
+
 
 % for 2019 07 16
 pix_to_nm = 2000/256;
 
-% % for 2019 07 15
-% pix_to_nm = 2000/256;
-
-% % for 2019 07 13, frames 68-89
-% pix_to_nm = 2000/256;
-
-% for 2019 07 13, frames 0-4 (naked mts)
-% pix_to_nm = 5000/256;
-
-% for 2019 07 13, frames 98-113
-%pix_to_nm = 2000/256;
-
-% for 2019 07 12, frame 30
-%pix_to_nm = 1310/356;
-
-%for 2019 07 12, frame 11
-%pix_to_nm = 2000/512;
-counter=-1;
-% [6,7,37]
+counter = -1;
 clear c_flattened
 for t = tIndsPlot
     counter = counter+1;
-    figure(1); hold on; box on;
+%     figure; hold on; box on;
     
     if doSmooth
         y=c(t,:)+ ( mean(c(t,:))-smooth(c(t,:),length(c)/smoothWindowFraction) )';%*1e9;
         
         % for publication plotting
-%         if counter == 0 
-%             y = y-mean(y)+25.47;
-%         else
-%             y = y-mean(y)+25.47+coatingData_mt1.film;
-%         end
+        if counter == 0 
+            y = y-mean(y)+25.47;
+        else
+            y = y-mean(y)+25.47+coatingData_mt1.film;
+        end
         %c(t,:) = y;
         c_flattened(counter+1,:) = y;
 
@@ -238,26 +199,26 @@ for t = tIndsPlot
     
    y(y>plot_yCutoff) = [];
    %y=smooth(y);
-    figure(1); hold on; box on;
+    figure(tIndsPlot(end)); hold on; box on;
 
     %if doSmooth
     %    plot(0:pix_to_nm:size(y,2)*pix_to_nm-pix_to_nm,y,'color',my_col(t,:))
     %else
     xPlot = 0:pix_to_nm:size(y,2)*pix_to_nm-pix_to_nm;
-%    if counter == 0        
-%        plot(xPlot,y,'color','k','lineWidth',2)
-%    elseif counter == 1
-%        plot(xPlot,y,'color','b','lineWidth',2)
-%    elseif counter == 2
-%        plot(xPlot,y,'color','r','linewidth',2)
-%    else
+   if counter == 0        
+       plot(xPlot,smooth(y,SmoothPub1),'color','k','lineWidth',lwPub)
+   elseif counter == 1
+       plot(xPlot,smooth(y,SmoothPub2),'color','b','lineWidth',lwPub)
+   elseif counter == 2
+       plot(xPlot,smooth(y,SmoothPub3),'color','r','linewidth',lwPub)
+   else
         plot(xPlot,y,'color',my_col(t,:))
         
-%    end
+   end
     %end
 end
 %%{
-%%{
+%{
 colormap(my_col)
 colorbar('Ticks',[0, 1/4, 1/2, 3/4, 1],...
         'TickLabels',{[num2str(round(startTime)),' min'],...
@@ -267,6 +228,10 @@ colorbar('Ticks',[0, 1/4, 1/2, 3/4, 1],...
         [num2str(round(endTime)),' min']},...
         'FontSize',12)
     %}
+
+
+
+
 if doYLim
     ylim([ylimMin ylimMax])
 end
@@ -275,19 +240,37 @@ if doXLim
     xlim([min(xPlot) max(xPlot)])
 end
 
-% legend('Uncoated','Initially coated','After droplet formation')
-% legend boxoff
+% lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
+%     'Interpreter','latex',...
+%     'Position',[.63 .37 .1 .1]);
+lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
+    'Position',[.63 .37 .1 .1]);
+legend boxoff
+lgd.FontSize = 20;
 
-xafz = 14;
-yafz = 14;
-tvfz = 12;
-simplePlotFormat( 'Length along MT (nm)', 'Height (nm)', xafz, yafz, tvfz )
+
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+% doLatex = 1;
+% simplePlotFormat( 'Length along MT (nm)', 'Height (nm)', xafz, yafz, tvfz, axesLw, doLatex )
 %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,['Instability surface vs time_',saveString_c])
+
+doLatex = 0;
+simplePlotFormat( 'Length along microtubule (nm)', 'Height (nm)', xafz, yafz, tvfz, axesLw, doLatex )
+
+% for pub
+% saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
+
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir2,'/','MT length vs time_',saveString_c])
+%     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir2,'/','uncoated_initCoated_final_',saveString_c])
+%     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_uncoated_initCoated_final_',saveString_c])
+
 end
 
-save([saveDir2,'/doSmooth.mat'],'doSmooth')
+% save([saveDir2,'/doSmooth.mat'],'doSmooth')
 
 if doSave
     if doSmooth
@@ -297,6 +280,13 @@ if doSave
 end
 %}
 %% do fourier transform (see MATLAB example fft for explanation)
+
+% indsForSpectra = [1:37];
+% indsForAverage = [10:37];%-min(indsForSpectra);
+% indsForSpectra = [1:17];
+% indsForAverage = [12:17];
+indsForSpectra = [1,3,4];
+indsForAverage = [1,2,3];
 
 
 doSave = 1;
@@ -308,30 +298,15 @@ else
 end
     
 
-
-%indsForSpectra = [17:23];
-% indsForSpectra = [1:4];
-
-
 % FOR PUBLICATION
 % indsForSpectra = [6:37];
 % indsForAverage = [29:37]-min(indsForSpectra)-1;
 
-indsForSpectra = [1:23];
-indsForAverage = [14:23]-min(indsForSpectra)-1;
-
-indsForSpectra = [1:4];
-indsForAverage = [1:4];
-%indsForSpectra = [29:37];
-%indsForSpectra = [3:4];
 
 % define cutoff frequency
 % f_cutoff = 0.0014;
 f_cutoff = .00099; %units nm^-1
-% f_cutoff = 0;
-% c=c(1:2,:);
-% c=c(2:3,:);
-%c=[c(1,:);c(3,:)];
+
 
 [P1s,...
     f,...
@@ -416,35 +391,39 @@ end
 %%
 
 % c_all = c(4:end,:);
-c_all = c_flattened(4:end,:);
-saveDirName = 'MiddleTopMt';
+if doSmooth
+    c_all = c_flattened(1:end,:);
+else
+    c_all = c;
+end
+saveDirName = 'topLeftMt';
 saveDir_pvst = saveDir2;
 
 %% get power at peak over time
 
 % set to 1 to save data
-doSave = 1;
+doSave = 0;
 
 % define cutoff frequency
 f_cutoff = .00099; %units nm^-1
 %f_cutoff = 0;
 
 % define deltaT
-dT = 4.283; %min
+dT = 4.25; %min
 
 % define pixel to distance conversion
 pix_to_nm = 2000/256;
 
 % select ind at which to take power
 % YOU HAVE TO CHANGE THIS PER LINE SCAN!!!
-indPMax = 8;
+indPMax = 9;
 
 clear P1s
 clear pAtMax
 
 pAtMax = zeros(size(c_all,1),1);
 
-t_pMax = (0:(length(pAtMax)-1))*dT;
+t_pMax = (0:(length(pAtMax))-1)*dT;
 
 % for top left mt from 2019 10 16: removing blurry middle frame
 if strcmp(saveDir_pvst,'/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 16 tpx2 brb80/expt2/valuesForPowerVsT_TopLeftMt')
@@ -527,7 +506,23 @@ simplePlotFormat( 't (min)', '|P(f_{RP})| (nm/Hz)', xafz, yafz, tvfz )
 %%
 saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
 
-doSave = 0;
+
+
+doYLim = 1;
+yMinPlot = 0.1;
+yMaxPlot = 4;
+
+doXLim = 1;
+tMaxPlot = 150;
+
+%pick delta t for linearized time
+deltaTLin = 4.25;
+
+%max for averaging
+tMaxPlotAvg = 51; %min
+
+% set to 1 to do bootstrp analysis for mean and conf int
+doBootStrp = 1;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/powerAtMaxF_Values_37_bottomRightMt_tStamps.mat')
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/powerAtMaxF_Values_37_bottomRightMt.mat')
@@ -608,20 +603,81 @@ load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stev
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-123-178_cy_mt-y-57-119/powerAtMaxF_MiddleTopMt_tStamps.mat')
 t_pMax11 = t_pMax;
 pAtMax11 = pAtMax;
+clear t_pMax
+clear pAtMax
 
-figure(2); hold on; box on;
-semilogy(t_pMax1,pAtMax1,'-k','LineWidth',.5)
-semilogy(t_pMax2,pAtMax2,'-k','LineWidth',.5)
-semilogy(t_pMax3,pAtMax3,'-k','LineWidth',.5)
-semilogy(t_pMax4,pAtMax4,'-k','LineWidth',.5)
-semilogy(t_pMax5,pAtMax5,'-k','LineWidth',.5)
-semilogy(t_pMax6,pAtMax6,'-k','LineWidth',.5)
-semilogy(t_pMax7,pAtMax7,'-k','LineWidth',.5)
-semilogy(t_pMax8,pAtMax8,'-k','LineWidth',.5)
-semilogy(t_pMax9,pAtMax9,'-k','LineWidth',.5)
-semilogy(t_pMax10,pAtMax10,'-k','LineWidth',.5)
-semilogy(t_pMax11,pAtMax11,'-k','LineWidth',.5)
 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/c_cx_mt-x-113-215_cy_mt-y-108-41/powerAtMaxF_MiddleTopMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/c_cx_mt-x-113-215_cy_mt-y-108-41/powerAtMaxF_MiddleTopMt_tStamps.mat')
+t_pMax12 = t_pMax;
+pAtMax12 = pAtMax;
+clear t_pMax
+clear pAtMax
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/c_cx_mt-x-113-215_cy_mt-y-108-41/powerAtMaxF_MiddleTopMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt4 4x tpx2fl 400nM 1200nM/expt4_tifStacks/Stack_expt4_20191031_3xTpx2fl_254-273_stackReg_affine/c_cx_mt-x-113-215_cy_mt-y-108-41/powerAtMaxF_MiddleTopMt_tStamps.mat')
+t_pMax13 = t_pMax;
+pAtMax13 = pAtMax;
+clear t_pMax
+clear pAtMax
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-14-253_cy_mt-y-143-123/powerAtMaxF_AcrossMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-14-253_cy_mt-y-143-123/powerAtMaxF_AcrossMt_tStamps.mat')
+t_pMax14 = t_pMax;
+pAtMax14 = pAtMax;
+clear t_pMax
+clear pAtMax
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-106-232_cy_mt-y-161-192/powerAtMaxF_AcrossBottomMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/c_cx_mt-x-106-232_cy_mt-y-161-192/powerAtMaxF_AcrossBottomMt_tStamps.mat')
+t_pMax15 = t_pMax;
+pAtMax15 = pAtMax;
+clear t_pMax
+clear pAtMax
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/c_cx_mt-x-113-128_cy_mt-y-7-120/powerAtMaxF_TopMiddlMt_tStamps.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/c_cx_mt-x-113-128_cy_mt-y-7-120/powerAtMaxF_TopMiddlMt.mat')
+t_pMax16 = t_pMax;
+pAtMax16 = pAtMax;
+clear t_pMax
+clear pAtMax
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/c_cx_mt-x-27-237_cy_mt-y-244-71/powerAtMaxF_diagonalMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/c_cx_mt-x-27-237_cy_mt-y-244-71/powerAtMaxF_diagonalMt_tStamps.mat')
+t_pMax17 = t_pMax;
+pAtMax17 = pAtMax;
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-181-206_cy_mt-y-44-251/powerAtMaxF_rightMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-181-206_cy_mt-y-44-251/powerAtMaxF_rightMt_tStamps.mat')
+t_pMax18 = t_pMax;
+pAtMax18 = pAtMax;
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-75-123_cy_mt-y-103-249/powerAtMaxF_middleMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-75-123_cy_mt-y-103-249/powerAtMaxF_middleMt_tStamps.mat')
+t_pMax19 = t_pMax;
+pAtMax19 = pAtMax;
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-23-50_cy_mt-y-117-4/powerAtMaxF_topLeftMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-23-50_cy_mt-y-117-4/powerAtMaxF_topLeftMt_tStamps.mat')
+t_pMax20 = t_pMax;
+pAtMax20 = pAtMax;
+
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-6-105_cy_mt-y-178-250/powerAtMaxF_bottomLeftMt.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-6-105_cy_mt-y-178-250/powerAtMaxF_bottomLeftMt_tStamps.mat')
+t_pMax21 = t_pMax;
+pAtMax21 = pAtMax;
+
+
+figure; hold on; box on;
 
 
 time_powerAtPeak = {...
@@ -636,6 +692,16 @@ time_powerAtPeak = {...
     t_pMax9,...
     t_pMax10,...
     t_pMax11,...
+    t_pMax12,...
+    t_pMax13,...
+    t_pMax14,...
+    t_pMax15,...
+    t_pMax16,...
+    t_pMax17,...
+    t_pMax18,...
+    t_pMax19,...
+    t_pMax20,...
+    t_pMax21,...
     };
 
 power_powerAtPeak = {...
@@ -650,30 +716,35 @@ power_powerAtPeak = {...
     pAtMax9,...
     pAtMax10,...
     pAtMax11,...
+    pAtMax12,...
+    pAtMax13,...
+    pAtMax14,...
+    pAtMax15,...
+    pAtMax16,...
+    pAtMax17,...
+    pAtMax18,...
+    pAtMax19,...
+    pAtMax20,...
+    pAtMax21,...
     };
 
 set(gca, 'YScale','log')
 
+% xafz = 24;
+% yafz = 24;
+% tvfz = 20;
+% axesLw = 2;
+% doLatex = 1;
+% simplePlotFormat( 'Time (min)', 'Power at most unstable frequency (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
 
-xafz = 14;
-yafz = 14;
-tvfz = 12;
-simplePlotFormat( 'Time (min)', 'Power at most unstable frequency (nm/Hz)', xafz, yafz, tvfz )
 
-ylim([0.1 4])
+%{
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir_pvst,'/','PeakPowerVsT_',saveDirName])
 end
-
+%}
 
 % average all power vs time via interpolation
-
-doSave = 0;
-tMaxPlot = 48; %min
-doXLim = 0;
-
-%pick delta t for linearized time
-deltaTLin = 4;
 
 % get all the time vectors
 t_all = [...
@@ -688,6 +759,16 @@ t_all = [...
     t_pMax9,...
     t_pMax10,...
     t_pMax11,...
+    t_pMax12,...
+    t_pMax13,...
+    t_pMax14,...
+    t_pMax15,...
+    t_pMax16,...
+    t_pMax17,...
+    t_pMax18,...
+    t_pMax19,...
+    t_pMax20,...
+    t_pMax21,...
     ];
 t_all = sort(t_all);
 
@@ -708,6 +789,17 @@ p8i = interp1(t_pMax8(:),pAtMax8(:),tLin(:),'linear','extrap');
 p9i = interp1(t_pMax9(:),pAtMax9(:),tLin(:),'linear','extrap');
 p10i = interp1(t_pMax10(:),pAtMax10(:),tLin(:),'linear','extrap');
 p11i = interp1(t_pMax11(:),pAtMax11(:),tLin(:),'linear','extrap');
+p12i = interp1(t_pMax12(:),pAtMax12(:),tLin(:),'linear','extrap');
+p13i = interp1(t_pMax13(:),pAtMax13(:),tLin(:),'linear','extrap');
+p14i = interp1(t_pMax14(:),pAtMax14(:),tLin(:),'linear','extrap');
+p15i = interp1(t_pMax15(:),pAtMax15(:),tLin(:),'linear','extrap');
+p16i = interp1(t_pMax16(:),pAtMax16(:),tLin(:),'linear','extrap');
+p17i = interp1(t_pMax17(:),pAtMax17(:),tLin(:),'linear','extrap');
+p18i = interp1(t_pMax18(:),pAtMax18(:),tLin(:),'linear','extrap');
+p19i = interp1(t_pMax19(:),pAtMax19(:),tLin(:),'linear','extrap');
+p20i = interp1(t_pMax20(:),pAtMax20(:),tLin(:),'linear','extrap');
+p21i = interp1(t_pMax21(:),pAtMax21(:),tLin(:),'linear','extrap');
+
 
 
 pAll = [p1i,...
@@ -721,55 +813,234 @@ pAll = [p1i,...
     p9i,...
     p10i,...
     p11i,...
+    p12i,...
+    p13i,...
+    p14i,...
+    p15i,...
+    p16i,...
+    p17i,...
+    p18i,...
+    p19i,...
+    p20i,...
+    p21i,...
     ];
 
-pAvg = mean(pAll,2);
-pSem = std(pAll,0,2)./sqrt(7);
 
-tLinPlot = tLin(tLin < tMaxPlot);
-pAvgPlot = pAvg(1:length(tLinPlot));
-pSemPlot = pSem(1:length(tLinPlot));
+ 
+if doBootStrp
+    
+    nboot = 10000;
+    pAvg = bootstrp(nboot,@mean,pAll');
+    pci = bootci(nboot,@mean,pAll');
+    
+    tLinPlot = tLin(tLin < tMaxPlotAvg);
+    pAvgPlot = pAvg(:,1:length(tLinPlot));
+    pci = pci(:,1:length(tLinPlot));
+    
+    alphaValCi=.5;
+    plot(tLinPlot,mean(pAvgPlot),'Color','k','LineWidth',2)
+    shadedplot(tLinPlot,pci(1,:),pci(2,:),alphaValCi,'k','k');
+    
+else
 
-%figure;
-%box on;
+    pAvg = mean(pAll,2);
+    pSem = std(pAll,0,2)./sqrt(7);
 
-% plot(tLin,pAvg)
-% errorbar(tLin,pAvg,pSem)
+    tLinPlot = tLin(tLin < tMaxPlotAvg);
+    pAvgPlot = pAvg(1:length(tLinPlot));
+    pSemPlot = pSem(1:length(tLinPlot));
+    p1 = errorbar(tLinPlot,pAvgPlot,pSemPlot,'LineWidth',2,'color','k');
 
-plot(tLinPlot,pAvgPlot)
-errorbar(tLinPlot,pAvgPlot,pSemPlot,'LineWidth',3,'color','k')
+end
+
+% guideToEyeX = [min(tLinPlot):tLinPlot(10)];
+% guideToEyeY = exp(.023*guideToEyeX)-.5;
+
+opacityVal2 = .75;
+
+indMinFit = 1;
+indMaxFit = 6;
+
+if doBootStrp == 1
+    
+    X = tLinPlot(indMinFit:indMaxFit);
+    yInit = mean(pAvgPlot);
+    Y = yInit(indMinFit:indMaxFit)';
+    % Y = mean(pAvgPlot(indMinFit:indMaxFit));
+
+else
+    
+    X = tLinPlot(indMinFit:indMaxFit);
+    Y = pAvgPlot(indMinFit:indMaxFit);
+    
+end
+
+
+log_y = log(Y);
+A = zeros(length(X), 2);
+A(:, 1) = X;
+A(:, 2) = ones(size(A(:, 1)));
+
+soln = inv(A'*A)*A'*log_y;
+a = soln(1);
+C = exp(soln(2));
+
+exp_fit = C*exp(a*X);
+
+p2=plot(X,exp_fit,'r-','LineWidth',4);
+p2.Color(4) = opacityVal2;
+
+%goodness of fit calc
+
+% residual sum of squares
+ss_res = sum((exp_fit'-Y).^2);
+
+% total sum of squares, ie variance
+ss_tot = var(Y);
+
+% get rSquared
+rSquared = 1 - (ss_res/ss_tot)
+X(end)
 
 
 set(gca, 'YScale','log')
-% ylim([.04 10])
-ylim([0.1 4])
-if doXLim
-xlim([0 tMaxPlot])
+
+if doYLim
+    ylim([yMinPlot yMaxPlot])
 end
 
-% xafz = 14;
-% yafz = 14;
-% tvfz = 12;
-% simplePlotFormat( 'Time (min)', 'Average |P(f_{RP})| +/- SEM (nm/Hz)', xafz, yafz, tvfz )
+if doXLim
+    xlim([0 tMaxPlot])
+end
+
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+% doLatex = 1;
+doLatex = 0;
+simplePlotFormat( 'Time \itt\rm (min)', 'Power (nm)', xafz, yafz, tvfz, axesLw, doLatex )
+
+% do legend
+% legend({'Mean peak power',...
+%     '$\propto e^{\sigma_{\mathrm{max}} t}$'},...
+%     'Interpreter','latex',...
+%     'Location','Southeast')
+% legend({'Mean peak power',...
+%     '\propto e^{\sigma_{max} t}'},...
+%     'Location','Southeast')
+legend({'Mean peak power',...
+    '\propto exp(\sigma_{max}\itt\rm)'},...
+    'Location','Southeast')
+legend boxoff
+%, $\sigma=0.03$ min$^{-1}$'
+
+doSave = 1;
+
+opacityVal=.25;
+
+ps = '.k';
+
+p1=semilogy(t_pMax1,pAtMax1,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax2,pAtMax2,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax3,pAtMax3,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax4,pAtMax4,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax5,pAtMax5,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax6,pAtMax6,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax7,pAtMax7,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax8,pAtMax8,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax9,pAtMax9,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax10,pAtMax10,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax11,pAtMax11,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax12,pAtMax12,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax13,pAtMax13,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax14,pAtMax14,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax15,pAtMax15,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax16,pAtMax16,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax17,pAtMax17,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax18,pAtMax18,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax19,pAtMax19,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax20,pAtMax20,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+p1=semilogy(t_pMax21,pAtMax21,ps,'LineWidth',.5);
+p1.Color(4) = opacityVal;
+set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+
 
 if doSave
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir_pvst,'/','AvgPeakPowerVsT_individualCurvesOverlay'])
+    if doBootStrp
+        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay_bootstrp'])
+        save([saveDirMain,'/sigmaFit_bootStrp.mat'],'a')
+        save([saveDirMain,'/rSquaredFit_bootStrp.mat'],'rSquared')
+    else
+        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay'])
+        save([saveDirMain,'/sigmaFit.mat'],'a')
+        save([saveDirMain,'/rSquaredFit.mat'],'rSquared')
+    end
 %         saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir_pvst,'/','AvgPeakPowerVsT_',saveDirName])
-
 end
 
 %{
-test = mean([pAtMax1(1:4),...
-            pAtMax2(1:4),...
-            pAtMax3(1:4),...
-            pAtMax4(1:4)]);
-testsem = std([pAtMax1(1:4),...
-            pAtMax2(1:4),...
-            pAtMax3(1:4),...
-            pAtMax4(1:4)])/sqrt(4);
-        errorbar(t_pMax1(1:4),test,testsem,'-kx','LineWidth',2)
-      
-  %}
 set(gca, 'YScale','log')
 
 
@@ -781,83 +1052,75 @@ simplePlotFormat( 't (min)', '|P(f_{RP})| (nm/Hz)', xafz, yafz, tvfz )
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/PeakPowerVsT_all'])
 end
-
-
-%%
-
-
-%{
-if doSave
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','PowerSpectrum_',saveString])
-end
-
-if size(c,1) > 1
-    avgSpectra = mean(P1s');
-    stdSpectra = std(P1s');
-    
-    maxAmplitude = max(mean(P1s(initFreqPlotInd:end,:)'));
-    maxF = f(find(avgSpectra==maxAmplitude));
-    spacing = 1/maxF;
-
-    figure; errorbar(f(initFreqPlotInd:end),avgSpectra(:,initFreqPlotInd:end),stdSpectra(:,initFreqPlotInd:end)/sqrt(size(P1s,2)))
-    xafz = 14;
-    yafz = 14;
-    tvfz = 12;
-    simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)|', xafz, yafz, tvfz )
-    if doSave
-        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir,'/','AveragePowerSpectrum_',saveString])
-    end
-else
-    maxAmplitude = max(P1s(initFreqPlotInd:end));
-    maxF = f(find(P1s==maxAmplitude));
-    spacing = 1/maxF;
-end
-
-if doSave
-    save([saveDir,'/','spectra_',saveString,'.mat'],'P1s')
-    save([saveDir,'/','frequencies_',saveString,'.mat'],'f')
-    save([saveDir,'/','maxFrequencies_',saveString,'.mat'],'maxF_all')
-    save([saveDir,'/','f_cutoff_',saveString,'.mat'],'f_cutoff')
-    save([saveDir,'/','indsForSpectra_',saveString,'.mat'],'indsForSpectra')
-    save([saveDir,'/','avgSpectra_',saveString,'.mat'],'avgSpectra')
-    save([saveDir,'/','stdSpectra_',saveString,'.mat'],'stdSpectra')
-    save([saveDir,'/','maxAmplitude_',saveString,'.mat'],'maxAmplitude')
-    save([saveDir,'/','maxFrequency_',saveString,'.mat'],'maxF')
-    save([saveDir,'/','spacing_',saveString,'.mat'],'spacing')
-    disp('DONE SAVING')
-end
 %}
 
-%% pick line scan per frame (not great...)
-
-% xi_pFr = zeros(size(img2,3),2);
-% yi_pFr = zeros(size(img2,3),2);
+%% make pub figure panel
+% figure; hold on;
 % 
-% for t = 1:size(img2,3)
-%     %indPick = size(img2,3)+1-t;
-%     indPick = t;
-%     figure('units','normalized','outerposition',[0.2 0.2 .8 .8]); imagesc(img2(:,:,indPick));
-%     [xi_pFr(indPick,:),yi_pFr(indPick,:)] = ginput(2);
-% end
+% imgPlot = img(:,:,8);
+% imgPlot = imgPlot - min(imgPlot(:));
+% % imgPlot = medfilt2(imgPlot,[2 2]);
+% subplot(3,1,1); imagesc( imgPlot );
+% 
+% colorbar;
+% colormap hsv
+% 
+% imgPlot = img(:,:,14);
+% imgPlot = imgPlot - min(imgPlot(:));
+% % imgPlot = medfilt2(imgPlot,[2 2]);
+% subplot(3,1,2); imagesc( imgPlot );
+% 
+% colorbar;
+% colormap hsv
 
-%%
-    
-    
-% ctest = improfile(img2(:,:,1),xi(1,:),yi(1,:));
-% cx1 = zeros(size(img,3),size(ctest,1));
-% cy1 = zeros(size(img,3),size(ctest,1));
-% c = zeros(size(img,3),size(ctest,1));
+doSave = 0;
 
-% for j = 1:size(img,3)
-%     [cx1{j},cy1{j},c{j}] = improfile(img2(:,:,j),xi(j,:),yi(j,:));
-%     %c(j,:) = c(j,:)-min(c(j,:));
-% end
-% %%
-% for j = 1:numel(c)
-%     figure(1); hold on ;
-%     plot(c{j})
-% end
-%%
+maxVal = 50;
+
+minVal = 0;
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/matlab.mat', 'imgPlot');
+% imgPlot = img;
+% imgPlot = imgPlot - min(imgPlot(:));
+imgPlot(imgPlot>maxVal)=maxVal;
+imgPlot(imgPlot<minVal)=minVal;
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% subplot(3,1,3); imagesc( imgPlot );
+%
+figure; imagesc( imgPlot(:,10:170) );
+set(gca,'xtick',[])
+set(gca,'ytick',[])
+% set(gca,'visible','off')
+box on
+ set(gca,'LineWidth',2)
+
+c = colorbar;
+colormap jet
+c.LineWidth = 2;
+c.FontSize = 16;
+% c.TickLabelInterpreter = 'latex';
+% ylabel(c,'Height (nm)','FontSize',20,'Interpreter','latex');
+ylabel(c,'Height (nm)','FontSize',20);
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_jet'])
+end
+
+%% quick pick line profile
+% DO TO REVISE AFM PLOT, IF NEEDED
+[xi,yi] = ginput(2);
+close(figure(10));
+
+% ctest = improfile(imgPlot(:,:,1),xi,yi);
+% cx1 = zeros(size(imgPlot,3),size(ctest,1));
+% cy1 = zeros(size(imgPlot,3),size(ctest,1));
+% c = zeros(size(imgPlot,3),size(ctest,1));
+
+
+    [cx1,cy1,c] = improfile(imgPlot,xi,yi);
+
+
+%% quick edit of plotted fig
 % open('PowerSpectrum_c_cx_mt-x-22-184_cy_mt-y-51-160.fig')
 open('MT length vs time_c_cx_mt-x-22-184_cy_mt-y-51-160.fig')
 lines = findobj(gcf,'Type','Line');
