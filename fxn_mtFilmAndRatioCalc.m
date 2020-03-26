@@ -120,6 +120,8 @@ end
 % load outputs into data structure
 outputData.mtNaked = mt_naked;
 outputData.mtTpx2 = mt_tpx2;
+outputData.errMtNaked = errMt_naked;
+outputData.errMtTpx2 = errMt_tpx2;
 
 outputData.film = film;
 outputData.errFilm = errFilm;
