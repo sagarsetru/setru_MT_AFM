@@ -76,6 +76,7 @@ stdSpectra_kin_1 = stdSpectra;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/spectra_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
 n_kin_1 = size(P1s,2);
+spectra_kin_1 = P1s;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 15/kinesin spike in at saturation/Stack_kinesin_20190715_197-202/c_cx_mt-x-73-140_cy_mt-y-124-133/frequencies_c_cx_mt-x-73-140_cy_mt-y-124-133.mat')
 f_kin_1=f;
@@ -135,13 +136,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_4 = stdSpectra/1e9;
 
 load(fNameStruct.spectra)
-n_kin_4 = size(P1s,2);
 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_4 = size(P1s,2);
+    spectra_kin_4 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_4 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_4 = f;
 
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_26-28_20191108_rigidBody/c_cx_mt-x-95-145_cy_mt-y-1-86';
@@ -154,13 +168,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_5 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_5 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_5 = size(P1s,2);
+    spectra_kin_5 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_5 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_5 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_29-31_20191108_rigidBody/c_cx_mt-x-6-181_cy_mt-y-149-232';
@@ -173,13 +200,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_6 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_6 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_6 = size(P1s,2);
+    spectra_kin_6 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_6 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_6 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_29-31_20191108_rigidBody/c_cx_mt-x-138-255_cy_mt-y-2-202';
@@ -192,13 +232,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_7 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_7 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_7 = size(P1s,2);
+    spectra_kin_7 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_7 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_7 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_33-35_20191108_rigidBody/c_cx_mt-x-3-109_cy_mt-y-229-194';
@@ -211,13 +264,25 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_8 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_8 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_8 = size(P1s,2);
+    spectra_kin_8 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_8 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_8 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
 
 
 
@@ -231,13 +296,25 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_9 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_9 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_9 = size(P1s,2);
+    spectra_kin_9 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_9 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_9 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_36-38_20191108_rigidBody/c_cx_mt-x-190-248_cy_mt-y-34-120';
@@ -250,13 +327,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_10 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_10 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_10 = size(P1s,2);
+    spectra_kin_10 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_10 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_10 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 
@@ -270,13 +360,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_11 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_11 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_11 = size(P1s,2);
+    spectra_kin_11 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_11 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_11 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 
@@ -290,13 +393,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_12 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_12 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_12 = size(P1s,2);
+    spectra_kin_12 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_12 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_12 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_42-43_20191108_rigidBody/c_cx_mt-x-122-150_cy_mt-y-105-1';
@@ -309,13 +425,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_13 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_13 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_13 = size(P1s,2);
+    spectra_kin_13 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_13 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_13 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_44-46_20191108_rigidBody/c_cx_mt-x-53-209_cy_mt-y-90-194';
@@ -328,13 +457,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_14 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_14 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_14 = size(P1s,2);
+    spectra_kin_14 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_14 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_14 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_44-46_20191108_rigidBody/c_cx_mt-x-204-255_cy_mt-y-137-78';
@@ -347,13 +489,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_15 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_15 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_15 = size(P1s,2);
+    spectra_kin_15 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_15 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_15 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-24-85_cy_mt-y-155-217';
@@ -366,13 +521,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_16 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_16 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_16 = size(P1s,2);
+    spectra_kin_16 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_16 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_16 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-120-196_cy_mt-y-67-217';
@@ -385,13 +553,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_17 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_17 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_17 = size(P1s,2);
+    spectra_kin_17 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_17 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_17 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_13-14_20191108/c_cx_mt-x-130-252_cy_mt-y-162-295';
@@ -404,13 +585,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_18 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_18 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_18 = size(P1s,2);
+    spectra_kin_18 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_18 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_18 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_15-17_20191108_rigidBody/c_cx_mt-x-34-254_cy_mt-y-5-234';
@@ -423,13 +617,26 @@ load(fNameStruct.stdSpectra)
 stdSpectra_kin_19 = stdSpectra/1e9;
  
 load(fNameStruct.spectra)
-n_kin_19 = size(P1s,2);
  
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    n_kin_19 = size(P1s,2);
+    spectra_kin_19 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    n_kin_19 = size(P1s,2);
+    clear indsForAverage
+end
+    
 load(fNameStruct.f)
 f_kin_19 = f;
  
 clear fNameStruct
 clear pathName
+clear avgSpectra
+clear stdSpectra
+clear P1s
+
 
 
 
@@ -800,16 +1007,16 @@ clear f
 
 
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/avgSpectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-9-73_cy_mt-y-15-29/avgSpectra_c_cx_mt-x-9-73_cy_mt-y-15-29.mat')
 avgSpectra_tpx2_12nm_2 = avgSpectra;
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/stdSpectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-9-73_cy_mt-y-15-29/stdSpectra_c_cx_mt-x-9-73_cy_mt-y-15-29.mat')
 stdSpectra_tpx2_12nm_2 = stdSpectra;
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/spectra_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-9-73_cy_mt-y-15-29/spectra_c_cx_mt-x-9-73_cy_mt-y-15-29.mat')
 n_tpx2_12nm_2 = size(P1s,2);
 
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-16-136_cy_mt-y-161-237/frequencies_c_cx_mt-x-16-136_cy_mt-y-161-237.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-9-73_cy_mt-y-15-29/frequencies_c_cx_mt-x-9-73_cy_mt-y-15-29.mat')
 f_tpx2_12nm_2 = f;
 
 clear avgSpectra
@@ -1648,18 +1855,22 @@ saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figu
 
 doSave = 0;
 
-lw = 1.2;
+lw = 2;
 
 figure;
 hold on;
 box on;
 
+% define marker, marker size, and linewidth for lambda rp
+rp_m = 'ko';
+rp_lw = 2;
+rp_ms = 15;
 
 %%{
 % plot avg wavelength pulled out of all data
 plot(fMaxTpx2,aMaxTpx2*1e9,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(fMaxtpx2_20nm,aMaxtpx2_20nm,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
-plot(.00468,.9888,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
+% plot(fMaxtpx2_20nm,aMaxtpx2_20nm,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
+% plot(.00468,.9888,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw)
 
 
 
@@ -1791,6 +2002,144 @@ simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)| +/- average SEM (nm/Hz)', xafz,
 
 if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2_20nm TPX2_15nm TPX2_12nm TPX2init TPX2cTerm kinesin1 naked mt'])
+    
+    %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2_20nm TPX2_15nm TPX2_12nm'])
+
+    %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2init TPX2cTerm kinesin1 naked mt'])
+
+end
+%% PUBLICATION MAIN BODY PLOT
+saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
+
+doSave = 1;
+lw = 2;
+
+figure;
+hold on;
+box on;
+
+% define marker, marker size, and linewidth for lambda rp
+rp_m = 'ko';
+rp_lw = 2;
+rp_ms = 18;
+
+%%{
+
+
+% plot average naked mt spectra
+indMaxPlot = max(find(fLin_naked<.026));
+h(1) = errorbar(fLin_naked(1:indMaxPlot),...
+    aMeannaked(1:indMaxPlot)*1e9,...
+    sMeannaked(1:indMaxPlot)*1e9,...
+    'LineWidth',...
+    lw,...
+    'color','k');
+
+plottedAvgNakedSpectra = aMeannaked(1:indMaxPlot)*1e9;
+plottedStdNakedSpectra = sMeannaked(1:indMaxPlot)*1e9;
+plottedFreqsNaked = fLin_naked(1:indMaxPlot);
+
+save([saveDirMain,'/avgNakedSpectra.mat'],'plottedAvgNakedSpectra')
+save([saveDirMain,'/stdNakedSpectra.mat'],'plottedStdNakedSpectra')
+save([saveDirMain,'/wavenumbers_AvgNakedSpectra.mat'],'plottedFreqsNaked')
+
+
+
+
+% plot average tpx2 initial spectra
+indMaxPlot = max(find(fLin_tpx2i<10));
+h(2) = errorbar(fLin_tpx2i(1:indMaxPlot),...
+    aMeanTpx2i(1:indMaxPlot)*1e9,...
+    sMeanTpx2i(1:indMaxPlot)*1e9,...
+    'LineWidth',...
+    lw,...
+    'color','b');
+
+plottedAvgInitTpx2Spectra = aMeanTpx2i(1:indMaxPlot)*1e9;
+plottedStdInitTpx2Spectra = sMeanTpx2i(1:indMaxPlot)*1e9;
+plottedFreqsInitTpx2 = fLin_tpx2i(1:indMaxPlot);
+
+save([saveDirMain,'/avgInitTpx2Spectra.mat'],'plottedAvgInitTpx2Spectra')
+save([saveDirMain,'/stdInitTpx2Spectra.mat'],'plottedStdInitTpx2Spectra')
+save([saveDirMain,'/wavenumbers_AvgInitTpx2Spectra.mat'],'plottedFreqsInitTpx2')
+
+
+
+
+% plot average tpx2 15-16 nm coating final spectra
+indMaxPlot = max(find(fLin_tpx2<10));
+h(3) = errorbar(fLin_tpx2(1:indMaxPlot),...
+    aMeanTpx2(1:indMaxPlot)*1e9,...
+    sMeanTpx2(1:indMaxPlot)*1e9,...
+    'LineWidth',...
+    lw,...
+    'color','r');
+% saveDirMain;
+
+plottedAvg15nmTpx2Spectra = aMeanTpx2(1:indMaxPlot)*1e9;
+plottedStd15nmTpx2Spectra = sMeanTpx2(1:indMaxPlot)*1e9;
+plottedFreqs15nmTpx2 = fLin_tpx2(1:indMaxPlot);
+
+save([saveDirMain,'/avg15nmTpx2Spectra.mat'],'plottedAvg15nmTpx2Spectra')
+save([saveDirMain,'/std15nmTpx2Spectra.mat'],'plottedStd15nmTpx2Spectra')
+save([saveDirMain,'/wavenumbers_Avg15nmTpx2Spectra.mat'],'plottedFreqs15nmTpx2')
+
+
+% plot avg wavelength pulled out of all data
+h(4) = plot(fMaxTpx2,aMaxTpx2*1e9,rp_m,'MarkerSize',rp_ms,'LineWidth',rp_lw);
+
+
+%}
+set(gca, 'XScale','log')
+
+%%{
+wavelengthString = num2str(round( ((1/fMaxTpx2)/1e3)*100 )/100 );
+wavelengthStringFull = ['Mean $\lambda$ = ',wavelengthString,' $\mu$m'];
+
+lgd = legend({'Uncoated',...
+    'Initially coated',...
+    'After droplet formation',...
+    wavelengthStringFull},...
+    'Interpreter','latex',...
+    'Position',[.62 .7 .1 .1]);
+
+lgd.FontSize = 20;
+%}
+
+% wavelengthString = num2str(round( ((1/fMaxTpx2)/1e3)*100 )/100 );
+% legend(h(1),'Uncoated MT (n=3)','Interpreter','latex');%,...
+% legend(h(2),'TPX2, initial coating (n=4)','Interpreter','latex');%,...
+% legend(h(3),'TPX2, after instability (n=6)','Interpreter','latex');%,...
+% legend(h(4),'Avg. $\lambda$ = ',wavelengthString,' $\mum$','Interpreter','latex');
+
+legend boxoff
+
+%lgd.FontSize = 20;
+%lgd.Interpreter='latex';
+
+%{
+legend('TPX2, initial coating (n=5)',...
+    'TPX2-CT (n=4)',...
+    'Kinesin1 (n=3)',...
+    'Naked MT (n=3)')
+%}
+
+legend('boxoff');
+
+% xafz = 14;
+% yafz = 14;
+% tvfz = 12;
+
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+doLatex = 1;
+simplePlotFormat( 'Spatial frequency (nm$^{-1}$)', 'Power (nm/Hz)', xafz, yafz, tvfz, axesLw, doLatex )
+% simplePlotFormat( 'f (nm^{-1})', 'Average |P(f)| +/- average SEM (nm/Hz)', xafz, yafz, tvfz )
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/main text avg amplitude spectra TPX2_15nm uncoated mt'])
     
     %saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/avg amplitude spectra TPX2_20nm TPX2_15nm TPX2_12nm'])
 
