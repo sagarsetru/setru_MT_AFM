@@ -1,5 +1,5 @@
-function [fLin,spectraAll_lin,avgSpectra_lin,ci_lin,avgMaxLmbd,ci_maxLmbd] = interpBootstrpSpectra(fAll,spectraAll,logIndAll,nboot,ci_alpha)
-%interpBootstrpSpectra.m  - do interpolation of linear spectra
+function [fLin,spectraAll_lin,avgSpectra_lin,ci_lin,avgMaxLmbd,stdMaxLmbd] = interpBootstrpSpectra(fAll,spectraAll,logIndAll,nboot,ci_alpha)
+% interpBootstrpSpectra.m  - do interpolation of linear spectra
 % first find spectra, then interpolate, then do boot strap stats
 % Sagar Setru, 2019 12 13
 
@@ -74,10 +74,12 @@ maxInds=find(avgSpectra_lin'==max(avgSpectra_lin'));
 % then get the subscript indices of these max values
 [I,~]=ind2sub(size(avgSpectra_lin'),maxInds);
 
+% I(I==1) = [];
+
 % loop through the linear frequencies to find the frequencies of max power
 maxFs = zeros(length(I),1);
 for j = 1:length(I)
-    
+
     maxFs(j) = fLin(I(j));
 
 end
@@ -85,9 +87,15 @@ end
 % convert to wavelength
 maxLmbds = 1./maxFs;
 
+avgMaxLmbd = mean(maxLmbds);
+stdMaxLmbd = std(maxLmbds);
+% stdMaxLmbd = mean(bootstrp(nboot,@std,maxLmbds));
 % then, bootstrap to get mean and 95% conf ints for max wavelength
-avgMaxLmbd = mean(bootstrp(nboot,@mean,maxLmbds));
-ci_maxLmbd = bootci(nboot,{@mean,maxLmbds},'alpha',ci_alpha);
+% avgMaxLmbd = mean(bootstrp(nboot,@mean,maxLmbds));
+% avgMaxF = mean(bootstrp(nboot,@mean,maxFs));
+% % std(bootstrp(nboot,@mean,maxLmbds));
+% stdMaxLmbd = bootci(nboot,{@mean,maxLmbds},'alpha',ci_alpha);
+% stdMaxLmbd = bootstrp(nboot,@std,maxLmbds);
 
 
 % % first, get all maximum power values
