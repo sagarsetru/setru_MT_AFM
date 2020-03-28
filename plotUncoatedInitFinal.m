@@ -23,9 +23,9 @@ for t = 1:size(drop,1)
 end
 
 % get the x axis to plot
-xPlot_un = 0:pix_to_nm:length(un)*pix_to_nm-pix_to_nm;
-xPlot_init = 0:pix_to_nm:length(init)*pix_to_nm-pix_to_nm;
-xPlot_drop = 0:pix_to_nm:length(drop)*pix_to_nm-pix_to_nm;
+xPlot_un = psp.unStart:pix_to_nm:length(un)*pix_to_nm+psp.unStart-pix_to_nm;
+xPlot_init = psp.initStart:pix_to_nm:length(init)*pix_to_nm+psp.initStart-pix_to_nm;
+xPlot_drop = psp.dropStart:pix_to_nm:length(drop)*pix_to_nm+psp.dropStart-pix_to_nm;
 
 % center around 25nm for uncoated
 un = un-mean(un)+25;
@@ -36,9 +36,21 @@ drop = drop-mean(drop)+(h+25);
 
 figure; hold on; box on;
 
-plot(xPlot_un,smooth(un,sm),psp.unColor,'LineWidth',psp.lw);
-plot(xPlot_init,smooth(init,sm),psp.initColor,'LineWidth',psp.lw); 
-% plot(xPlot_drop,smooth(drop,sm),psp.dropColor,'LineWidth',psp.lw);
+if un == 25
+    colShape = [psp.unColor,psp.missingLineSpec];
+    plot(xPlot_un,smooth(un,sm),colShape,'LineWidth',psp.lw);
+else
+    plot(xPlot_un,smooth(un,sm),psp.unColor,'LineWidth',psp.lw);
+end
+
+if init == (h+25)
+    colShape = [psp.initColor,psp.missingLineSpec];
+    plot(xPlot_init,smooth(init,sm),colShape,'LineWidth',psp.lw); 
+else
+    plot(xPlot_init,smooth(init,sm),psp.initColor,'LineWidth',psp.lw); 
+
+end
+
 plot(xPlot_drop,drop,psp.dropColor,'LineWidth',psp.lw);
 
 % lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
@@ -46,15 +58,20 @@ plot(xPlot_drop,drop,psp.dropColor,'LineWidth',psp.lw);
 % legend boxoff
 % lgd.FontSize = 20;
 % xlim([psp.xmin psp.xmax])
-xlim([psp.xmin max(xPlot_drop)])
+xlim([psp.xmin max([xPlot_drop xPlot_init xPlot_un])])
 ylim([psp.ymin psp.ymax])
+% ylim([psp.ymin max([un init drop])])
 % pbaspect([1.0000    0.7638    0.7638])
 daspect(psp.dAsp)
 % set(gcf,'PaperPosition',[0.3611    2.5833    7.7778    5.8333])
 set(gca, 'XTick', psp.xTicks)
 simplePlotFormat( psp.xAxisLabel, psp.yAxisLabel, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
 
+if psp.doSave == 1
+    
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_lineScans'])
 
+end
 
 end
 
