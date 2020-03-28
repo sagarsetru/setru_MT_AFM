@@ -3019,7 +3019,7 @@ clear P1s
 clear f
 
 
-pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/uncoated/c_cx_mt-x-117-114_cy_mt-y-71-3';
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_rowsAligned_affine/initCoated/c_cx_mt-x-114-127_cy_mt-y-3-117';
 fNameStruct = loadSpectralDataFromDir(pathName);
  
 load(fNameStruct.spectra)
@@ -3251,6 +3251,30 @@ clear P1s
 clear f
 
 
+pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/initCoated/c_cx_mt-x-167-221_cy_mt-y-255-225';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_24  = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_24 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_24 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
 
 %% tpx2_init spectra interp and bootstrap
  
@@ -3279,6 +3303,7 @@ fAll_tpx2_init = {...
     f_tpx2_init_21(f_tpx2_init_21>f_cutoff),...
     f_tpx2_init_22(f_tpx2_init_22>f_cutoff),...
     f_tpx2_init_23(f_tpx2_init_23>f_cutoff),...
+    f_tpx2_init_24(f_tpx2_init_24>f_cutoff),...
     };
  
 % generate cell of logical indices for indexing spectra
@@ -3306,6 +3331,7 @@ logIndAll_tpx2_init = {...
     (f_tpx2_init_21>f_cutoff),...
     (f_tpx2_init_22>f_cutoff),...
     (f_tpx2_init_23>f_cutoff),...
+    (f_tpx2_init_24>f_cutoff),...
     };
  
  
@@ -3334,6 +3360,7 @@ spectraAll_tpx2_init = {...
     spectra_tpx2_init_21,...
     spectra_tpx2_init_22,...
     spectra_tpx2_init_23,...
+    spectra_tpx2_init_24,...
     };
  
 % number of boot strap iterations
@@ -3369,7 +3396,8 @@ fNameStruct = loadSpectralDataFromDir(pathName);
 load(fNameStruct.spectra)
  
 if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
-    spectra_uncoated_1 = P1s*1e9;
+    % using too many late spectra here; removed many
+    spectra_uncoated_1 = P1s(:,1)*1e9;
 else
     load(fNameStruct.indsForAverage)
     P1s = P1s(:,indsForAverage);
@@ -3394,7 +3422,8 @@ fNameStruct = loadSpectralDataFromDir(pathName);
 load(fNameStruct.spectra)
  
 if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
-    spectra_uncoated_2 = P1s*1e9;
+    % same as above
+    spectra_uncoated_2 = P1s(:,2)*1e9;
 else
     load(fNameStruct.indsForAverage)
     P1s = P1s(:,indsForAverage);
@@ -3876,6 +3905,141 @@ clear pathName
 clear P1s
 clear f
 
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/mt_expt10_Tpx2fl_4x.0_00394/uncoated/c_cx_mt-x-86-158_cy_mt-y-138-249';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_23 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_23 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_23 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/mt_expt10_Tpx2fl_4x.0_00394/uncoated/c_cx_mt-x-48-98_cy_mt-y-126-192';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_24 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_24 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_24 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/uncoated/c_cx_mt-x-153-183_cy_mt-y-268-225';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_25 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_25 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_25 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/uncoated/c_cx_mt-x-119-197_cy_mt-y-115-174';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_26 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_26 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_26 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/uncoated/c_cx_mt-x-158-209_cy_mt-y-263-234';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_27 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_27 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_27 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/uncoated/c_cx_mt-x-202-229_cy_mt-y-263-232';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_uncoated_28 = P1s*1e9;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_uncoated_28 = P1s*1e9;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_uncoated_28 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
 
 %% uncoated spectra interp and bootstrap
  
@@ -3903,6 +4067,12 @@ fAll_uncoated = {...
     f_uncoated_20(f_uncoated_20>f_cutoff),...
     f_uncoated_21(f_uncoated_21>f_cutoff),...
     f_uncoated_22(f_uncoated_22>f_cutoff),...
+    f_uncoated_23(f_uncoated_23>f_cutoff),...
+    f_uncoated_24(f_uncoated_24>f_cutoff),...
+    f_uncoated_25(f_uncoated_25>f_cutoff),...
+    f_uncoated_26(f_uncoated_26>f_cutoff),...
+    f_uncoated_27(f_uncoated_27>f_cutoff),...
+    f_uncoated_28(f_uncoated_28>f_cutoff),...
     };
  
 % generate cell of logical indices for indexing spectra
@@ -3929,6 +4099,12 @@ logIndAll_uncoated = {...
     (f_uncoated_20>f_cutoff),...
     (f_uncoated_21>f_cutoff),...
     (f_uncoated_22>f_cutoff),...
+    (f_uncoated_23>f_cutoff),...
+    (f_uncoated_24>f_cutoff),...
+    (f_uncoated_25>f_cutoff),...
+    (f_uncoated_26>f_cutoff),...
+    (f_uncoated_27>f_cutoff),...
+    (f_uncoated_28>f_cutoff),...
     };
  
  
@@ -3956,6 +4132,12 @@ spectraAll_uncoated = {...
     spectra_uncoated_20,...
     spectra_uncoated_21,...
     spectra_uncoated_22,...
+    spectra_uncoated_23,...
+    spectra_uncoated_24,...
+    spectra_uncoated_25,...
+    spectra_uncoated_26,...
+    spectra_uncoated_27,...
+    spectra_uncoated_28,...
     };
  
 % number of boot strap iterations
@@ -4165,7 +4347,7 @@ end
 
 %% just uncoated, initial, final for 0.2uM
 
-doSave = 0;
+doSave = 1;
 
 % set colors
 tpx2_conc2Color = 'r';
@@ -4361,7 +4543,7 @@ end
 % kinesin, init coated, uncoated
 %
 
-doSave = 0;
+doSave = 1;
 
 % set colors
 kinColor = 'c';
@@ -4445,7 +4627,7 @@ end
 % kinesin, init coated, uncoated, tpx2 c term
 %
 
-doSave = 0;
+doSave = 1;
 
 % set colors
 kinColor = 'c';
