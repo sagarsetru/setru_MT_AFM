@@ -3274,6 +3274,27 @@ clear P1s
 clear f
 
 
+pathName =  '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/initCoated/c_cx_mt-x-7-84_cy_mt-y-14-31';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_init_25 = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_init_25 = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_init_25 = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
 
 
 %% tpx2_init spectra interp and bootstrap
@@ -3304,6 +3325,7 @@ fAll_tpx2_init = {...
     f_tpx2_init_22(f_tpx2_init_22>f_cutoff),...
     f_tpx2_init_23(f_tpx2_init_23>f_cutoff),...
     f_tpx2_init_24(f_tpx2_init_24>f_cutoff),...
+    f_tpx2_init_25(f_tpx2_init_25>f_cutoff),...
     };
  
 % generate cell of logical indices for indexing spectra
@@ -3332,6 +3354,7 @@ logIndAll_tpx2_init = {...
     (f_tpx2_init_22>f_cutoff),...
     (f_tpx2_init_23>f_cutoff),...
     (f_tpx2_init_24>f_cutoff),...
+    (f_tpx2_init_25>f_cutoff),...
     };
  
  
@@ -3361,6 +3384,7 @@ spectraAll_tpx2_init = {...
     spectra_tpx2_init_22,...
     spectra_tpx2_init_23,...
     spectra_tpx2_init_24,...
+    spectra_tpx2_init_25,...
     };
  
 % number of boot strap iterations
@@ -4231,7 +4255,7 @@ fMaxTpx2_conc4 = fLin_tpx2_conc4(aMaxTpx2_conc4_Ind);
 % all four tpx2 conc, kinesin, init coated, uncoated
 %
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 kinColor = 'c';
@@ -4347,7 +4371,7 @@ end
 
 %% just uncoated, initial, final for 0.2uM
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 tpx2_conc2Color = 'r';
@@ -4385,8 +4409,14 @@ plot(fLin_uncoated,mean(avgSpectra_lin_uncoated),'Color',uncoatedColor,'LineWidt
 plot(fLin_tpx2_init,mean(avgSpectra_lin_tpx2_init),'Color',tpx2_initColor,'LineWidth',lw)
 plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2),'Color',tpx2_conc2Color,'LineWidth',lw)
 
+% plot(fLin_uncoated,mean(avgSpectra_lin_uncoated).^2,'Color',uncoatedColor,'LineWidth',lw)
+% plot(fLin_tpx2_init,mean(avgSpectra_lin_tpx2_init).^2,'Color',tpx2_initColor,'LineWidth',lw)
+% plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2).^2,'Color',tpx2_conc2Color,'LineWidth',lw)
 
+
+% plot(fMaxTpx2_conc2,aMaxTpx2_conc2.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1,'LineStyle','none')
 plot(fMaxTpx2_conc2,aMaxTpx2_conc2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1,'LineStyle','none')
+
 % plot(fMaxTpx2_conc2,aMaxTpx2_conc2,'Color',tpx2_conc2Color,'Marker','o','MarkerSize',ms2,'LineWidth',lw2)
 % errorbar(fMaxTpx2_conc2,aMaxTpx2_conc2,...
 %     0,0,...
@@ -4396,6 +4426,11 @@ plot(fMaxTpx2_conc2,aMaxTpx2_conc2,'Color','k','Marker','o','MarkerSize',ms1,'Li
 shadedplot(fLin_uncoated,ci_avgSpectra_lin_uncoated(1,:),ci_avgSpectra_lin_uncoated(2,:),alphaValCi,uncoatedColor,uncoatedColor);
 shadedplot(fLin_tpx2_init,ci_avgSpectra_lin_tpx2_init(1,:),ci_avgSpectra_lin_tpx2_init(2,:),alphaValCi,tpx2_initColor,tpx2_initColor);
 shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:),ci_avgSpectra_lin_tpx2_conc2(2,:),alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+
+% shadedplot(fLin_uncoated,ci_avgSpectra_lin_uncoated(1,:).^2,ci_avgSpectra_lin_uncoated(2,:).^2,alphaValCi,uncoatedColor,uncoatedColor);
+% shadedplot(fLin_tpx2_init,ci_avgSpectra_lin_tpx2_init(1,:).^2,ci_avgSpectra_lin_tpx2_init(2,:).^2,alphaValCi,tpx2_initColor,tpx2_initColor);
+% shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:).^2,ci_avgSpectra_lin_tpx2_conc2(2,:).^2,alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+
 
 % doLatex = 1;
 % simplePlotFormat( 'Inverse wavelength $1/\lambda$ (nm$^{-1}$)', 'Power (nm)', xafz, yafz, tvfz, axesLw, doLatex )
