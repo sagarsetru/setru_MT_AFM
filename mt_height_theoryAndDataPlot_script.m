@@ -1843,7 +1843,8 @@ save([saveDirMain,'/coatingData_mt31.mat'],'coatingData_mt31')
 
 
 %% mt 32, 2019 10 31, expt 4, 4x tpx2, 254-27
- 
+ % THIS IS NOT PLOTTED BECAUSE IT IS A DUPLICATE
+
 % load data from table
 h32_naked = expt42bg1mtNakedframe25420191031.y;
 h32_bg_naked = expt42bg1mtNakedframe25420191031.y1;
@@ -1899,7 +1900,6 @@ save([saveDirMain,'/coatingData_mt32.mat'],'coatingData_mt32')
  
  
 %% mt 33, 2019 10 31, expt 4, 4x tpx2, 275-278
-% THIS IS NOT PLOTTED BECAUSE IT IS A DUPLICATE
  
 % load data from table
 h33_naked = expt42bg1mtNakedframe25420191031.y;
@@ -3920,8 +3920,8 @@ plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-% plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+% plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
 
 
 % 50-150nM, 0.5x
@@ -4064,8 +4064,8 @@ plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-% plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+% plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
 
 
 % 50-150nM, 0.5x
@@ -4138,7 +4138,7 @@ end
 
 %% adjusted for effective film height/volume without conc. noted
 
-doSave = 1;
+doSave = 0;
 
 % load theory curve
 run('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/loadRPTheoryCurve_nonDimensionalized.m')
@@ -4255,8 +4255,8 @@ plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-% plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+% plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
 
 
 % 50-150nM, 0.5x
@@ -4405,7 +4405,7 @@ grid off
 lmbeff(1)=lmb(1); %just for plotting; since lmbeff(1) is nan (can't interp earlier)
 
 plot(h,lmbeff*1e3,'k-','LineWidth',5)%,'MarkerSize',ms)
-plot(h,lmb*1e3,'k:','LineWidth',2.5)
+plot(h,lmb*1e3,'k--','LineWidth',2.5)
 
 
 plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms)
@@ -4453,8 +4453,8 @@ plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
 plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-% plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+% plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
 
 
 % 50-150nM, 0.5x
