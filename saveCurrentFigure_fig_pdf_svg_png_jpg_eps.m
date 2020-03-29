@@ -20,13 +20,13 @@ print(fig,fileName,'-dpdf','-r300')
 print(fig,fileName,'-dsvg','-r300')
 %saveas(fig,fileName,'svg')
 
-% save as png
-print(fig,fileName,'-dpng','-r300')
-%saveas(fig,[fileName,'.png'])
-
-% save as jpg
-print(fig,fileName,'-djpeg','-r300')
-%saveas(fig,[fileName,'jpg'])
+% % save as png
+% print(fig,fileName,'-dpng','-r300')
+% %saveas(fig,[fileName,'.png'])
+% 
+% % save as jpg
+% print(fig,fileName,'-djpeg','-r300')
+% %saveas(fig,[fileName,'jpg'])
 
 % save as eps
 print(fig,fileName,'-depsc','-r300')
