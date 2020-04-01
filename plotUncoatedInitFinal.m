@@ -38,16 +38,18 @@ figure; hold on; box on;
 
 if un == 25
     colShape = [psp.unColor,psp.missingLineSpec];
-    plot(xPlot_un,smooth(un,sm),colShape,'LineWidth',psp.lw);
+    plot(xPlot_un,un,colShape,'LineWidth',psp.lw);
 else
-    plot(xPlot_un,smooth(un,sm),psp.unColor,'LineWidth',psp.lw);
+%     plot(xPlot_un,smooth(un,sm),psp.unColor,'LineWidth',psp.lw);
+    plot(xPlot_un,smooth(un,sm),'k:','LineWidth',psp.lw);
 end
 
 if init == (h+25)
     colShape = [psp.initColor,psp.missingLineSpec];
-    plot(xPlot_init,smooth(init,sm),colShape,'LineWidth',psp.lw); 
+    plot(xPlot_init,init,colShape,'LineWidth',psp.lw); 
 else
     plot(xPlot_init,smooth(init,sm),psp.initColor,'LineWidth',psp.lw); 
+%     plot(xPlot_init,smooth(init,sm),'b:','LineWidth',psp.lw); 
 
 end
 
@@ -62,7 +64,9 @@ xlim([psp.xmin max([xPlot_drop xPlot_init xPlot_un])])
 ylim([psp.ymin psp.ymax])
 % ylim([psp.ymin max([un init drop])])
 % pbaspect([1.0000    0.7638    0.7638])
-daspect(psp.dAsp)
+if psp.fixAsp
+    daspect(psp.dAsp)
+end
 % set(gcf,'PaperPosition',[0.3611    2.5833    7.7778    5.8333])
 set(gca, 'XTick', psp.xTicks)
 simplePlotFormat( psp.xAxisLabel, psp.yAxisLabel, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
