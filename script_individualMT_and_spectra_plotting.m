@@ -6,7 +6,8 @@
 addpath(genpath('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis'))
 
 % for saving
-saveDirMain =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/individualMTs_lineScans_spectra/';
+psp.doSave = 1;
+psp.saveDirMain =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/individualMTs_lineScans_spectra/';
 
 % main path for running scripts to load height data
 runDir = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/scripts_loadMtHeighData/';
@@ -28,6 +29,15 @@ psp.lmbMarkerSize = 20;
 psp.doXlimSpec = 1;
 psp.doYlimSpec = 0;
 
+% for plotting psd vs asd
+psp.doPsd = 1;
+if psp.doPsd == 1
+    psp.yAxisLabel2 = 'Spectral power (nm^2)';
+else
+    psp.yAxisLabel2 = 'Spectral amplitude (nm)'; % for spectra
+end
+psp.xAxisLabel2 = 'Inverse wavelength 1/\lambda (nm^{-1})'; % for spectra
+
 % for plotting individual power spectra data points as scatter
 psp.doScatter = 0;
 psp.specMarkerStyle = '.';
@@ -42,9 +52,8 @@ psp.axesLw = 2;
 psp.doLatex = 0;
 psp.xAxisLabel = 'Length along microtubule (nm)';
 psp.yAxisLabel = 'Height (nm)';
-psp.yAxisLabel2 = 'Power (nm)'; % for spectra
-psp.xAxisLabel2 = 'Inverse wavelength 1/\lambda (nm^{-1})'; % for spectra
-psp.lfz = 20;
+% psp.lfz = 20;
+psp.lfz = 15;
 psp.lgdLocSpec = 'NorthEast';
 
 % limits, aspect ratio, tick marks for line scan plots
@@ -63,7 +72,7 @@ psp.xmaxSpec = 0.06;
 psp.yminSpec = 0;
 psp.ymaxSpec = 2.5;
 psp.xscale = 'log';
-psp.yscale = 'lin';
+psp.yscale = 'log';
 
 % set default smooth windows (smPlaneFrac may change; sm should be same throughout)
 sm = 5;
@@ -75,12 +84,28 @@ pix_to_nm = 2000/256;
 % define cutoff frequency for plotting
 psp.f_cutoff = .00099; %units nm^-1
 
-psp.doSave = 1;
-psp.saveDirMain = saveDirMain;
+% to close figures at end per mt (for batch generation)
+psp.doClose = 1;
+
+% if you want to fix the aspect ratio
+psp.fixAsp = 1;
+
+% if you want to show errorbars for uncoated or init
+psp.doError_u_i = 0;
 
 %% mt 1 (publication main fig)
 psp.fname = 'mt1';
+psp.doPsd = 1;
+% psp.doSave = 0;
 
+doPubFig = 0;
+
+if doPubFig
+    psp.fname = '/sansSerif_uncoated_initCoated_final_c_cx_mt-x-22-184_cy_mt-y-51-160';
+    psp.fixAsp = 0;
+    psp.ymax = 55;
+    psp.dAsp = 0;
+end
 % 3 from 2019 07 16
 % run('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/scripts_loadMtHeighData/loadMtHeightData_mt_123_20190716.m')
 
@@ -113,13 +138,35 @@ un = c(6,:);
 init = c(8,:);
 drop = c(37,:);
 
-sm = 5;
+sm = 1;
 smPlaneFrac = 3;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+% plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
+if doPubFig
+    lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
+        'Position',[.6 .35 .1 .1]);
+    legend boxoff
+    lgd.FontSize = 20;
+end
+
+if doPubFig
+    if psp.doSave == 1
+
+        if sm == 1
+            
+             saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_noSmooth'])
+           
+        else
+            
+            saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname])
+        
+        end
+    end
+end
+%%
 
 % load spectra data
 % load and plot spectra
@@ -137,12 +184,22 @@ plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 psp.doScatter=1;
 plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 
+        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_forSupFig'])
 
+%     lgd = legend({'Uncoated',...
+%         'Initially coated',...
+%         'After droplet formation',...
+%         ['\lambda_{max} = ',num2str(248),' nm']},...
+%         'Position',[.685 .77 .1 .1]);
+%     legend boxoff
+%     lgd.FontSize = psp.lfz;
+%     
+    
 clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 
 %% mt 2
@@ -166,7 +223,7 @@ smPlaneFrac = 3;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 % load and plot spectra
 inputStruct1.pathName =  '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 16/expt1/Stack_225-261/uncoated/c_cx_mt-x-158-209_cy_mt-y-263-234';
@@ -188,7 +245,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 3
 psp.fname = 'mt3';
@@ -213,7 +270,7 @@ smPlaneFrac = 0;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 % load and plot spectra
@@ -237,7 +294,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 
 %% mt4
@@ -266,7 +323,7 @@ smPlaneFrac = 3;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/uncoated/c_cx_mt-x-153-183_cy_mt-y-268-225';
 inputStruct1.whichPlot = 'u';
@@ -287,7 +344,7 @@ plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 5 drops only
 psp.fname = 'mt5';
@@ -302,7 +359,7 @@ smPlaneFrac = 0;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 inputStruct.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_68-89/c_cx_mt-x-114-179_cy_mt-y-92-117';
 inputStruct.whichPlot = 'd';
@@ -316,7 +373,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 6 drops only
 
@@ -331,7 +388,7 @@ smPlaneFrac = 0;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 inputStruct0.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data/2019 07 13/Stack_tpx2_20190713_90-91/c_cx_mt-x-219-209_cy_mt-y-3-132';
@@ -346,7 +403,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 7 MAKE CLEAR THAT LINE SCANS FROM DIFFERENT MTS
 % actually just using dummy height line
@@ -395,13 +452,13 @@ h = coatingData_mt7.film;
 % psp.ymax=60;
 % psp.xTicks=0:200:4000;
 
-% plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+% %plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 sm = 5;
 smPlaneFrac = 10;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 inputStruct2.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_422-424_20191031_stackReg_rigidBody/c_cx_mt-x-167-329_cy_mt-y-2-490';
@@ -425,7 +482,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 8
 psp.fname = 'mt8';
@@ -446,7 +503,7 @@ smPlaneFrac = 8;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 end
 %
 
@@ -462,10 +519,11 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 9
 psp.fname = 'mt9';
+doSave = 0;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
 % drop = c(2,80:196);
@@ -480,7 +538,7 @@ h = coatingData_mt8.film;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 %
 inputStruct1.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223';
@@ -488,6 +546,9 @@ inputStruct1.whichPlot = 'd';
 
 psp.doScatter = 0;
 plotUnInitDropSpectra(inputStruct1,psp);
+% if doSave
+%     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra'])
+% end
 psp.doScatter = 1;
 plotUnInitDropSpectra(inputStruct1,psp);
 
@@ -495,10 +556,11 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 10
 psp.fname = 'mt10';
+psp.doSave = 1;
 
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/c_cx_mt-x-7-124_cy_mt-y-156-230/c_cx_mt-x-7-124_cy_mt-y-156-230.mat')
 drop = c(21,4:end);
@@ -513,7 +575,7 @@ h = coatingData_mt10.film;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 inputStruct1.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/uncoated/c_cx_mt-x-2-148_cy_mt-y-166-252';
@@ -534,7 +596,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 11 only drops
 psp.fname = 'mt11';
@@ -545,7 +607,7 @@ drop = c(3,:);
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 %
@@ -561,7 +623,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 12 only drops
 psp.fname = 'mt12';
@@ -572,7 +634,7 @@ drop = c(1,:);
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 %
@@ -588,7 +650,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 13 drop only
 psp.fname = 'mt13';
@@ -601,7 +663,7 @@ h = coatingData_mt13.film;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(ones(size(drop)),ones(size(drop)),drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 
 end
@@ -619,10 +681,12 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 14
 psp.fname = 'mt14';
+psp.doSave = 1;
+psp.doClose = 0;
 
 for t=[22]
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-108-183_cy_mt-y-95-156/c_cx_mt-x-108-183_cy_mt-y-95-156.mat')
@@ -638,10 +702,13 @@ drop = c(t,:);
 h = coatingData_mt14.film;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
-
+%%
+psp.fname = 'mt14';
+doSave = 0;
+psp.lgdLocSpec = 'SouthWest';
 inputStruct1.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-108-183_cy_mt-y-95-156';
 inputStruct1.whichPlot = 'u';
 
@@ -653,6 +720,11 @@ inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
 plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra'])
+end
+
 psp.doScatter = 1;
 plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 
@@ -660,7 +732,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; 
+if psp.doClose == 1; close all; end
 
 %% mt 15
 psp.fname = 'mt15';
@@ -683,7 +756,7 @@ psp.dropStart = 0;
 h = coatingData_mt15.film;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -705,7 +778,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 16
 psp.fname = 'mt16';
@@ -730,7 +803,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -744,7 +817,7 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
@@ -756,7 +829,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 17
 psp.fname = 'mt17';
@@ -781,7 +854,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -795,11 +868,11 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
@@ -807,7 +880,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 18
 psp.fname = 'mt18';
@@ -835,7 +908,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -849,11 +922,11 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
@@ -861,7 +934,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 19
 psp.fname = 'mt19';
@@ -889,7 +962,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -903,11 +976,11 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
@@ -915,7 +988,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 20
 psp.fname = 'mt20';
@@ -943,7 +1016,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -957,11 +1030,11 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
@@ -969,7 +1042,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 20
 psp.fname = 'mt20';
@@ -997,7 +1070,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1011,11 +1084,11 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
@@ -1023,7 +1096,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 21
 psp.fname = 'mt21';
@@ -1051,7 +1124,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1077,7 +1150,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 22
 psp.fname = 'mt22';
@@ -1105,7 +1178,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1131,7 +1204,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 23
 psp.fname = 'mt23';
@@ -1160,7 +1233,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 2;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1186,7 +1259,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 24
 psp.fname = 'mt24';
@@ -1215,7 +1288,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 1;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1241,7 +1314,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 25
 psp.fname = 'mt25';
@@ -1270,7 +1343,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 1;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1296,7 +1369,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 26
 psp.fname = 'mt26';
@@ -1325,7 +1398,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 
@@ -1351,7 +1424,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 27
 psp.fname = 'mt27';
@@ -1380,7 +1453,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 
@@ -1406,7 +1479,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 28
 psp.fname = 'mt28';
@@ -1435,7 +1508,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 1;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1461,7 +1534,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 29
 psp.fname = 'mt29';
@@ -1490,7 +1563,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 2;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1516,7 +1589,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 30
 psp.fname = 'mt30';
@@ -1545,7 +1618,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1571,7 +1644,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 31
 psp.fname = 'mt31';
@@ -1600,7 +1673,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 1;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1626,7 +1699,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 32 DUPLICAT,E DO NOT PLOT!
 % psp.fname = 'mt32';
@@ -1656,7 +1729,7 @@ clear h
 % psp.dropStart = 0*pix_to_nm;
 % sm = 5;
 % smPlaneFrac = 1;
-% plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+% %plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 % 
 % end
 % %
@@ -1684,7 +1757,7 @@ clear h
 % clear un
 % clear init
 % clear drop
-% clear h
+% clear h; if psp.doClose == 1; close all; end
 
 %% mt 33
 psp.fname = 'mt33';
@@ -1714,7 +1787,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1742,12 +1815,12 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 34
 psp.fname = 'mt34';
 h = coatingData_mt34.film;
-psp.doSave = 0;
+psp.doSave = 1;
 if psp.doSave == 1
     disp(psp.fname);
 end
@@ -1773,11 +1846,11 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 10;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
-psp.lfz=15;
+% psp.lfz=15;
 inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_168-177_affine/uncoated/c_cx_mt-x-2-144_cy_mt-y-109-95';
 inputStruct1.whichPlot = 'u';
 
@@ -1802,10 +1875,10 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 % restore default lgd font size
-psp.lfz = 20;
+% psp.lfz = 20;
 
 %% mt 35
 psp.fname = 'mt35';
@@ -1836,7 +1909,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1864,7 +1937,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 36
 psp.fname = 'mt36';
@@ -1896,7 +1969,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1924,7 +1997,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 37
 psp.fname = 'mt37';
@@ -1956,7 +2029,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -1985,7 +2058,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 38
 psp.fname = 'mt38';
@@ -2017,7 +2090,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2046,7 +2119,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 39
 psp.fname = 'mt39';
@@ -2078,7 +2151,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2107,7 +2180,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 40
 psp.fname = 'mt40';
@@ -2139,7 +2212,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2168,7 +2241,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 41
 psp.fname = 'mt41';
@@ -2200,7 +2273,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2229,7 +2302,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 42
 psp.fname = 'mt42';
@@ -2261,7 +2334,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2273,7 +2346,7 @@ end
 
 inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt1 1x tpx2 100nM 300nM/expt1_tifStacks/Stack_expt1_1xTpx2Fl_10312019_184-186_strackReg/c_cx_mt-x-229-204_cy_mt-y-132-251';
 inputStruct3.whichPlot = 'd';
-psp.lfz=15;
+% psp.lfz=15;
 psp.doScatter = 0;
 psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
@@ -2290,8 +2363,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
-psp.lfz=20;
+clear h; if psp.doClose == 1; close all; end
+% psp.lfz=20;
 
 %% mt 43
 psp.fname = 'mt43';
@@ -2323,7 +2396,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2352,7 +2425,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 44
 psp.fname = 'mt44';
@@ -2384,7 +2457,7 @@ psp.initStart = 0*pix_to_nm;
 psp.dropStart = 0*pix_to_nm;
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2413,7 +2486,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 45
 psp.fname = 'mt45';
@@ -2448,7 +2521,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2477,7 +2550,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 46
 psp.fname = 'mt46';
@@ -2510,7 +2583,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2539,7 +2612,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 47
 psp.fname = 'mt47';
@@ -2572,7 +2645,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 5;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2601,7 +2674,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 48
 psp.fname = 'mt48';
@@ -2634,7 +2707,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2663,7 +2736,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 49
 psp.fname = 'mt49';
@@ -2696,7 +2769,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2725,7 +2798,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 50
 psp.fname = 'mt50';
@@ -2758,7 +2831,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2771,7 +2844,7 @@ end
 inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_119-120_affine/c_cx_mt-x-224-171_cy_mt-y-355-508';
 inputStruct3.whichPlot = 'd';
 
-psp.lfz = 15;
+% psp.lfz = 15;
 psp.doScatter = 0;
 psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
@@ -2788,8 +2861,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
-psp.lfz = 20;
+clear h; if psp.doClose == 1; close all; end
+% psp.lfz = 20;
 
 %% mt 51
 psp.fname = 'mt51';
@@ -2822,7 +2895,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2836,13 +2909,13 @@ inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio
 inputStruct3.whichPlot = 'd';
 
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
 
 psp.doScatter = 1;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
@@ -2851,7 +2924,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 
 %% mt 52
 psp.fname = 'mt52';
@@ -2885,7 +2958,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 5;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2915,7 +2988,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 % psp.lfz=20;
 
 %% mt 53
@@ -2948,7 +3021,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -2978,7 +3051,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 % psp.lfz=20;
 
 %% mt 54
@@ -3011,7 +3084,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -3024,7 +3097,7 @@ inputStruct2.whichPlot = 'i';
 inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-23-50_cy_mt-y-117-4';
 inputStruct3.whichPlot = 'd';
 
-psp.lfz = 15;
+% psp.lfz = 15;
 psp.doScatter = 0;
 psp.lgdLocSpec = 'NorthEast';
 plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
@@ -3041,8 +3114,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
-psp.lfz=20;
+clear h; if psp.doClose == 1; close all; end
+% psp.lfz=20;
 
 %% mt 55
 psp.fname = 'mt55';
@@ -3074,7 +3147,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 3;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -3087,7 +3160,7 @@ inputStruct2.whichPlot = 'i';
 inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/c_cx_mt-x-6-105_cy_mt-y-178-250';
 inputStruct3.whichPlot = 'd';
 
-psp.lfz = 15;
+% psp.lfz = 15;
 psp.doScatter = 0;
 psp.lgdLocSpec = 'NorthEast';
 plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
@@ -3104,8 +3177,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
-psp.lfz=20;
+clear h; if psp.doClose == 1; close all; end
+% psp.lfz=20;
 
 %% mt 56
 psp.fname = 'mt56';
@@ -3137,7 +3210,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -3167,7 +3240,7 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 % psp.lfz=20;
 
 %% mt 57
@@ -3200,7 +3273,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 5;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -3213,9 +3286,9 @@ end
 inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_248-250_stackReg/c_cx_mt-x-216-503_cy_mt-y-173-504';
 inputStruct3.whichPlot = 'd';
 
-psp.lfz = 15;
+% psp.lfz = 15;
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
@@ -3230,8 +3303,8 @@ clear c
 clear un
 clear init
 clear drop
-clear h
-psp.lfz=20;
+clear h; if psp.doClose == 1; close all; end
+% psp.lfz=20;
 
 %% mt 58
 psp.fname = 'mt58';
@@ -3263,7 +3336,7 @@ psp.dropStart = 0*pix_to_nm;
 
 sm = 5;
 smPlaneFrac = 0;
-plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+%plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 end
 %
@@ -3278,7 +3351,7 @@ inputStruct3.whichPlot = 'd';
 
 % psp.lfz = 15;
 psp.doScatter = 0;
-psp.lgdLocSpec = 'SouthWest';
+psp.lgdLocSpec = 'NorthEast';
 % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
 % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
 plotUnInitDropSpectra(inputStruct3,psp);
@@ -3293,5 +3366,257 @@ clear c
 clear un
 clear init
 clear drop
-clear h
+clear h; if psp.doClose == 1; close all; end
 % psp.lfz=20;
+
+%%{
+
+%% mt kinesin
+psp.fixAsp = 0;
+psp.fname = 'mt_kinesin';
+h = 2.9;
+psp.ymax = 35;
+psp.doSave = 0;
+if psp.doSave == 1
+    disp(psp.fname);
+end
+% for t = [12:17]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_26-28_20191108_rigidBody/c_cx_mt-x-95-145_cy_mt-y-1-86/c_cx_mt-x-95-145_cy_mt-y-1-86.mat')
+for t = [3]
+
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_227-228_units_nm/uncoated/c_cx_mt-x-205-255_cy_mt-y-90-246/c_cx_mt-x-205-255_cy_mt-y-90-246.mat')
+% un = c(1,:);
+% un = flip(un);
+
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-2-60_cy_mt-y-174-214/c_cx_mt-x-2-60_cy_mt-y-174-214.mat')
+% init = c(1,:);
+% init=flip(init);
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-24-85_cy_mt-y-155-217/c_cx_mt-x-24-85_cy_mt-y-155-217.mat')
+drop = c(t,:);
+% drop = flip(drop);
+init = ones(size(drop));
+un = ones(size(drop));
+
+% psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+
+sm = 5;
+smPlaneFrac = 0;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+
+end
+
+%%
+psp.doSave = 0;
+inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt1 kinesin/tifStacks_expt1Kinesin_20191108/Stack_expt1_8-11_20191108_rigidBody/c_cx_mt-x-24-85_cy_mt-y-155-217';
+inputStruct3.whichPlot = 'u';
+
+% psp.lfz = 15;
+psp.doError_u_i = 1;
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+
+if psp.doSave == 1
+    
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra'])
+
+end
+
+
+
+%% mt cttpx2
+psp.fixAsp = 0;
+psp.fname = 'mt_ct_tpx2';
+h = 3.7;
+psp.ymax = 35;
+psp.doSave = 0;
+if psp.doSave == 1
+    disp(psp.fname);
+end
+% for t = [12:17]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 11 08 kinesin brb80/expt2 kinesin/tifStacks_expt2_kinesin_20191108/Stack_expt2_kin_26-28_20191108_rigidBody/c_cx_mt-x-95-145_cy_mt-y-1-86/c_cx_mt-x-95-145_cy_mt-y-1-86.mat')
+% for t = 1:size(c,1)
+for t = 3
+
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_227-228_units_nm/uncoated/c_cx_mt-x-205-255_cy_mt-y-90-246/c_cx_mt-x-205-255_cy_mt-y-90-246.mat')
+% un = c(1,:);
+% un = flip(un);
+
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_229-245_stackReg/initCoated/c_cx_mt-x-2-60_cy_mt-y-174-214/c_cx_mt-x-2-60_cy_mt-y-174-214.mat')
+% init = c(1,:);
+% init=flip(init);
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166/c_cx_mt-x-76-109_cy_mt-y-254-166.mat')
+drop = c(t,:);
+drop = flip(drop);
+init = ones(size(drop));
+un = ones(size(drop));
+
+% psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+
+sm = 5;
+smPlaneFrac = 0;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+
+end
+if psp.doSave == 1
+    
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_lineScans'])
+
+end
+
+%%
+psp.doSave = 1;
+inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt5 3x tpx2 cterm 300nM 900nM/expt5_tifStacks/Substack_expt5_20191031_3xTpx2cTerm_282-286_stackReg/c_cx_mt-x-76-109_cy_mt-y-254-166';
+inputStruct3.whichPlot = 'u';
+
+% psp.lfz = 15;
+psp.doError_u_i = 1;
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+% 
+% psp.doScatter = 1;
+% psp.lgdLocSpec = 'NorthEast';
+% % plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
+% % plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+% plotUnInitDropSpectra(inputStruct3,psp);
+%}
+%% mt 4 for pub
+psp.fname = 'mt46';
+h = coatingData_mt46.film;
+psp.doSave = 0;
+doSave = 0;
+if psp.doSave == 1
+    disp(psp.fname);
+end
+for t = [1]
+% for t=[11]
+% for t=1
+% for t = 12
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/uncoated/c_cx_mt-x-3-68_cy_mt-y-62-8/c_cx_mt-x-3-68_cy_mt-y-62-8.mat')
+un = c(1,:);
+% % un = flip(un);
+% 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/initCoated/c_cx_mt-x-28-233_cy_mt-y-244-73/c_cx_mt-x-28-233_cy_mt-y-244-73.mat')
+init = c(3,:);
+% % init=flip(init);
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_114-116_affine/c_cx_mt-x-379-442_cy_mt-y-2-207/c_cx_mt-x-379-442_cy_mt-y-2-207.mat')
+drop = c(t,:);
+% drop = flip(drop);
+% init = ones(size(drop));
+% un = ones(size(drop));
+
+% psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+
+sm = 5;
+smPlaneFrac = 0;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+
+end
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_lineScans_forPub'])
+end
+%%
+psp.fname = 'mt46';
+psp.doSave = 0;
+doSave = 0;
+inputStruct1.pathName =      '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/uncoated/c_cx_mt-x-3-68_cy_mt-y-62-8';
+inputStruct1.whichPlot = 'u';
+% 
+inputStruct2.pathName =      '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_75-113_rigidBody/initCoated/c_cx_mt-x-28-233_cy_mt-y-244-73';
+inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_114-116_affine/c_cx_mt-x-379-442_cy_mt-y-2-207';
+inputStruct3.whichPlot = 'd';
+
+psp.doScatter = 0;
+psp.lgdLocSpec = 'SouthWest';
+% plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+% plotUnInitDropSpectra(inputStruct3,psp);
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_forPub'])
+end
+
+psp.doScatter = 1;
+psp.lgdLocSpec = 'SouthWest';
+% plotUnInitDropSpectra(inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+% plotUnInitDropSpectra(inputStruct3,psp);
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_withScatter_forPub'])
+end
+
+clear c
+clear un
+clear init
+clear drop
+clear h; 
+% if psp.doClose == 1; close all; end
+
+%% mt 9 for pub
+psp.fname = 'mt9';
+psp.doSave = 0;
+doSave = 0;
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223/c_cx_mt-x-233-209_cy_mt-y-8-223.mat')
+% drop = c(2,80:196);
+% drop = c(2,end-135:end-10);
+drop = c(2,end-154:end);
+drop = c(2,:);
+% drop = c(1,end-154:end);
+% drop = c(2,130:250);
+% drop = c(3,1:155);
+% drop = c(3,:);
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_395-420_20191031_units_nm/initCoated/c_cx_mt-x-254-187_cy_mt-y-29-131/c_cx_mt-x-254-187_cy_mt-y-29-131.mat')
+init = c(1,:);
+un = ones(size(drop));
+h = coatingData_mt8.film;
+
+sm = 5;
+smPlaneFrac = 5;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_lineScans_forPub'])
+end
+%%
+doSave = 0;
+psp.doSave = 0;
+psp.lgdLocSpec = 'SouthWest';
+inputStruct1.pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Substack_412-420_stackReg_affine/c_cx_mt-x-233-209_cy_mt-y-8-223';
+inputStruct1.whichPlot = 'd';
+
+inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt10 4x tpx2fl 300nM 1200nM/expt10_tifStacks/Stack_expt10_395-420_20191031_units_nm/initCoated/c_cx_mt-x-254-187_cy_mt-y-29-131';
+inputStruct2.whichPlot = 'i';
+
+psp.doScatter = 0;
+plotUnInitDropSpectra(inputStruct2,inputStruct1,psp);
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_forPub'])
+end
+
+psp.doScatter = 1;
+plotUnInitDropSpectra(inputStruct2,inputStruct1,psp);
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_withScatter_forPub'])
+end
+
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
