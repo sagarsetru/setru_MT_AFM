@@ -55,13 +55,21 @@ if nargin == 2
     
     load(fNameStruct.f)
     
-    [lmb] = plotIndivAvgSpectra(f,avgSpectra,stdSpectra,P1s,psp,whichPlot);
+%     [lmb] = plotIndivAvgSpectra(f,avgSpectra,stdSpectra,P1s,psp,whichPlot);
     
-%     lpSpec = avgSpectra(2:12);
-%     lpDrop = ifft(lpSpec);
+    % for individual spectra of kinesin and ct-tpx2
+    if strcmp(whichPlot,'d')
+        [lmb] = plotIndivAvgSpectra(f,avgSpectra,stdSpectra,P1s,psp,whichPlot);
+    else
+        plotIndivAvgSpectra(f,avgSpectra,stdSpectra,P1s,psp,whichPlot);
+    end
+    lpSpec = avgSpectra(2:12);
+    lpDrop = ifft(lpSpec);
     
     xlim([0 0.06])
-    set(gca, 'XScale','log')
+    set(gca,'XScale',psp.xscale)
+    set(gca,'YScale',psp.yscale)
+
     simplePlotFormat( psp.xAxisLabel2, psp.yAxisLabel2, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
 
     lgd = legend({['After droplet formation'],...
@@ -188,7 +196,7 @@ elseif nargin == 4
         ylim([psp.yminSpec psp.ymaxSpec])
     end
     
-    set(gca, 'XScale',psp.xscale)
+    set(gca,'XScale',psp.xscale)
     set(gca,'YScale',psp.yscale)
     simplePlotFormat( psp.xAxisLabel2, psp.yAxisLabel2, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
 
@@ -433,7 +441,7 @@ elseif nargin == 3
         ylim([psp.yminSpec psp.ymaxSpec])
     end
     
-    set(gca, 'XScale',psp.xscale)
+    set(gca,'XScale',psp.xscale)
     set(gca,'YScale',psp.yscale)
     simplePlotFormat( psp.xAxisLabel2, psp.yAxisLabel2, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
 
