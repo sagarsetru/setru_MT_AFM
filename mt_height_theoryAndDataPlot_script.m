@@ -3875,10 +3875,10 @@ grid off
 
 plot(h,lmb*1e3,'k-','LineWidth',5)
 
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms) %.5x
+plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms) % 1x
+plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms) % 4x
+plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms) % 3x
 
 % 100-300nM, 1x
 plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms)
@@ -4491,7 +4491,7 @@ gcf;
 %     'FontSize',16,...
 %     'Position',[.2 .74 .1 .1])
 legend({'\lambda_{max} = f(h_{eff})',...
-    '\lambda_{max}',...
+    '\lambda_{max} = f(h)',...
     '0.1 \pm 0.05 \muM',...
     '0.2 \pm 0.1 \muM',...
     '0.6 \pm 0.3 \muM',...
