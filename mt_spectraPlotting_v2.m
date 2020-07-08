@@ -1982,6 +1982,75 @@ save([saveDirMain2,'/avgMaxf_tpx2_conc1'],'avgMaxLmbd_tpx2_conc1')
 save([saveDirMain2,'/lmbdMaxTpx2_conc1'],'lmbdMaxTpx2_conc1')
 save([saveDirMain2,'/stdMaxLmbd_tpx2_conc1'],'stdMaxLmbd_tpx2_conc1')
 
+%% lin interp and bootstrap for conc1 (50-150nM tpx2), keeping only long scans
+
+% generate cell of frequencies
+fAll_tpx2_conc1_long = {...
+    f_tpx2_conc1_1(f_tpx2_conc1_1>f_cutoff),...
+    f_tpx2_conc1_2(f_tpx2_conc1_2>f_cutoff),...
+    f_tpx2_conc1_3(f_tpx2_conc1_3>f_cutoff),...
+    f_tpx2_conc1_4(f_tpx2_conc1_4>f_cutoff),...
+    f_tpx2_conc1_6(f_tpx2_conc1_6>f_cutoff),...
+    f_tpx2_conc1_14(f_tpx2_conc1_14>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_conc1_long = {...
+    (f_tpx2_conc1_1>f_cutoff),...
+    (f_tpx2_conc1_2>f_cutoff),...
+    (f_tpx2_conc1_3>f_cutoff),...
+    (f_tpx2_conc1_4>f_cutoff),...
+    (f_tpx2_conc1_6>f_cutoff),...
+    (f_tpx2_conc1_14>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc1_long = {...
+    spectra_tpx2_conc1_1,...
+    spectra_tpx2_conc1_2,...
+    spectra_tpx2_conc1_3,...
+    spectra_tpx2_conc1_4,...
+    spectra_tpx2_conc1_6,...
+    spectra_tpx2_conc1_14,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc1_long,...
+    spectraAll_lin_tpx2_conc1_long,...
+    avgSpectra_lin_tpx2_conc1_long,...
+    ci_avgSpectra_lin_tpx2_conc1_long,...
+    avgMaxLmbd_tpx2_conc1_long,...
+    stdMaxLmbd_tpx2_conc1_long] = interpBootstrpSpectra(fAll_tpx2_conc1_long,spectraAll_tpx2_conc1_long,logIndAll_tpx2_conc1_long,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc1';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc1esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc1.mat'],'spectraAll_lin_tpx2_conc1_long')
+ 
+% save mat file of tpx2_conc1esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc1_long.mat'],'fLin_tpx2_conc1_long')
+
+aMaxTpx2_conc1_long = max(mean(avgSpectra_lin_tpx2_conc1_long));
+aMaxTpx2_conc1_Ind_long = find(mean(avgSpectra_lin_tpx2_conc1_long)==aMaxTpx2_conc1_long);
+fMaxTpx2_conc1_long = fLin_tpx2_conc1_long(aMaxTpx2_conc1_Ind_long);
+lmbdMaxTpx2_conc1_long = 1/fMaxTpx2_conc1_long;
+
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc1_long'],'avgSpectra_lin_tpx2_conc1_long')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc1_long'],'ci_avgSpectra_lin_tpx2_conc1_long')
+save([saveDirMain2,'/avgMaxf_tpx2_conc1_long'],'avgMaxLmbd_tpx2_conc1_long')
+save([saveDirMain2,'/lmbdMaxTpx2_conc1_long'],'lmbdMaxTpx2_conc1_long')
+save([saveDirMain2,'/stdMaxLmbd_tpx2_conc1_long'],'stdMaxLmbd_tpx2_conc1_long')
+
 
 %% load data for 4x tpx2 conc (400-1200nM)
 
@@ -4193,6 +4262,12 @@ load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spect
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/ci_avgSpectra_lin_tpx2_conc1.mat')
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/fLin_tpx2_conc1.mat')
 
+% tpx2_conc_1, long scans only
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/avgSpectra_lin_tpx2_conc1_long.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/ci_avgSpectra_lin_tpx2_conc1_long.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc1/fLin_tpx2_conc1_long.mat')
+
+
 % tpx2_conc_2
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc2/avgSpectra_lin_tpx2_conc2.mat')
 load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/spectra_tpx2_conc2/ci_avgSpectra_lin_tpx2_conc2.mat')
@@ -4223,6 +4298,10 @@ aMaxTpx2_conc1 = max(mean(avgSpectra_lin_tpx2_conc1));
 aMaxTpx2_conc1_Ind = find(mean(avgSpectra_lin_tpx2_conc1)==aMaxTpx2_conc1);
 fMaxTpx2_conc1 = fLin_tpx2_conc1(aMaxTpx2_conc1_Ind);
 
+aMaxTpx2_conc1_long = max(mean(avgSpectra_lin_tpx2_conc1_long));
+aMaxTpx2_conc1_Ind_long = find(mean(avgSpectra_lin_tpx2_conc1_long)==aMaxTpx2_conc1_long);
+fMaxTpx2_conc1_long = fLin_tpx2_conc1_long(aMaxTpx2_conc1_Ind_long);
+
 aMaxTpx2_conc2 = max(mean(avgSpectra_lin_tpx2_conc2));
 aMaxTpx2_conc2_Ind = find(mean(avgSpectra_lin_tpx2_conc2)==aMaxTpx2_conc2);
 fMaxTpx2_conc2 = fLin_tpx2_conc2(aMaxTpx2_conc2_Ind);
@@ -4240,7 +4319,7 @@ fMaxTpx2_conc4 = fLin_tpx2_conc4(aMaxTpx2_conc4_Ind);
 % all four tpx2 conc, kinesin, init coated, uncoated
 %
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 kinColor = 'c';
@@ -4360,7 +4439,7 @@ end
 
 %% just uncoated, initial, final for 0.2uM
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 tpx2_conc2Color = 'r';
@@ -4461,7 +4540,7 @@ end
 %
 % all four tpx2 conc
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 kinColor = 'c';
@@ -4572,6 +4651,124 @@ if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_spectraAvged_tpx2Concs_loglog'])
 end
 
+
+%%
+%
+% all four tpx2 conc, only long lowest conc scans
+
+doSave = 0;
+
+% set colors
+kinColor = 'c';
+tpx2_conc2Color = 'b';
+tpx2_conc1Color = 'g';
+tpx2_conc3Color = 'm';
+tpx2_conc4Color = 'r';
+tpx2_initColor = 'k';
+uncoatedColor = [0.6350    0.0780    0.1840];
+
+% set linewidth for mean curve
+lw = 2;
+
+% set opacity value for 95% conf interval
+alphaValCi = .25;
+
+% set xLims
+xMin = 0;
+xMax = 0.06;
+
+
+xafz = 24;
+yafz = 24;
+tvfz = 20;
+axesLw = 2;
+
+
+figure; 
+box on;
+hold on;
+
+%marker sizes and line widths for id'ing peaks
+ms1 = 20;
+lw1 = 2;
+ms2 = 15;
+lw2 = 3;
+
+
+plot(fLin_tpx2_conc1_long,mean(avgSpectra_lin_tpx2_conc1_long).^2,'Color',tpx2_conc1Color,'LineWidth',lw)
+plot(fLin_tpx2_conc2,mean(avgSpectra_lin_tpx2_conc2).^2,'Color',tpx2_conc2Color,'LineWidth',lw)
+plot(fLin_tpx2_conc3,mean(avgSpectra_lin_tpx2_conc3).^2,'Color',tpx2_conc3Color,'LineWidth',lw)
+plot(fLin_tpx2_conc4,mean(avgSpectra_lin_tpx2_conc4).^2,'Color',tpx2_conc4Color,'LineWidth',lw)
+plot(fMaxTpx2_conc1_long,aMaxTpx2_conc1_long.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1,'LineStyle','none')
+
+
+
+plot(fMaxTpx2_conc1_long,aMaxTpx2_conc1_long.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1)%,'MarkerEdgeColor',tpx2_conc1Color)
+plot(fMaxTpx2_conc2,aMaxTpx2_conc2.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1)
+plot(fMaxTpx2_conc3,aMaxTpx2_conc3.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1)
+plot(fMaxTpx2_conc4,aMaxTpx2_conc4.^2,'Color','k','Marker','o','MarkerSize',ms1,'LineWidth',lw1)
+
+plot(fMaxTpx2_conc1_long,aMaxTpx2_conc1_long.^2,'Color',tpx2_conc1Color,'Marker','o','MarkerSize',ms2,'LineWidth',lw2)%,'MarkerEdgeColor',tpx2_conc1Color)
+plot(fMaxTpx2_conc2,aMaxTpx2_conc2.^2,'Color',tpx2_conc2Color,'Marker','o','MarkerSize',ms2,'LineWidth',lw2)
+plot(fMaxTpx2_conc3,aMaxTpx2_conc3.^2,'Color',tpx2_conc3Color,'Marker','o','MarkerSize',ms2,'LineWidth',lw2)
+plot(fMaxTpx2_conc4,aMaxTpx2_conc4.^2,'Color',tpx2_conc4Color,'Marker','o','MarkerSize',ms2,'LineWidth',lw2)
+
+
+shadedplot(fLin_tpx2_conc1_long,ci_avgSpectra_lin_tpx2_conc1_long(1,:).^2,ci_avgSpectra_lin_tpx2_conc1_long(2,:).^2,alphaValCi,tpx2_conc1Color,tpx2_conc1Color);
+shadedplot(fLin_tpx2_conc2,ci_avgSpectra_lin_tpx2_conc2(1,:).^2,ci_avgSpectra_lin_tpx2_conc2(2,:).^2,alphaValCi,tpx2_conc2Color,tpx2_conc2Color);
+shadedplot(fLin_tpx2_conc3,ci_avgSpectra_lin_tpx2_conc3(1,:).^2,ci_avgSpectra_lin_tpx2_conc3(2,:).^2,alphaValCi,tpx2_conc3Color,tpx2_conc3Color);
+shadedplot(fLin_tpx2_conc4,ci_avgSpectra_lin_tpx2_conc4(1,:).^2,ci_avgSpectra_lin_tpx2_conc4(2,:).^2,alphaValCi,tpx2_conc4Color,tpx2_conc4Color);
+
+
+% doLatex = 1;
+% simplePlotFormat( 'Inverse wavelength $1/\lambda$ (nm$^{-1}$)', 'Spectral power (nm^2)', xafz, yafz, tvfz, axesLw, doLatex )
+% simplePlotFormat( '1/\lambda (nm^{-1})', 'Spectral power (nm^2)', xafz, yafz, tvfz, axesLw, 0 )
+
+doLatex = 0;
+simplePlotFormat( 'Inverse wavelength 1/\lambda (nm^{-1})', 'Spectral power (nm^2)', xafz, yafz, tvfz, axesLw, doLatex )
+
+% legend({'0.1 $\pm$ 0.05 $\mu$M',...
+%     '0.2 $\pm$ 0.1 $\mu$M',...
+%     '0.6 $\pm$ 0.3 $\mu$M',...
+%     '0.8 $\pm$ 0.4 $\mu$M',...
+%     'Peak wavelengths'},...
+%     'Interpreter','latex',...
+%     'FontSize',14,...
+%     'Position',[.685 .75 .1 .1])
+
+legend({'0.1 \pm 0.05 \muM',...
+    '0.2 \pm 0.1 \muM',...
+    '0.6 \pm 0.3 \muM',...
+    '0.8 \pm 0.4 \muM',...
+    'Peak wavelengths'},...
+    'FontSize',14,...
+    'Position',[.685 .75 .1 .1])
+
+% legend({'0.05 -- 0.15 $\mu$M',...
+%     '0.1 -- 0.3 $\mu$M',...
+%     '0.3 -- 0.9 $\mu$M',...
+%     '0.4 -- 1.2 $\mu$M',...
+%     'Peak wavelengths'},...
+%     'Interpreter','latex',...
+%     'FontSize',16,...
+%     'Position',[.685 .71 .1 .1])
+
+legend boxoff
+
+set(gca, 'XScale', 'log')
+xlim([xMin xMax])
+ylim([10^-2 10^1])
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_spectraAvged_tpx2Concs_conc1_long'])
+end
+
+set(gca,'YScale','log')
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_spectraAvged_tpx2Concs_loglog_conc1_long'])
+end
+
+
 %%
 %
 % kinesin, init coated, uncoated
@@ -4661,7 +4858,7 @@ end
 % kinesin, init coated, uncoated, tpx2 c term
 %
 
-doSave = 1;
+doSave = 0;
 
 % set colors
 kinColor = 'c';
@@ -4753,7 +4950,7 @@ end
 %
 % fl tpx2 conc 3 and tpx2 c term
 
-doSave = 0;
+doSave = 1;
 
 % set colors
 tpx2_conc3Color = [0    0.4470    0.7410];
@@ -4849,7 +5046,7 @@ legend({'Full length TPX2 0.6 \pm 0.3 \muM',...
 %     'Position',[.685 .71 .1 .1])
 
 legend boxoff
-
+% set(gca, 'YScale', 'log')
 set(gca, 'XScale', 'log')
 xlim([xMin xMax])
 
