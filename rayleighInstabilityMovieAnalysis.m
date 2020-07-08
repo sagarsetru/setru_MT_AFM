@@ -87,7 +87,7 @@ for j = 1:size(img2,3)
 end
 
 %% plot line profile along img
-indShow = 2;
+indShow = 1;
 % indShow = size(img2,3);
 % indShow = 7;
 % indShow = 6;
@@ -108,11 +108,12 @@ saveString_cx = ['cx_mt-x-',num2str(round(cx1(1))),'-',num2str(round(cx1(1,end))
 saveString_cy = ['cy_mt-y-',num2str(round(cy1(1))),'-',num2str(round(cy1(1,end)))];
 saveString_c = ['c_',saveString_cx,'_',saveString_cy];
 
-%saveDir2 = [saveDir1,'/controlScans_',saveString_c];
-%saveDir2 = [saveDir1,'/xc2yc2_',saveString_c];
+% saveDir2 = [saveDir1,'/controlScans_',saveString_c];
+% saveDir2 = [saveDir1,'/xc2yc2_',saveString_c];
 
-saveDir2 = [saveDir1,'/',saveString_c];
-% saveDir2 = [saveDir1,'/uncoated/',saveString_c];
+% saveDir2 = [saveDir1,'/',saveString_c];
+saveDir2 = [saveDir1,'/uncoated/',saveString_c];
+% saveDir2 = [saveDir1,'/initCoated/',saveString_c];
 % saveDir2 = [saveDir1,'/forPub/',saveString_c];
 
 
@@ -143,7 +144,7 @@ nLines = size(c,1);
 % tIndsPlot = [1:17];
 
 doSave = 0;
-doSmooth = 0; % set to 1 FOR PUB
+doSmooth = 1; % set to 1 FOR PUB
 % define fraction of line scan to smooth over
 smoothWindowFraction = 3; 
 % smoothWindowFraction = 2; 
@@ -153,7 +154,7 @@ smoothWindowFraction = 3;
 
 % tIndsPlot = [6,8,37];
 % tIndsPlot = [6,8,21];
-tIndsPlot = [1:4];
+tIndsPlot = [1];
 SmoothPub1 = 5;
 SmoothPub2 = 5;
 SmoothPub3 = 5;
@@ -189,6 +190,7 @@ for t = tIndsPlot
         else
             y = y-mean(y)+25.47+coatingData_mt1.film;
         end
+        
         %c(t,:) = y;
         c_flattened(counter+1,:) = y;
 
@@ -285,8 +287,8 @@ end
 % indsForAverage = [10:37];%-min(indsForSpectra);
 % indsForSpectra = [1:17];
 % indsForAverage = [12:17];
-indsForSpectra = [1,3,4];
-indsForAverage = [1,2,3];
+indsForSpectra = [1];
+indsForAverage = [1];
 
 
 doSave = 1;
@@ -506,11 +508,20 @@ simplePlotFormat( 't (min)', '|P(f_{RP})| (nm/Hz)', xafz, yafz, tvfz )
 %%
 saveDirMain = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
 
+% set to 1 to use amplitude spectrum, otherwise uses power
+doAmpSpec = 1;
 
+
+doSave = 1;
 
 doYLim = 1;
 yMinPlot = 0.1;
 yMaxPlot = 4;
+
+if ~doAmpSpec
+    yMinPlot = yMinPlot.^2;
+    yMaxPlot = yMaxPlot.^2;
+end
 
 doXLim = 1;
 tMaxPlot = 150;
@@ -838,13 +849,24 @@ if doBootStrp
     pci = pci(:,1:length(tLinPlot));
     
     alphaValCi=.5;
-    plot(tLinPlot,mean(pAvgPlot),'Color','k','LineWidth',2)
-    shadedplot(tLinPlot,pci(1,:),pci(2,:),alphaValCi,'k','k');
+    
+    if doAmpSpec
+        plot(tLinPlot,mean(pAvgPlot),'Color','k','LineWidth',2)
+        shadedplot(tLinPlot,pci(1,:),pci(2,:),alphaValCi,'k','k');
+    else
+        plot(tLinPlot,mean(pAvgPlot).^2,'Color','k','LineWidth',2)
+        shadedplot(tLinPlot,pci(1,:).^2,pci(2,:).^2,alphaValCi,'k','k');
+    end
     
 else
 
-    pAvg = mean(pAll,2);
-    pSem = std(pAll,0,2)./sqrt(7);
+    if doAmpSpec
+        pAvg = mean(pAll,2);
+        pSem = std(pAll,0,2)./sqrt(size(pAll,2));
+    else
+        pAvg = mean(pAll.^2,2);
+        pSem = std(pAll.^2,0,2)./sqrt(size(pAll,2));
+    end
 
     tLinPlot = tLin(tLin < tMaxPlotAvg);
     pAvgPlot = pAvg(1:length(tLinPlot));
@@ -864,8 +886,14 @@ indMaxFit = 6;
 if doBootStrp == 1
     
     X = tLinPlot(indMinFit:indMaxFit);
-    yInit = mean(pAvgPlot);
-    Y = yInit(indMinFit:indMaxFit)';
+    
+    if doAmpSpec
+        yInit = mean(pAvgPlot);
+        Y = yInit(indMinFit:indMaxFit)';
+    else
+        yInit = mean(pAvgPlot).^2;
+        Y = yInit(indMinFit:indMaxFit)';
+    end
     % Y = mean(pAvgPlot(indMinFit:indMaxFit));
 
 else
@@ -919,7 +947,12 @@ tvfz = 20;
 axesLw = 2;
 % doLatex = 1;
 doLatex = 0;
-simplePlotFormat( 'Time \itt\rm (min)', 'Power (nm)', xafz, yafz, tvfz, axesLw, doLatex )
+
+if doAmpSpec
+    simplePlotFormat( 'Time \itt\rm (min)', 'Spectral amplitude (nm)', xafz, yafz, tvfz, axesLw, doLatex )
+else
+    simplePlotFormat( 'Time \itt\rm (min)', 'Spectral power (nm^2)', xafz, yafz, tvfz, axesLw, doLatex )
+end
 
 % do legend
 % legend({'Mean peak power',...
@@ -935,107 +968,204 @@ legend({'Mean peak power',...
 legend boxoff
 %, $\sigma=0.03$ min$^{-1}$'
 
-doSave = 1;
-
 opacityVal=.25;
 
 ps = '.k';
 
-p1=semilogy(t_pMax1,pAtMax1,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax2,pAtMax2,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+if doAmpSpec
+    p1=semilogy(t_pMax1,pAtMax1,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax3,pAtMax3,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax2,pAtMax2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax4,pAtMax4,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax3,pAtMax3,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax5,pAtMax5,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax4,pAtMax4,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax6,pAtMax6,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax5,pAtMax5,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax7,pAtMax7,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax6,pAtMax6,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax8,pAtMax8,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax7,pAtMax7,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax9,pAtMax9,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax8,pAtMax8,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax10,pAtMax10,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax9,pAtMax9,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax11,pAtMax11,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax10,pAtMax10,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax12,pAtMax12,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax11,pAtMax11,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax13,pAtMax13,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax12,pAtMax12,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax14,pAtMax14,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax13,pAtMax13,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax15,pAtMax15,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax14,pAtMax14,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax16,pAtMax16,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax15,pAtMax15,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax17,pAtMax17,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax16,pAtMax16,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax18,pAtMax18,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax17,pAtMax17,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax19,pAtMax19,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax18,pAtMax18,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax20,pAtMax20,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax19,pAtMax19,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
-p1=semilogy(t_pMax21,pAtMax21,ps,'LineWidth',.5);
-p1.Color(4) = opacityVal;
-set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+    p1=semilogy(t_pMax20,pAtMax20,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
 
+    p1=semilogy(t_pMax21,pAtMax21,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+else
+    p1=semilogy(t_pMax1,pAtMax1.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax2,pAtMax2.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax3,pAtMax3.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax4,pAtMax4.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax5,pAtMax5.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax6,pAtMax6.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax7,pAtMax7.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax8,pAtMax8.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax9,pAtMax9.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax10,pAtMax10.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax11,pAtMax11.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax12,pAtMax12.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax13,pAtMax13.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax14,pAtMax14.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax15,pAtMax15.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax16,pAtMax16.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax17,pAtMax17.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax18,pAtMax18.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax19,pAtMax19.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax20,pAtMax20.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+    p1=semilogy(t_pMax21,pAtMax21.^2,ps,'LineWidth',.5);
+    p1.Color(4) = opacityVal;
+    set(get(get(p1(1),'Annotation'),'LegendInformation'),'IconDisplayStyle','off');
+
+end
 
 
 if doSave
     if doBootStrp
-        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay_bootstrp'])
-        save([saveDirMain,'/sigmaFit_bootStrp.mat'],'a')
-        save([saveDirMain,'/rSquaredFit_bootStrp.mat'],'rSquared')
+        if doAmpSpec
+            saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay_bootstrp'])
+            save([saveDirMain,'/sigmaFit_bootStrp.mat'],'a')
+            save([saveDirMain,'/rSquaredFit_bootStrp.mat'],'rSquared')
+        else
+            saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay_bootstrp_powerSpec'])
+            save([saveDirMain,'/sigmaFit_bootStrp_powerSpec.mat'],'a')
+            save([saveDirMain,'/rSquaredFit_bootStrp_powerSpec.mat'],'rSquared')
+        end
     else
-        saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay'])
-        save([saveDirMain,'/sigmaFit.mat'],'a')
-        save([saveDirMain,'/rSquaredFit.mat'],'rSquared')
+        if doAmpSpec
+            saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay'])
+            save([saveDirMain,'/sigmaFit.mat'],'a')
+            save([saveDirMain,'/rSquaredFit.mat'],'rSquared')
+        else
+            saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_AvgPeakPowerVsT_individualCurvesOverlay_powerSpec'])
+            save([saveDirMain,'/sigmaFit_powerSpec.mat'],'a')
+            save([saveDirMain,'/rSquaredFit_powerSpec.mat'],'rSquared')
+        end
     end
 %         saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDir_pvst,'/','AvgPeakPowerVsT_',saveDirName])
 end
@@ -1075,10 +1205,10 @@ end
 
 doSave = 0;
 
-maxVal = 50;
+maxVal = 56;
 
 minVal = 0;
-load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/matlab.mat', 'imgPlot');
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/topoImgPlot.mat')
 % imgPlot = img;
 % imgPlot = imgPlot - min(imgPlot(:));
 imgPlot(imgPlot>maxVal)=maxVal;
@@ -1087,7 +1217,86 @@ imgPlot(imgPlot<minVal)=minVal;
 % imgPlot = medfilt2(imgPlot,[2 2]);
 % subplot(3,1,3); imagesc( imgPlot );
 %
-figure; imagesc( imgPlot(:,10:170) );
+medFiltVal = 5;
+figure; imagesc( medfilt2(imgPlot(:,10:170),[medFiltVal medFiltVal]) );
+set(gca,'xtick',[])
+set(gca,'ytick',[])
+% set(gca,'visible','off')
+box on
+set(gca,'LineWidth',2)
+% set(gca,'LineWidth',4)
+
+% mycolormap = customcolormap([0 0.18 0.3 1], [1 0 0; 0 0 1; .5 .5 .5; 0 0 0]);
+
+mycolormap = customcolormap([0 0.1 0.3 0.5 0.7 1], [.6 0 0; .8 0 0; .7 .7 .7; .5 .5 .5; .3 .3 .3; .2 .2 .2]);
+% mycolormap = customcolormap([0 0.1 0.3 1], [.6 0 0; .8 0 0; .7 .7 .7; .2 .2 .2]);
+
+mycolormap = customcolormap([0 0.1 0.3 1], [1 0 0; 1 0 0; .5 .5 .5; 0 0 0]);
+
+% pool white brown
+% mycolormap = customcolormap(linspace(0,1,11), {'#523107','#523107','#bf812c','#e2c17e','#f3e9c4','#f6f4f4','#cae9e3','#81cdc1','#379692','#01665e','#003d2e'});
+
+% red white blue ORIGINAL
+mycolormap = customcolormap(linspace(0,1,11), {'#68011d','#b5172f','#d75f4e','#f7a580','#fedbc9','#f5f9f3','#d5e2f0','#93c5dc','#4295c1','#2265ad','#062e61'});
+
+% red white blue COLORS EDITED
+% mycolormap = customcolormap(linspace(0,1,11), {'#68011d','#68011d','#b5172f','#f7a580','#fedbc9','#f5f9f3','#d5e2f0','#93c5dc','#4295c1','#2265ad','#062e61'});
+
+% red white blue LINSPACE EDITED
+mycolormap = customcolormap([0 .09 .18 .27 .36 .5 .6 .7 .8 .9 1], {'#68011d','#68011d','#b5172f','#f7a580','#fedbc9','#f5f9f3','#d5e2f0','#93c5dc','#4295c1','#2265ad','#062e61'});
+
+% red yellow blue
+% mycolormap = customcolormap(linspace(0,1,11), {'#a60026','#d83023','#f66e44','#faac5d','#ffdf93','#ffffbd','#def4f9','#abd9e9','#73add2','#4873b5','#313691'});
+
+% pastel jet
+% mycolormap = customcolormap([0 .25 .5 .75 1], {'#9d0142','#f66e45','#ffffbb','#65c0ae','#5e4f9f'});
+
+% mycolormap = customcolormap([0 .3 .8 1], {'#fbeed7','#ffba5a','#ff7657','#665c84'});
+c = colorbar;
+% c = colorbar('westoutside');
+% colorbar('westoutside')
+colormap(mycolormap)
+caxis([0 50])
+% colormap jet
+% colormap parula
+% colormap hot
+c.LineWidth = 2;
+% c.LineWidth = 4;
+
+c.FontSize = 16;
+% c.FontSize = 32;
+
+% c.TickLabelInterpreter = 'latex';
+% ylabel(c,'Height (nm)','FontSize',20,'Interpreter','latex');
+ylabel(c,'Height (nm)','FontSize',20);
+% ylabel(c,'Height (nm)','FontSize',40);
+
+daspect([1 1 1])
+% daspect([120 161 1])
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_RedWhiteBlue2'])
+end
+%%
+colormap parula
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_parula'])
+end
+
+%% make ct tpx2 topography
+
+doSave = 0;
+
+minVal = 0;
+maxVal = 35;
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/ct_tpx2_topo/imgTopo_raw_ct_tpx2.mat')
+
+imgTopo_ct_tpx2(imgTopo_ct_tpx2>maxVal)=maxVal;
+imgTopo_ct_tpx2(imgTopo_ct_tpx2<minVal)=minVal;
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% subplot(3,1,3); imagesc( imgPlot );
+%
+figure; imagesc( imgTopo_ct_tpx2 );
 set(gca,'xtick',[])
 set(gca,'ytick',[])
 % set(gca,'visible','off')
@@ -1096,15 +1305,66 @@ box on
 
 c = colorbar;
 colormap jet
+% colormap hot
 c.LineWidth = 2;
 c.FontSize = 16;
+c.Ticks = [0,10,20,30];
 % c.TickLabelInterpreter = 'latex';
 % ylabel(c,'Height (nm)','FontSize',20,'Interpreter','latex');
 ylabel(c,'Height (nm)','FontSize',20);
+% daspect([size(imgTopo_ct_tpx2,1) size(imgTopo_ct_tpx2,2) 1])
+% daspect([1 1 1])
 
 if doSave
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_jet'])
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/ct_tpx2_topo/','sansSerif_afm_ctTopo_jet'])
 end
+% 
+% colormap parula
+% if doSave
+%     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_parula'])
+% end
+
+%% make kinesin topography
+
+doSave = 0;
+
+minVal = 0;
+maxVal = 35;
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures/kinesin_topo/imgTopo_raw_kin.mat')
+
+imgTopo_kin(imgTopo_kin>maxVal)=maxVal;
+imgTopo_kin(imgTopo_kin<minVal)=minVal;
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% imgPlot = medfilt2(imgPlot,[2 2]);
+% subplot(3,1,3); imagesc( imgPlot );
+%
+figure; imagesc( imgTopo_kin );
+set(gca,'xtick',[])
+set(gca,'ytick',[])
+% set(gca,'visible','off')
+box on
+ set(gca,'LineWidth',2)
+
+c = colorbar;
+colormap jet
+% colormap hot
+c.LineWidth = 2;
+c.FontSize = 16;
+c.Ticks = [0,10,20,30];
+% c.TickLabelInterpreter = 'latex';
+% ylabel(c,'Height (nm)','FontSize',20,'Interpreter','latex');
+ylabel(c,'Height (nm)','FontSize',20);
+% daspect([size(imgTopo_ct_tpx2,1) size(imgTopo_ct_tpx2,2) 1])
+% daspect([1 1 1])
+
+if doSave
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/kinesin_topo/','sansSerif_afm_kinTopo_jet'])
+end
+% 
+% colormap parula
+% if doSave
+%     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/','sansSerif_afmTimeLapse_parula'])
+% end
 
 %% quick pick line profile
 % DO TO REVISE AFM PLOT, IF NEEDED
