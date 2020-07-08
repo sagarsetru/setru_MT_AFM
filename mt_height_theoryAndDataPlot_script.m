@@ -1615,11 +1615,9 @@ inputData_mt28.h_bg_tpx2 = h28_bg_tpx2;
  
 selectCutOff = 0;
 if selectCutOff == 0
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/yibgn_mt10.mat')
     inputData_mt28.yibgn = 1000;
     clear yibgn
     
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191028_stackReg_rigidBody/yibgtp_mt10.mat')
     inputData_mt28.yibgtp = 1000;
     clear yibgtp
 end
@@ -1680,11 +1678,9 @@ inputData_mt29.h_bg_tpx2 = h29_bg_tpx2;
  
 selectCutOff = 0;
 if selectCutOff == 0
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 29 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191029_stackReg_rigidBody/yibgn_mt10.mat')
     inputData_mt29.yibgn = 1000;
     clear yibgn
     
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 29 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191029_stackReg_rigidBody/yibgtp_mt10.mat')
     inputData_mt29.yibgtp = 1000;
     clear yibgtp
 end
@@ -1743,11 +1739,9 @@ inputData_mt30.h_bg_tpx2 = h30_bg_tpx2;
  
 selectCutOff = 0;
 if selectCutOff == 0
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 30 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191030_stackReg_rigidBody/yibgn_mt10.mat')
     inputData_mt30.yibgn = 1000;
     clear yibgn
     
-%     load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 30 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt2 brb80 tpx2 0.5x 50nM 150nM/expt2_tifStacks/Stack_expt2_37-59_20191030_stackReg_rigidBody/yibgtp_mt10.mat')
     inputData_mt30.yibgtp = 1000;
     clear yibgtp
 end
@@ -3875,7 +3869,7 @@ grid off
 
 plot(h,lmb*1e3,'k-','LineWidth',5)
 
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms) %.5x
+plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms) %.5x
 plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms) % 1x
 plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms) % 4x
 plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms) % 3x
@@ -3925,23 +3919,25 @@ plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
 
 
 % 50-150nM, 0.5x
+% NOTE: longer than 750 nm: 10, 11, 12, 13, 15, 24
+plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms) %.5x
 plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms)
 plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms)
 plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
 plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
+% plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
 
 %plot(mean([film_mt1 film_mt3 film_mt3 film_mt4 film_mt5 film_mt6]),229,'bo')
 xlim([0 31])
@@ -3988,7 +3984,7 @@ box on
 
 if doSave
     
-    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/sansSerif_predicted and measured wavelength vs film thickness and tpx2 conc range_nmYaxis'])
+    saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[saveDirMain,'/sansSerif_predicted and measured wavelength vs film thickness and tpx2 conc range_nmYaxis_conc1_long'])
     
 end
 
@@ -4331,7 +4327,7 @@ end
 %% adjusted for film height with conc. noted
 
 
-doSave = 1;
+doSave = 0;
 
 % load theory curve
 run('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/data analysis/loadRPTheoryCurve_nonDimensionalized.m')
