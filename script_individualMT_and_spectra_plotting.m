@@ -143,7 +143,7 @@ smPlaneFrac = 3;
 psp.unStart = 0;
 psp.initStart = 0;
 psp.dropStart = 0;
-% plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
 
 if doPubFig
     lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
@@ -3615,6 +3615,954 @@ if doSave
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_avgSpectra_withScatter_forPub'])
 end
 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+%% mt 1a
+psp.fname = 'mt1a';
+% h = coatingData_mt17.film;
+
+h = coatingData_mt1a.film;
+psp.doClose = 0;
+
+psp.doSave = 0;
+for t=[9]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191/c_cx_mt-x-9-155_cy_mt-y-175-191.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+
+end
+%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191';
+inputStruct3.whichPlot = 'd';
+
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 2a
+psp.fname = 'mt2a';
+% h = coatingData_mt17.film;
+ 
+h = coatingData_mt2a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 0;
+for t=[9]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131/c_cx_mt-x-115-205_cy_mt-y-100-131.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+ 
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 3a
+psp.fname = 'mt3a';
+% h = coatingData_mt17.film;
+ 
+h = coatingData_mt3a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 0;
+for t=[4]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247/c_cx_mt-x-141-90_cy_mt-y-135-247.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+ 
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 4a
+psp.fname = 'mt4a';
+ 
+h = coatingData_mt4a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[1]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241/c_cx_mt-x-157-61_cy_mt-y-90-241.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+ 
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+%% mt 5a
+psp.fname = 'mt5a';
+ 
+h = coatingData_mt5a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[1]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91/c_cx_mt-x-246-180_cy_mt-y-245-91.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+ 
+inputStruct3.pathName =      '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+%% mt 6a
+psp.fname = 'mt6a';
+ 
+h = coatingData_mt6a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[4]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254/c_cx_mt-x-189-77_cy_mt-y-8-254.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+ 
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 7a
+psp.fname = 'mt7a';
+ 
+h = coatingData_mt7a.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[2]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2/c_cx_mt-x-90-193_cy_mt-y-249-2.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 1c
+psp.fname = 'mt1c';
+ 
+h = coatingData_mt1c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5/c_cx_mt-x-4-160_cy_mt-y-169-5.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 2c
+psp.fname = 'mt2c';
+ 
+h = coatingData_mt2c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5/c_cx_mt-x-4-160_cy_mt-y-169-5.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-91-253_cy_mt-y-253-149';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 3c
+psp.fname = 'mt3c';
+ 
+h = coatingData_mt3c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[4]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97/c_cx_mt-x-77-248_cy_mt-y-2-97.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 4c
+psp.fname = 'mt4c';
+ 
+h = coatingData_mt4c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[1]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140/c_cx_mt-x-7-187_cy_mt-y-57-140.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 5c
+psp.fname = 'mt5c';
+ 
+h = coatingData_mt5c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[5]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185/c_cx_mt-x-197-254_cy_mt-y-253-185.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 6c
+psp.fname = 'mt6c';
+ 
+h = coatingData_mt6c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90/c_cx_mt-x-164-252_cy_mt-y-195-90.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 7c
+psp.fname = 'mt7c';
+ 
+h = coatingData_mt7c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[2]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175/c_cx_mt-x-88-141_cy_mt-y-1-175.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 8c
+psp.fname = 'mt8c';
+ 
+h = coatingData_mt8c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-78-86_cy_mt-y-252-10/c_cx_mt-x-78-86_cy_mt-y-252-10.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-78-86_cy_mt-y-252-10';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+%% mt 9c
+psp.fname = 'mt9c';
+ 
+h = coatingData_mt9c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10/c_cx_mt-x-169-212_cy_mt-y-187-10.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
+clear c
+clear un
+clear init
+clear drop
+clear h; if psp.doClose == 1; close all; end
+
+
+%% mt 10c
+psp.fname = 'mt10c';
+ 
+h = coatingData_mt10c.film;
+psp.doClose = 0;
+ 
+psp.doSave = 1;
+for t=[3]
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/c_cx_mt-x-81-117_cy_mt-y-87-200/c_cx_mt-x-81-117_cy_mt-y-87-200.mat')
+% un = c(1,:);
+% % un = flip(un);
+% 
+% load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204/c_cx_mt-x-80-118_cy_mt-y-86-204.mat')
+% init = c(3,1:end);
+% init=flip(init);
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182/c_cx_mt-x-252-186_cy_mt-y-59-182.mat')
+drop = c(t,:);
+init = ones(size(drop));
+un = ones(size(drop));
+ 
+psp.unStart = 0*pix_to_nm;
+psp.initStart = 0*pix_to_nm;
+psp.dropStart = 0*pix_to_nm;
+sm = 5;
+smPlaneFrac = 1;
+plotUncoatedInitFinal(un,init,drop,h,sm,smPlaneFrac,pix_to_nm,psp)
+ 
+end
+
+%%
+% inputStruct1.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/uncoated/c_cx_mt-x-75-124_cy_mt-y-75-224';
+% inputStruct1.whichPlot = 'u';
+% 
+% inputStruct2.pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 28 tpx2 brb80 concentration tests 0.5x 0.5x 0.75x 0.75x/expt1 brb80 tpx2 0.5x 50nM 150nM/expt1_tifStacks/Stack_expt1_1-25_20191028_affine/initCoated/c_cx_mt-x-80-118_cy_mt-y-86-204';
+% inputStruct2.whichPlot = 'i';
+
+inputStruct3.pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182';
+inputStruct3.whichPlot = 'd';
+ 
+psp.doScatter = 0;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+psp.doScatter = 1;
+psp.lgdLocSpec = 'NorthEast';
+% plotUnInitDropSpectra(inputStruct1,inputStruct2,inputStruct3,psp);
+plotUnInitDropSpectra(inputStruct3,psp);
+ 
 clear c
 clear un
 clear init

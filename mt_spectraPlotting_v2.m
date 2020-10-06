@@ -1456,6 +1456,89 @@ save([saveDirMain2,'/avgMaxLmbd_tpx2_conc2'],'avgMaxLmbd_tpx2_conc2')
 save([saveDirMain2,'/stdMaxLmbd_tpx2_conc2'],'stdMaxLmbd_tpx2_conc2')
 
 
+spectra_inds_conc2 = [ 1     4     8     9    13    14    15    16 ];
+
+
+%% lin interp and bootstrap for conc2 (100-300nM tpx2), keeping only long scans
+ 
+f_cutoff = .00099;
+ 
+% generate cell of frequencies
+fAll_tpx2_conc2_long = {...
+    f_tpx2_conc2_1(f_tpx2_conc2_1>f_cutoff),...
+    f_tpx2_conc2_4(f_tpx2_conc2_4>f_cutoff),...
+    f_tpx2_conc2_8(f_tpx2_conc2_8>f_cutoff),...
+    f_tpx2_conc2_9(f_tpx2_conc2_9>f_cutoff),...
+    f_tpx2_conc2_13(f_tpx2_conc2_13>f_cutoff),...
+    f_tpx2_conc2_14(f_tpx2_conc2_14>f_cutoff),...
+    f_tpx2_conc2_15(f_tpx2_conc2_15>f_cutoff),...
+    f_tpx2_conc2_16(f_tpx2_conc2_16>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra below cutoff
+% frequency
+logIndAll_tpx2_conc2_long = {...
+    (f_tpx2_conc2_1>f_cutoff),...
+    (f_tpx2_conc2_4>f_cutoff),...
+    (f_tpx2_conc2_8>f_cutoff),...
+    (f_tpx2_conc2_9>f_cutoff),...
+    (f_tpx2_conc2_13>f_cutoff),...
+    (f_tpx2_conc2_14>f_cutoff),...
+    (f_tpx2_conc2_15>f_cutoff),...
+    (f_tpx2_conc2_16>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc2_long = {...
+    spectra_tpx2_conc2_1,...
+    spectra_tpx2_conc2_4,...
+    spectra_tpx2_conc2_8,...
+    spectra_tpx2_conc2_9,...
+    spectra_tpx2_conc2_13,...
+    spectra_tpx2_conc2_14,...
+    spectra_tpx2_conc2_15,...
+    spectra_tpx2_conc2_16,...
+    };
+ 
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc2_long,...
+    spectraAll_lin_tpx2_conc2_long,...
+    avgSpectra_lin_tpx2_conc2_long,...
+    ci_avgSpectra_lin_tpx2_conc2_long,...
+    avgMaxLmbd_tpx2_conc2_long,...
+    stdMaxLmbd_tpx2_conc2_long] = interpBootstrpSpectra(fAll_tpx2_conc2_long,spectraAll_tpx2_conc2_long,logIndAll_tpx2_conc2_long,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc2';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc2esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc2.mat'],'spectraAll_lin_tpx2_conc2_long')
+ 
+% save mat file of tpx2_conc2esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc2_long.mat'],'fLin_tpx2_conc2_long')
+ 
+aMaxTpx2_conc2_long = max(mean(avgSpectra_lin_tpx2_conc2_long));
+aMaxTpx2_conc2_Ind_long = find(mean(avgSpectra_lin_tpx2_conc2_long)==aMaxTpx2_conc2_long);
+fMaxTpx2_conc2_long = fLin_tpx2_conc2_long(aMaxTpx2_conc2_Ind_long);
+lmbdMaxTpx2_conc2_long = 1/fMaxTpx2_conc2_long;
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc2_long'],'avgSpectra_lin_tpx2_conc2_long')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc2_long'],'ci_avgSpectra_lin_tpx2_conc2_long')
+save([saveDirMain2,'/avgMaxf_tpx2_conc2_long'],'avgMaxLmbd_tpx2_conc2_long')
+save([saveDirMain2,'/lmbdMaxTpx2_conc2_long'],'lmbdMaxTpx2_conc2_long')
+save([saveDirMain2,'/stdMaxLmbd_tpx2_conc2_long'],'stdMaxLmbd_tpx2_conc2_long')
+
+
 %% load data for tpx2 conc1, 50-150nM
 
 
@@ -1876,8 +1959,172 @@ clear P1s
 clear f
 
 
+% from second round of data acquisition by Bernardo
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_1a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_1a = P1s;
+    clear indsForAverage
+end
+
+load(fNameStruct.f)
+f_tpx2_conc1_1a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_2a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_2a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_2a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_3a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_3a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_3a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_4a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_4a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_4a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_5a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_5a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_5a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_6a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_6a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_6a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc1_7a = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc1_7a = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc1_7a = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
 
 %% lin interp and bootstrap for conc1 (50-150nM tpx2)
+
+f_cutoff = 0.00099; 
 
 % generate cell of frequencies
 fAll_tpx2_conc1 = {...
@@ -1982,7 +2229,11 @@ save([saveDirMain2,'/avgMaxf_tpx2_conc1'],'avgMaxLmbd_tpx2_conc1')
 save([saveDirMain2,'/lmbdMaxTpx2_conc1'],'lmbdMaxTpx2_conc1')
 save([saveDirMain2,'/stdMaxLmbd_tpx2_conc1'],'stdMaxLmbd_tpx2_conc1')
 
+
 %% lin interp and bootstrap for conc1 (50-150nM tpx2), keeping only long scans
+
+
+f_cutoff = .00099;
 
 % generate cell of frequencies
 fAll_tpx2_conc1_long = {...
@@ -2242,6 +2493,10 @@ clear f
 
 %% lin interp and bootstrap for conc4 (400-1200 nM)
 
+% define cutoff frequency for plotting
+% f_cutoff = .00099; %units nm^-1
+f_cutoff = .0014;
+
 % generate cell of frequencies
 fAll_tpx2_conc4 = {...
     f_tpx2_conc4_1(f_tpx2_conc4_1>f_cutoff),...
@@ -2316,6 +2571,8 @@ save([saveDirMain2,'/lmbdMaxTpx2_conc4'],'lmbdMaxTpx2_conc4')
 
 
 %% load data for conc3, 300-900 nM TPX2
+
+f_cutoff = .00099; %units nm^-1
 
 pathName = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 25 tpx2 brb80 concentration tests 1x 2x 3x/expt3 300nM 900nM/expt3_3xTPX2_tifStacks/Stack_expt3_3xTpx2_114-116_affine/c_cx_mt-x-379-442_cy_mt-y-2-207';
 fNameStruct = loadSpectralDataFromDir(pathName);
@@ -2642,6 +2899,238 @@ clear P1s
 clear f
 
 
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_1c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_1c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_1c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-91-253_cy_mt-y-253-149';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_2c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_2c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_2c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =      '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_3c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_3c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_3c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_4c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_4c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_4c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_5c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_5c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_5c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_6c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_6c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_6c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_7c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_7c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_7c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_8c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_8c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_8c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_9c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_9c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_9c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+pathName =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182';
+fNameStruct = loadSpectralDataFromDir(pathName);
+ 
+load(fNameStruct.spectra)
+ 
+if strcmp(fNameStruct.indsForAverage,'USE ALL IN SPECTRA VARIABLE')
+    spectra_tpx2_conc3_10c = P1s;
+else
+    load(fNameStruct.indsForAverage)
+    P1s = P1s(:,indsForAverage);
+    spectra_tpx2_conc3_10c = P1s;
+    clear indsForAverage
+end
+ 
+load(fNameStruct.f)
+f_tpx2_conc3_10c = f;
+ 
+clear fNameStruct
+clear pathName
+clear P1s
+clear f
+
+
+
+
 %% lin interp and bootstrp for conc3 (300-900nM)
 
 % generate cell of frequencies
@@ -2735,6 +3224,96 @@ save([saveDirMain2,'/avgSpectra_lin_tpx2_conc3'],'avgSpectra_lin_tpx2_conc3')
 save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc3'],'ci_avgSpectra_lin_tpx2_conc3')
 save([saveDirMain2,'/avgMaxLmbd_tpx2_conc3'],'avgMaxLmbd_tpx2_conc3')
 save([saveDirMain2,'/stdMaxLmbd_tpx2_conc3'],'stdMaxLmbd_tpx2_conc3')
+
+
+spectra_inds_conc3 = [1     3     4     5     6     8     9    10    11    12    13];
+
+%% lin interp and bootstrap for conc3 (300-900nM tpx2), keeping only long scans
+ 
+ 
+f_cutoff = .00099;
+ 
+% generate cell of frequencies
+fAll_tpx2_conc3_long = {...
+    f_tpx2_conc3_1(f_tpx2_conc3_1>f_cutoff),...
+    f_tpx2_conc3_3(f_tpx2_conc3_3>f_cutoff),...
+    f_tpx2_conc3_4(f_tpx2_conc3_4>f_cutoff),...
+    f_tpx2_conc3_5(f_tpx2_conc3_5>f_cutoff),...
+    f_tpx2_conc3_6(f_tpx2_conc3_6>f_cutoff),...
+    f_tpx2_conc3_8(f_tpx2_conc3_8>f_cutoff),...
+    f_tpx2_conc3_9(f_tpx2_conc3_9>f_cutoff),...
+    f_tpx2_conc3_10(f_tpx2_conc3_10>f_cutoff),...
+    f_tpx2_conc3_11(f_tpx2_conc3_11>f_cutoff),...
+    f_tpx2_conc3_12(f_tpx2_conc3_12>f_cutoff),...
+    f_tpx2_conc3_13(f_tpx2_conc3_13>f_cutoff),...
+    };
+ 
+% generate cell of logical indices for indexing spectra
+logIndAll_tpx2_conc3_long = {...
+    (f_tpx2_conc3_1>f_cutoff),...
+    (f_tpx2_conc3_3>f_cutoff),...
+    (f_tpx2_conc3_4>f_cutoff),...
+    (f_tpx2_conc3_5>f_cutoff),...
+    (f_tpx2_conc3_6>f_cutoff),...
+    (f_tpx2_conc3_8>f_cutoff),...
+    (f_tpx2_conc3_9>f_cutoff),...
+    (f_tpx2_conc3_10>f_cutoff),...
+    (f_tpx2_conc3_11>f_cutoff),...
+    (f_tpx2_conc3_12>f_cutoff),...
+    (f_tpx2_conc3_13>f_cutoff),...
+    };
+ 
+ 
+% generate cell of spectra
+spectraAll_tpx2_conc3_long = {...
+    spectra_tpx2_conc3_1,...
+    spectra_tpx2_conc3_3,...
+    spectra_tpx2_conc3_4,...
+    spectra_tpx2_conc3_5,...
+    spectra_tpx2_conc3_6,...
+    spectra_tpx2_conc3_8,...
+    spectra_tpx2_conc3_9,...
+    spectra_tpx2_conc3_10,...
+    spectra_tpx2_conc3_11,...
+    spectra_tpx2_conc3_12,...
+    spectra_tpx2_conc3_13,...
+    };
+ 
+% number of boot strap iterations
+nboot = 10000;
+ci_alpha = .05; % default for 95% is .05
+ 
+% do linear interp and bootstrap
+[fLin_tpx2_conc3_long,...
+    spectraAll_lin_tpx2_conc3_long,...
+    avgSpectra_lin_tpx2_conc3_long,...
+    ci_avgSpectra_lin_tpx2_conc3_long,...
+    avgMaxLmbd_tpx2_conc3_long,...
+    stdMaxLmbd_tpx2_conc3_long] = interpBootstrpSpectra(fAll_tpx2_conc3_long,spectraAll_tpx2_conc3_long,logIndAll_tpx2_conc3_long,nboot,ci_alpha);
+ 
+subDir = 'spectra_tpx2_conc3';
+saveDirMain2 = [saveDirMain,'/',subDir];
+if ~isdir(saveDirMain2)
+    mkdir(saveDirMain2)
+end
+ 
+% save mat file of all linear tpx2_conc3esin spectra
+save([saveDirMain2,'/spectraAll_lin_tpx2_conc3.mat'],'spectraAll_lin_tpx2_conc3_long')
+ 
+% save mat file of tpx2_conc3esin linear indices
+save([saveDirMain2,'/fLin_tpx2_conc3_long.mat'],'fLin_tpx2_conc3_long')
+ 
+aMaxTpx2_conc3_long = max(mean(avgSpectra_lin_tpx2_conc3_long));
+aMaxTpx2_conc3_Ind_long = find(mean(avgSpectra_lin_tpx2_conc3_long)==aMaxTpx2_conc3_long);
+fMaxTpx2_conc3_long = fLin_tpx2_conc3_long(aMaxTpx2_conc3_Ind_long);
+lmbdMaxTpx2_conc3_long = 1/fMaxTpx2_conc3_long;
+ 
+% save mat file for boot strap avg and conf ints.
+save([saveDirMain2,'/avgSpectra_lin_tpx2_conc3_long'],'avgSpectra_lin_tpx2_conc3_long')
+save([saveDirMain2,'/ci_avgSpectra_lin_tpx2_conc3_long'],'ci_avgSpectra_lin_tpx2_conc3_long')
+save([saveDirMain2,'/avgMaxf_tpx2_conc3_long'],'avgMaxLmbd_tpx2_conc3_long')
+save([saveDirMain2,'/lmbdMaxTpx2_conc3_long'],'lmbdMaxTpx2_conc3_long')
+save([saveDirMain2,'/stdMaxLmbd_tpx2_conc3_long'],'stdMaxLmbd_tpx2_conc3_long')
 
 
 %% tpx2 initially coated

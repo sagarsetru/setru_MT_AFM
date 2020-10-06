@@ -3779,7 +3779,6 @@ clear indsForAverage
  
 saveDir = '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/2019 10 31 tpx2 brb80 concentration tests/expt3 3x tpx2fl 300nM 900nM/expt3_tifStacks/Stack_expt3_20191031_3xTpx2fl_248-250_stackReg';
  
- 
 % calculate film thickness, ratios, and std devs via error propagation
 [coatingData_mt58] = fxn_mtFilmAndRatioCalc(inputData_mt58,selectCutOff);
  
@@ -3794,6 +3793,997 @@ end
  
 save([saveDir,'/coatingData_mt58.mat'],'coatingData_mt58')
 save([saveDirMain,'/coatingData_mt58.mat'],'coatingData_mt58')
+
+
+%% load height data for Wednesday MT 1 2019 09 30
+
+run([runDir,'loadMtHeightData_wednesday_mt1_20190930'])
+hdata_20190930_wed_mt1 = heightdata000132;
+
+%% mt 1a
+
+% load input data for tpx2 coated mt
+h1a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+
+h1a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt1a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt1a.yibgtp = 1000;
+    clear yibgtp
+end
+
+% load input data for naked mt
+inputData_mt1a.h_naked = [25]*1e-9;
+inputData_mt1a.h_bg_naked = [0];
+
+inputData_mt1a.h_tpx2 = h1a_tpx2;
+inputData_mt1a.h_bg_tpx2 = h1a_bg_tpx2;
+
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191/spacing_c_cx_mt-x-9-155_cy_mt-y-175-191.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191/maxFrequencies_c_cx_mt-x-9-155_cy_mt-y-175-191.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-9-155_cy_mt-y-175-191/indsForAverage_c_cx_mt-x-9-155_cy_mt-y-175-191.mat')
+lmb_mt1a = spacing;
+inputData_mt1a.lmb = lmb_mt1a;
+inputData_mt1a.maxF_all = maxF_all(indsForAverage);
+ 
+
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid';
+
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt1a] = fxn_mtFilmAndRatioCalc(inputData_mt1a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt1a.yibgn;
+    yibgtp = coatingData_mt1a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt1a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt1a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt1a.mat'],'coatingData_mt1a')
+save([saveDirMain,'/coatingData_mt1a.mat'],'coatingData_mt1a')
+
+
+%% mt 2a
+ 
+% load input data for tpx2 coated mt
+h2a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+ 
+h2a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt2a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt2a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt2a.h_naked = [25]*1e-9;
+inputData_mt2a.h_bg_naked = [0];
+ 
+inputData_mt2a.h_tpx2 = h2a_tpx2;
+inputData_mt2a.h_bg_tpx2 = h2a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131/indsForAverage_c_cx_mt-x-115-205_cy_mt-y-100-131.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131/maxFrequencies_c_cx_mt-x-115-205_cy_mt-y-100-131.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid/c_cx_mt-x-115-205_cy_mt-y-100-131/spacing_c_cx_mt-x-115-205_cy_mt-y-100-131.mat')
+lmb_mt2a = spacing;
+inputData_mt2a.lmb = lmb_mt2a;
+inputData_mt2a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_2_fr136_fr148/Stack_rigid';
+ 
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt2a] = fxn_mtFilmAndRatioCalc(inputData_mt2a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt2a.yibgn;
+    yibgtp = coatingData_mt2a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt2a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt2a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt2a.mat'],'coatingData_mt2a')
+save([saveDirMain,'/coatingData_mt2a.mat'],'coatingData_mt2a')
+ 
+
+%% mt 3a
+ 
+% load input data for tpx2 coated mt
+h3a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+ 
+h3a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt3a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt3a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt3a.h_naked = [25]*1e-9;
+inputData_mt3a.h_bg_naked = [0];
+ 
+inputData_mt3a.h_tpx2 = h3a_tpx2;
+inputData_mt3a.h_bg_tpx2 = h3a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247/maxFrequencies_c_cx_mt-x-141-90_cy_mt-y-135-247.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247/indsForAverage_c_cx_mt-x-141-90_cy_mt-y-135-247.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine/c_cx_mt-x-141-90_cy_mt-y-135-247/spacing_c_cx_mt-x-141-90_cy_mt-y-135-247.mat')
+lmb_mt3a = spacing;
+inputData_mt3a.lmb = lmb_mt3a;
+inputData_mt3a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =  '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_3_fr149_fr153/Stack_affine';
+
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt3a] = fxn_mtFilmAndRatioCalc(inputData_mt3a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt3a.yibgn;
+    yibgtp = coatingData_mt3a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt3a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt3a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt3a.mat'],'coatingData_mt3a')
+save([saveDirMain,'/coatingData_mt3a.mat'],'coatingData_mt3a')
+ 
+
+%% mt 4a
+ 
+% load input data for tpx2 coated mt
+h4a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+
+h4a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt4a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt4a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt4a.h_naked = [25]*1e-9;
+inputData_mt4a.h_bg_naked = [0];
+ 
+inputData_mt4a.h_tpx2 = h4a_tpx2;
+inputData_mt4a.h_bg_tpx2 = h4a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241/indsForAverage_c_cx_mt-x-157-61_cy_mt-y-90-241.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241/maxFrequencies_c_cx_mt-x-157-61_cy_mt-y-90-241.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-157-61_cy_mt-y-90-241/spacing_c_cx_mt-x-157-61_cy_mt-y-90-241.mat')
+lmb_mt4a = spacing;
+inputData_mt4a.lmb = lmb_mt4a;
+inputData_mt4a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid';
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt4a] = fxn_mtFilmAndRatioCalc(inputData_mt4a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt4a.yibgn;
+    yibgtp = coatingData_mt4a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt4a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt4a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt4a.mat'],'coatingData_mt4a')
+save([saveDirMain,'/coatingData_mt4a.mat'],'coatingData_mt4a')
+ 
+
+%% mt 5a
+ 
+% load input data for tpx2 coated mt
+h5a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+ 
+h5a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt5a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt5a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt5a.h_naked = [25]*1e-9;
+inputData_mt5a.h_bg_naked = [0];
+ 
+inputData_mt5a.h_tpx2 = h5a_tpx2;
+inputData_mt5a.h_bg_tpx2 = h5a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91/indsForAverage_c_cx_mt-x-246-180_cy_mt-y-245-91.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91/maxFrequencies_c_cx_mt-x-246-180_cy_mt-y-245-91.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid/c_cx_mt-x-246-180_cy_mt-y-245-91/spacing_c_cx_mt-x-246-180_cy_mt-y-245-91.mat')
+lmb_mt5a = spacing;
+inputData_mt5a.lmb = lmb_mt5a;
+inputData_mt5a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_4_fr154_fr158/Stack_rigid';
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt5a] = fxn_mtFilmAndRatioCalc(inputData_mt5a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt5a.yibgn;
+    yibgtp = coatingData_mt5a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt5a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt5a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt5a.mat'],'coatingData_mt5a')
+save([saveDirMain,'/coatingData_mt5a.mat'],'coatingData_mt5a')
+
+
+%% mt 6a
+ 
+% load input data for tpx2 coated mt
+h6a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+ 
+h6a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt6a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt6a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt6a.h_naked = [25]*1e-9;
+inputData_mt6a.h_bg_naked = [0];
+ 
+inputData_mt6a.h_tpx2 = h6a_tpx2;
+inputData_mt6a.h_bg_tpx2 = h6a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254/indsForAverage_c_cx_mt-x-189-77_cy_mt-y-8-254.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254/maxFrequencies_c_cx_mt-x-189-77_cy_mt-y-8-254.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid/c_cx_mt-x-189-77_cy_mt-y-8-254/spacing_c_cx_mt-x-189-77_cy_mt-y-8-254.mat')
+lmb_mt6a = spacing;
+inputData_mt6a.lmb = lmb_mt6a;
+inputData_mt6a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_5_fr159_fr163/Stack_rigid';
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt6a] = fxn_mtFilmAndRatioCalc(inputData_mt6a,selectCutOff);
+
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt6a.yibgn;
+    yibgtp = coatingData_mt6a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt6a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt6a.mat'],'yibgtp')
+end
+
+save([saveDir,'/coatingData_mt6a.mat'],'coatingData_mt6a')
+save([saveDirMain,'/coatingData_mt6a.mat'],'coatingData_mt6a')
+
+
+%% mt 7a
+ 
+% load input data for tpx2 coated mt
+h7a_tpx2 = [hdata_20190930_wed_mt1.y;...
+    hdata_20190930_wed_mt1.y2;...
+    ];
+ 
+h7a_bg_tpx2 = [hdata_20190930_wed_mt1.y1;...
+    hdata_20190930_wed_mt1.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt7a.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt7a.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt7a.h_naked = [25]*1e-9;
+inputData_mt7a.h_bg_naked = [0];
+ 
+inputData_mt7a.h_tpx2 = h7a_tpx2;
+inputData_mt7a.h_bg_tpx2 = h7a_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2/indsForAverage_c_cx_mt-x-90-193_cy_mt-y-249-2.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2/maxFrequencies_c_cx_mt-x-90-193_cy_mt-y-249-2.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid/c_cx_mt-x-90-193_cy_mt-y-249-2/spacing_c_cx_mt-x-90-193_cy_mt-y-249-2.mat')
+lmb_mt7a = spacing;
+inputData_mt7a.lmb = lmb_mt7a;
+inputData_mt7a.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_1_lowest/movie_6_fr164_fr168/Stack_rigid';
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt7a] = fxn_mtFilmAndRatioCalc(inputData_mt7a,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt7a.yibgn;
+    yibgtp = coatingData_mt7a.yibgtp;
+    
+    save([saveDir,'/yibgn_mt7a.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt7a.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt7a.mat'],'coatingData_mt7a')
+save([saveDirMain,'/coatingData_mt7a.mat'],'coatingData_mt7a')
+ 
+
+%% wednesday 09 30 2020, mt 4, third highest conc
+
+run([runDir,'loadMtHeightData_wednesday_mt4_20200930.m'])
+
+hdata_20200930_wed_mt4 = heightdata3;
+%% mt 1c
+ 
+% load input data for tpx2 coated mt
+h1c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h1c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt1c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt1c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt1c.h_naked = [25]*1e-9;
+inputData_mt1c.h_bg_naked = [0];
+ 
+inputData_mt1c.h_tpx2 = h1c_tpx2;
+inputData_mt1c.h_bg_tpx2 = h1c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5/indsForAverage_c_cx_mt-x-4-160_cy_mt-y-169-5.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5/maxFrequencies_c_cx_mt-x-4-160_cy_mt-y-169-5.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-4-160_cy_mt-y-169-5/spacing_c_cx_mt-x-4-160_cy_mt-y-169-5.mat')
+lmb_mt1c = spacing;
+inputData_mt1c.lmb = lmb_mt1c;
+inputData_mt1c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =       '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine';
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt1c] = fxn_mtFilmAndRatioCalc(inputData_mt1c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt1c.yibgn;
+    yibgtp = coatingData_mt1c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt1c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt1c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt1c.mat'],'coatingData_mt1c')
+save([saveDirMain,'/coatingData_mt1c.mat'],'coatingData_mt1c')
+ 
+
+%% mt 2c
+ 
+% load input data for tpx2 coated mt
+h2c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h2c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt2c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt2c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt2c.h_naked = [25]*1e-9;
+inputData_mt2c.h_bg_naked = [0];
+ 
+inputData_mt2c.h_tpx2 = h2c_tpx2;
+inputData_mt2c.h_bg_tpx2 = h2c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-91-253_cy_mt-y-253-149/indsForAverage_c_cx_mt-x-91-253_cy_mt-y-253-149.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-91-253_cy_mt-y-253-149/maxFrequencies_c_cx_mt-x-91-253_cy_mt-y-253-149.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine/c_cx_mt-x-91-253_cy_mt-y-253-149/spacing_c_cx_mt-x-91-253_cy_mt-y-253-149.mat')
+lmb_mt2c = spacing;
+inputData_mt2c.lmb = lmb_mt2c;
+inputData_mt2c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_1_fr206_fr221/Stack_affine';
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt2c] = fxn_mtFilmAndRatioCalc(inputData_mt2c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt2c.yibgn;
+    yibgtp = coatingData_mt2c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt2c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt2c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt2c.mat'],'coatingData_mt2c')
+save([saveDirMain,'/coatingData_mt2c.mat'],'coatingData_mt2c')
+
+
+%% mt 3c
+ 
+% load input data for tpx2 coated mt
+h3c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h3c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt3c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt3c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt3c.h_naked = [25]*1e-9;
+inputData_mt3c.h_bg_naked = [0];
+ 
+inputData_mt3c.h_tpx2 = h3c_tpx2;
+inputData_mt3c.h_bg_tpx2 = h3c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97/indsForAverage_c_cx_mt-x-77-248_cy_mt-y-2-97.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97/maxFrequencies_c_cx_mt-x-77-248_cy_mt-y-2-97.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-77-248_cy_mt-y-2-97/spacing_c_cx_mt-x-77-248_cy_mt-y-2-97.mat')
+lmb_mt3c = spacing;
+inputData_mt3c.lmb = lmb_mt3c;
+inputData_mt3c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid';
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt3c] = fxn_mtFilmAndRatioCalc(inputData_mt3c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt3c.yibgn;
+    yibgtp = coatingData_mt3c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt3c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt3c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt3c.mat'],'coatingData_mt3c')
+save([saveDirMain,'/coatingData_mt3c.mat'],'coatingData_mt3c')
+ 
+
+%% mt 4c
+ 
+% load input data for tpx2 coated mt
+h4c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h4c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt4c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt4c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt4c.h_naked = [25]*1e-9;
+inputData_mt4c.h_bg_naked = [0];
+ 
+inputData_mt4c.h_tpx2 = h4c_tpx2;
+inputData_mt4c.h_bg_tpx2 = h4c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140/spacing_c_cx_mt-x-7-187_cy_mt-y-57-140.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140/maxFrequencies_c_cx_mt-x-7-187_cy_mt-y-57-140.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-7-187_cy_mt-y-57-140/indsForAverage_c_cx_mt-x-7-187_cy_mt-y-57-140.mat')
+lmb_mt4c = spacing;
+inputData_mt4c.lmb = lmb_mt4c;
+inputData_mt4c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =      '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid';
+
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt4c] = fxn_mtFilmAndRatioCalc(inputData_mt4c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt4c.yibgn;
+    yibgtp = coatingData_mt4c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt4c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt4c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt4c.mat'],'coatingData_mt4c')
+save([saveDirMain,'/coatingData_mt4c.mat'],'coatingData_mt4c')
+ 
+
+%% mt 5c
+ 
+% load input data for tpx2 coated mt
+h5c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h5c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt5c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt5c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt5c.h_naked = [25]*1e-9;
+inputData_mt5c.h_bg_naked = [0];
+ 
+inputData_mt5c.h_tpx2 = h5c_tpx2;
+inputData_mt5c.h_bg_tpx2 = h5c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185/spacing_c_cx_mt-x-197-254_cy_mt-y-253-185.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185/maxFrequencies_c_cx_mt-x-197-254_cy_mt-y-253-185.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid/c_cx_mt-x-197-254_cy_mt-y-253-185/indsForAverage_c_cx_mt-x-197-254_cy_mt-y-253-185.mat')
+lmb_mt5c = spacing;
+inputData_mt5c.lmb = lmb_mt5c;
+inputData_mt5c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_2_fr222_fr226/Stack_rigid';
+
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt5c] = fxn_mtFilmAndRatioCalc(inputData_mt5c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt5c.yibgn;
+    yibgtp = coatingData_mt5c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt5c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt5c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt5c.mat'],'coatingData_mt5c')
+save([saveDirMain,'/coatingData_mt5c.mat'],'coatingData_mt5c')
+
+
+%% mt 6c
+ 
+% load input data for tpx2 coated mt
+h6c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h6c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt6c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt6c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt6c.h_naked = [25]*1e-9;
+inputData_mt6c.h_bg_naked = [0];
+ 
+inputData_mt6c.h_tpx2 = h6c_tpx2;
+inputData_mt6c.h_bg_tpx2 = h6c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90/indsForAverage_c_cx_mt-x-164-252_cy_mt-y-195-90.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90/maxFrequencies_c_cx_mt-x-164-252_cy_mt-y-195-90.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-164-252_cy_mt-y-195-90/spacing_c_cx_mt-x-164-252_cy_mt-y-195-90.mat')
+lmb_mt6c = spacing;
+inputData_mt6c.lmb = lmb_mt6c;
+inputData_mt6c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine';
+
+
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt6c] = fxn_mtFilmAndRatioCalc(inputData_mt6c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt6c.yibgn;
+    yibgtp = coatingData_mt6c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt6c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt6c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt6c.mat'],'coatingData_mt6c')
+save([saveDirMain,'/coatingData_mt6c.mat'],'coatingData_mt6c')
+ 
+
+%% mt 7c
+
+% load input data for tpx2 coated mt
+h7c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h7c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt7c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt7c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt7c.h_naked = [25]*1e-9;
+inputData_mt7c.h_bg_naked = [0];
+ 
+inputData_mt7c.h_tpx2 = h7c_tpx2;
+inputData_mt7c.h_bg_tpx2 = h7c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175/indsForAverage_c_cx_mt-x-88-141_cy_mt-y-1-175.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175/maxFrequencies_c_cx_mt-x-88-141_cy_mt-y-1-175.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine/c_cx_mt-x-88-141_cy_mt-y-1-175/spacing_c_cx_mt-x-88-141_cy_mt-y-1-175.mat')
+lmb_mt7c = spacing;
+inputData_mt7c.lmb = lmb_mt7c;
+inputData_mt7c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =     '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_3_fr227_fr231/Stack_affine';
+ 
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt7c] = fxn_mtFilmAndRatioCalc(inputData_mt7c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt7c.yibgn;
+    yibgtp = coatingData_mt7c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt7c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt7c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt7c.mat'],'coatingData_mt7c')
+save([saveDirMain,'/coatingData_mt7c.mat'],'coatingData_mt7c')
+ 
+
+%% mt 8c
+ 
+% load input data for tpx2 coated mt
+h8c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h8c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt8c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt8c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt8c.h_naked = [25]*1e-9;
+inputData_mt8c.h_bg_naked = [0];
+ 
+inputData_mt8c.h_tpx2 = h8c_tpx2;
+inputData_mt8c.h_bg_tpx2 = h8c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-78-86_cy_mt-y-252-10/indsForAverage_c_cx_mt-x-78-86_cy_mt-y-252-10.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-78-86_cy_mt-y-252-10/maxFrequencies_c_cx_mt-x-78-86_cy_mt-y-252-10.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-78-86_cy_mt-y-252-10/spacing_c_cx_mt-x-78-86_cy_mt-y-252-10.mat')
+lmb_mt8c = spacing;
+inputData_mt8c.lmb = lmb_mt8c;
+inputData_mt8c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine';
+
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt8c] = fxn_mtFilmAndRatioCalc(inputData_mt8c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt8c.yibgn;
+    yibgtp = coatingData_mt8c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt8c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt8c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt8c.mat'],'coatingData_mt8c')
+save([saveDirMain,'/coatingData_mt8c.mat'],'coatingData_mt8c')
+ 
+
+%% mt 9c
+ 
+% load input data for tpx2 coated mt
+h9c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h9c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt9c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt9c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt9c.h_naked = [25]*1e-9;
+inputData_mt9c.h_bg_naked = [0];
+ 
+inputData_mt9c.h_tpx2 = h9c_tpx2;
+inputData_mt9c.h_bg_tpx2 = h9c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10/indsForAverage_c_cx_mt-x-169-212_cy_mt-y-187-10.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10/maxFrequencies_c_cx_mt-x-169-212_cy_mt-y-187-10.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-169-212_cy_mt-y-187-10/spacing_c_cx_mt-x-169-212_cy_mt-y-187-10.mat')
+lmb_mt9c = spacing;
+inputData_mt9c.lmb = lmb_mt9c;
+inputData_mt9c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine';
+ 
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt9c] = fxn_mtFilmAndRatioCalc(inputData_mt9c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt9c.yibgn;
+    yibgtp = coatingData_mt9c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt9c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt9c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt9c.mat'],'coatingData_mt9c')
+save([saveDirMain,'/coatingData_mt9c.mat'],'coatingData_mt9c')
+ 
+
+%% mt 10c
+ 
+% load input data for tpx2 coated mt
+h10c_tpx2 = [hdata_20200930_wed_mt4.y;...
+    hdata_20200930_wed_mt4.y2;...
+    ];
+ 
+h10c_bg_tpx2 = [hdata_20200930_wed_mt4.y1;...
+    hdata_20200930_wed_mt4.y3;...
+    ];
+ 
+selectCutOff = 0;
+if selectCutOff == 0
+    inputData_mt10c.yibgn = 1000;
+    clear yibgn
+    
+    inputData_mt10c.yibgtp = 1000;
+    clear yibgtp
+end
+ 
+% load input data for naked mt
+inputData_mt10c.h_naked = [25]*1e-9;
+inputData_mt10c.h_bg_naked = [0];
+ 
+inputData_mt10c.h_tpx2 = h10c_tpx2;
+inputData_mt10c.h_bg_tpx2 = h10c_bg_tpx2;
+ 
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182/indsForAverage_c_cx_mt-x-252-186_cy_mt-y-59-182.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182/maxFrequencies_c_cx_mt-x-252-186_cy_mt-y-59-182.mat')
+load('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine/c_cx_mt-x-252-186_cy_mt-y-59-182/spacing_c_cx_mt-x-252-186_cy_mt-y-59-182.mat')
+lmb_mt10c = spacing;
+inputData_mt10c.lmb = lmb_mt10c;
+inputData_mt10c.maxF_all = maxF_all(indsForAverage);
+ 
+ 
+clear spacing
+clear maxF_all
+clear indsForAverage
+ 
+saveDir =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/afm data stevens/AFM Data Reviewer 3/Wednesday_20190930_mt_4_highest/movie_4_fr232_fr236/Stack_affine';
+ 
+ 
+% calculate film thickness, ratios, and std devs via error propagation
+[coatingData_mt10c] = fxn_mtFilmAndRatioCalc(inputData_mt10c,selectCutOff);
+ 
+if selectCutOff == 1
+    
+    yibgn = coatingData_mt10c.yibgn;
+    yibgtp = coatingData_mt10c.yibgtp;
+    
+    save([saveDir,'/yibgn_mt10c.mat'],'yibgn')
+    save([saveDir,'/yibgtp_mt10c.mat'],'yibgtp')
+end
+ 
+save([saveDir,'/coatingData_mt10c.mat'],'coatingData_mt10c')
+save([saveDirMain,'/coatingData_mt10c.mat'],'coatingData_mt10c')
+ 
+
+
 
 
 %% just theory curve
@@ -3858,10 +4848,10 @@ yafz = 24;
 tvfz = 20;
 axesLw = 2;
 
-tpData3 = 'gx'; % 50-150nM
-tpData1 = 'b^'; % 100-300nM
-tpData4 = 'mo'; % 300-900nM
-tpData2 = 'rs'; % 400-1200nM
+tpData1 = 'gx'; % 50-150nM
+tpData3 = 'b^'; % 300-900nM
+tpData2 = 'mo'; % 100-300nM
+tpData4 = 'rs'; % 400-1200nM
 
 tpLw = 1.5;
 ms = 12;
@@ -3869,75 +4859,78 @@ grid off
 
 plot(h,lmb*1e3,'k-','LineWidth',5)
 
-plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms) %.5x
-plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms) % 1x
-plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms) % 4x
-plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms) % 3x
+plotLmbVsH(coatingData_mt24,tpData1,tpLw,ms) %.5x
+plotLmbVsH(coatingData_mt1,tpData3,tpLw,ms) % 1x
+plotLmbVsH(coatingData_mt45,tpData2,tpLw,ms) % 4x
+plotLmbVsH(coatingData_mt7,tpData4,tpLw,ms) % 3x
 
 % 100-300nM, 1x
-plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt3,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt4,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt5,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt6,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt34,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt35,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt36,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt37,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt38,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt39,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt40,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt41,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt42,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt43,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt44,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt2,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt3,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt4,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt5,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt6,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt34,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt35,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt36,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt37,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt38,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt39,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt40,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt41,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt42,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt43,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt44,tpData3,tpLw,ms)
 
 % 300-900nM, 3x
-plotLmbVsH(coatingData_mt46,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt47,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt48,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt49,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt50,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt51,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt52,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt53,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt54,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt55,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt56,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt57,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt58,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt46,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt47,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt48,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt49,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt50,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt51,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt52,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt53,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt54,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt55,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt56,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt57,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt58,tpData2,tpLw,ms)
 
 % 400-1200nM, 4x
-plotLmbVsH(coatingData_mt8,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt9,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt8,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt9,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt28,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt29,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt30,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt31,tpData4,tpLw,ms)
 % plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData4,tpLw,ms)
 
 
 % 50-150nM, 0.5x
 % NOTE: longer than 750 nm: 10, 11, 12, 13, 15, 24
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms) %.5x
-plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
-% plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt10,tpData1,tpLw,ms) %.5x
+plotLmbVsH(coatingData_mt11,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt12,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt13,tpData1,tpLw,ms)
+
+plotLmbVsH(coatingData_mt14,tpData1,tpLw,ms) % long
+
+plotLmbVsH(coatingData_mt15,tpData1,tpLw,ms)
+
+plotLmbVsH(coatingData_mt16,tpData1,tpLw,ms) % long below
+plotLmbVsH(coatingData_mt17,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt18,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt19,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt20,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt21,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt22,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt23,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt25,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt24,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt26,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt27,tpData1,tpLw,ms)
 
 %plot(mean([film_mt1 film_mt3 film_mt3 film_mt4 film_mt5 film_mt6]),229,'bo')
 xlim([0 31])
@@ -4004,10 +4997,10 @@ tvfz = 20;
 axesLw = 2;
 
 tpData = 'ko';
-tpData3 = tpData; % 50-150nM
-tpData1 = tpData; % 100-300nM
-tpData4 = tpData; % 300-900nM
-tpData2 = tpData; % 400-1200nM
+tpData1 = tpData; % 50-150nM
+tpData3 = tpData; % 100-300nM
+tpData2 = tpData; % 300-900nM
+tpData4 = tpData; % 400-1200nM
 
 tpLw = 2;
 ms = 10;
@@ -4015,73 +5008,73 @@ grid off
 
 plot(h,lmb*1e3,'k-','LineWidth',5)
 
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt10,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt1,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt45,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt7,tpData4,tpLw,ms)
 
 % 100-300nM, 1x
-plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt3,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt4,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt5,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt6,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt34,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt35,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt36,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt37,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt38,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt39,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt40,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt41,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt42,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt43,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt44,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt2,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt3,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt4,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt5,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt6,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt34,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt35,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt36,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt37,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt38,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt39,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt40,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt41,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt42,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt43,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt44,tpData3,tpLw,ms)
 
 % 300-900nM, 3x
-plotLmbVsH(coatingData_mt46,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt47,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt48,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt49,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt50,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt51,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt52,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt53,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt54,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt55,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt56,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt57,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt58,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt46,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt47,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt48,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt49,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt50,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt51,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt52,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt53,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt54,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt55,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt56,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt57,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt58,tpData2,tpLw,ms)
 
 % 400-1200nM, 4x
-plotLmbVsH(coatingData_mt8,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt9,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt8,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt9,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt28,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt29,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt30,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt31,tpData4,tpLw,ms)
 % plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData4,tpLw,ms)
 
 
 % 50-150nM, 0.5x
-plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt11,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt12,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt13,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt14,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt15,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt16,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt17,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt18,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt19,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt20,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt21,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt22,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt23,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt24,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt25,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt26,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt27,tpData1,tpLw,ms)
 
 %plot(mean([film_mt1 film_mt3 film_mt3 film_mt4 film_mt5 film_mt6]),229,'bo')
 xlim([0 31])
@@ -4121,7 +5114,7 @@ gcf;
 doLatex = 0;
 simplePlotFormat( 'Film thickness \ith\rm (nm)', 'Droplet spacing \lambda_{max} (nm)', xafz, yafz, tvfz, axesLw, doLatex )
 
-doSave = 1;
+doSave = 0;
 
 
 box on
@@ -4193,10 +5186,10 @@ tvfz = 20;
 axesLw = 2;
 
 tpData = 'ko';
-tpData3 = tpData; % 50-150nM
-tpData1 = tpData; % 100-300nM
-tpData4 = tpData; % 300-900nM
-tpData2 = tpData; % 400-1200nM
+tpData1 = tpData; % 50-150nM
+tpData3 = tpData; % 100-300nM
+tpData2 = tpData; % 300-900nM
+tpData4 = tpData; % 400-1200nM
 
 tpLw = 2;
 ms = 10;
@@ -4206,73 +5199,73 @@ plot(h,lmb*1e3,'k-','LineWidth',5)%,'MarkerSize',ms)
 % plot(hi,lmbi(1:78)*1e3,'k-*','LineWidth',5,'MarkerSize',ms)
 plot(h,lmbeff*1e3,'b-','LineWidth',5)%,'MarkerSize',ms)
 
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt10,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt1,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt45,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt7,tpData4,tpLw,ms)
 
 % 100-300nM, 1x
-plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt3,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt4,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt5,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt6,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt34,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt35,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt36,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt37,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt38,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt39,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt40,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt41,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt42,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt43,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt44,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt2,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt3,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt4,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt5,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt6,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt34,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt35,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt36,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt37,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt38,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt39,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt40,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt41,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt42,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt43,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt44,tpData3,tpLw,ms)
 
 % 300-900nM, 3x
-plotLmbVsH(coatingData_mt46,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt47,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt48,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt49,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt50,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt51,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt52,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt53,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt54,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt55,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt56,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt57,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt58,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt46,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt47,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt48,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt49,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt50,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt51,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt52,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt53,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt54,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt55,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt56,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt57,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt58,tpData2,tpLw,ms)
 
 % 400-1200nM, 4x
-plotLmbVsH(coatingData_mt8,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt9,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt8,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt9,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt28,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt29,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt30,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt31,tpData4,tpLw,ms)
 % plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData4,tpLw,ms)
 
 
 % 50-150nM, 0.5x
-plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt11,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt12,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt13,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt14,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt15,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt16,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt17,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt18,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt19,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt20,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt21,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt22,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt23,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt24,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt25,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt26,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt27,tpData1,tpLw,ms)
 
 %plot(mean([film_mt1 film_mt3 film_mt3 film_mt4 film_mt5 film_mt6]),229,'bo')
 xlim([0 31])
@@ -4389,10 +5382,10 @@ yafz = 24;
 tvfz = 20;
 axesLw = 2;
 
-tpData3 = 'gx'; % 50-150nM
-tpData1 = 'b^'; % 100-300nM
-tpData4 = 'mo'; % 300-900nM
-tpData2 = 'rs'; % 400-1200nM
+tpData1 = 'gx'; % 50-150nM
+tpData3 = 'b^'; % 100-300nM
+tpData2 = 'mo'; % 300-900nM
+tpData4 = 'rs'; % 400-1200nM
 
 tpLw = 1.5;
 ms = 12;
@@ -4404,73 +5397,143 @@ plot(h,lmbeff*1e3,'k-','LineWidth',5)%,'MarkerSize',ms)
 plot(h,lmb*1e3,'k--','LineWidth',2.5)
 
 
-plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt10,tpData1,tpLw,ms) %conc1
+plotLmbVsH(coatingData_mt1,tpData3,tpLw,ms) %conc2
+plotLmbVsH(coatingData_mt45,tpData2,tpLw,ms) %conc3
+plotLmbVsH(coatingData_mt7,tpData4,tpLw,ms) %conc4
 
 % 100-300nM, 1x
-plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt3,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt4,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt5,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt6,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt34,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt35,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt36,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt37,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt38,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt39,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt40,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt41,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt42,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt43,tpData1,tpLw,ms)
-plotLmbVsH(coatingData_mt44,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt2,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt3,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt4,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt5,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt6,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt34,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt35,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt36,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt37,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt38,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt39,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt40,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt41,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt42,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt43,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt44,tpData3,tpLw,ms)
 
 % 300-900nM, 3x
-plotLmbVsH(coatingData_mt46,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt47,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt48,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt49,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt50,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt51,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt52,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt53,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt54,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt55,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt56,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt57,tpData4,tpLw,ms)
-plotLmbVsH(coatingData_mt58,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt46,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt47,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt48,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt49,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt50,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt51,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt52,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt53,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt54,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt55,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt56,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt57,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt58,tpData2,tpLw,ms)
 
 % 400-1200nM, 4x
-plotLmbVsH(coatingData_mt8,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt9,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt8,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt9,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt28,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt29,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt30,tpData4,tpLw,ms)
+plotLmbVsH(coatingData_mt31,tpData4,tpLw,ms)
 % plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
-plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms)
+plotLmbVsH(coatingData_mt33,tpData4,tpLw,ms)
 
 
 % 50-150nM, 0.5x
-plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms)
-plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms)
+plotLmbVsH(coatingData_mt11,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt12,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt13,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt14,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt15,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt16,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt17,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt18,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt19,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt20,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt21,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt22,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt23,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt24,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt25,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt26,tpData1,tpLw,ms)
+plotLmbVsH(coatingData_mt27,tpData1,tpLw,ms)
+
+
+% for nature physics submission, saving csv files
+% plotLmbVsH(coatingData_mt10,tpData3,tpLw,ms,10,1) %conc1
+% plotLmbVsH(coatingData_mt1,tpData1,tpLw,ms,1,2) %conc2
+% plotLmbVsH(coatingData_mt45,tpData4,tpLw,ms,45,3) %conc3
+% plotLmbVsH(coatingData_mt7,tpData2,tpLw,ms,7,4) %conc4
+% 
+% % 100-300nM, 1x
+% plotLmbVsH(coatingData_mt2,tpData1,tpLw,ms,2,2)
+% plotLmbVsH(coatingData_mt3,tpData1,tpLw,ms,3,2)
+% plotLmbVsH(coatingData_mt4,tpData1,tpLw,ms,4,2)
+% plotLmbVsH(coatingData_mt5,tpData1,tpLw,ms,5,2)
+% plotLmbVsH(coatingData_mt6,tpData1,tpLw,ms,6,2)
+% plotLmbVsH(coatingData_mt34,tpData1,tpLw,ms,34,2)
+% plotLmbVsH(coatingData_mt35,tpData1,tpLw,ms,35,2)
+% plotLmbVsH(coatingData_mt36,tpData1,tpLw,ms,36,2)
+% plotLmbVsH(coatingData_mt37,tpData1,tpLw,ms,37,2)
+% plotLmbVsH(coatingData_mt38,tpData1,tpLw,ms,38,2)
+% plotLmbVsH(coatingData_mt39,tpData1,tpLw,ms,39,2)
+% plotLmbVsH(coatingData_mt40,tpData1,tpLw,ms,40,2)
+% plotLmbVsH(coatingData_mt41,tpData1,tpLw,ms,41,2)
+% plotLmbVsH(coatingData_mt42,tpData1,tpLw,ms,42,2)
+% plotLmbVsH(coatingData_mt43,tpData1,tpLw,ms,43,2)
+% plotLmbVsH(coatingData_mt44,tpData1,tpLw,ms,44,2)
+% 
+% % 300-900nM, 3x
+% plotLmbVsH(coatingData_mt46,tpData4,tpLw,ms,46,3)
+% plotLmbVsH(coatingData_mt47,tpData4,tpLw,ms,47,3)
+% plotLmbVsH(coatingData_mt48,tpData4,tpLw,ms,48,3)
+% plotLmbVsH(coatingData_mt49,tpData4,tpLw,ms,49,3)
+% plotLmbVsH(coatingData_mt50,tpData4,tpLw,ms,50,3)
+% plotLmbVsH(coatingData_mt51,tpData4,tpLw,ms,51,3)
+% plotLmbVsH(coatingData_mt52,tpData4,tpLw,ms,52,3)
+% plotLmbVsH(coatingData_mt53,tpData4,tpLw,ms,53,3)
+% plotLmbVsH(coatingData_mt54,tpData4,tpLw,ms,54,3)
+% plotLmbVsH(coatingData_mt55,tpData4,tpLw,ms,55,3)
+% plotLmbVsH(coatingData_mt56,tpData4,tpLw,ms,56,3)
+% plotLmbVsH(coatingData_mt57,tpData4,tpLw,ms,57,3)
+% plotLmbVsH(coatingData_mt58,tpData4,tpLw,ms,58,3)
+% 
+% % 400-1200nM, 4x
+% plotLmbVsH(coatingData_mt8,tpData2,tpLw,ms,8,4)
+% plotLmbVsH(coatingData_mt9,tpData2,tpLw,ms,9,4)
+% plotLmbVsH(coatingData_mt28,tpData2,tpLw,ms,28,4)
+% plotLmbVsH(coatingData_mt29,tpData2,tpLw,ms,29,4)
+% plotLmbVsH(coatingData_mt30,tpData2,tpLw,ms,30,4)
+% plotLmbVsH(coatingData_mt31,tpData2,tpLw,ms,31,4)
+% % plotLmbVsH(coatingData_mt32,tpData2,tpLw,ms)
+% plotLmbVsH(coatingData_mt33,tpData2,tpLw,ms,33,4)
+% 
+% 
+% % 50-150nM, 0.5x
+% plotLmbVsH(coatingData_mt11,tpData3,tpLw,ms,11,1)
+% plotLmbVsH(coatingData_mt12,tpData3,tpLw,ms,12,1)
+% plotLmbVsH(coatingData_mt13,tpData3,tpLw,ms,13,1)
+% plotLmbVsH(coatingData_mt14,tpData3,tpLw,ms,14,1)
+% plotLmbVsH(coatingData_mt15,tpData3,tpLw,ms,15,1)
+% plotLmbVsH(coatingData_mt16,tpData3,tpLw,ms,16,1)
+% plotLmbVsH(coatingData_mt17,tpData3,tpLw,ms,17,1)
+% plotLmbVsH(coatingData_mt18,tpData3,tpLw,ms,18,1)
+% plotLmbVsH(coatingData_mt19,tpData3,tpLw,ms,19,1)
+% plotLmbVsH(coatingData_mt20,tpData3,tpLw,ms,20,1)
+% plotLmbVsH(coatingData_mt21,tpData3,tpLw,ms,21,1)
+% plotLmbVsH(coatingData_mt22,tpData3,tpLw,ms,22,1)
+% plotLmbVsH(coatingData_mt23,tpData3,tpLw,ms,23,1)
+% plotLmbVsH(coatingData_mt24,tpData3,tpLw,ms,24,1)
+% plotLmbVsH(coatingData_mt25,tpData3,tpLw,ms,25,1)
+% plotLmbVsH(coatingData_mt26,tpData3,tpLw,ms,26,1)
+% plotLmbVsH(coatingData_mt27,tpData3,tpLw,ms,27,1)
 
 %plot(mean([film_mt1 film_mt3 film_mt3 film_mt4 film_mt5 film_mt6]),229,'bo')
 xlim([0 31])
