@@ -7,6 +7,7 @@ addpath(genpath('/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/da
 saveDirMain =    '/Users/sagarsetru/Documents/Princeton/woods hole physio 2019/figures';
 
 
+
 %% all data
 
 doSave = 0;
@@ -704,6 +705,13 @@ l_1 = [300
 1100
 1200
 1500
+1100
+700
+850
+1200
+1200
+1950
+1950
 ];
 
 lmb_1 = [64
@@ -724,6 +732,13 @@ lmb_1 = [64
 186
 309
 212
+68
+240
+223
+198
+101
+149
+216
 ];
 
 l_2 = [400
@@ -778,6 +793,16 @@ l_3 = [800
 1650
 1900
 2500
+1450
+1250
+1350
+1350
+550
+800
+1350
+1900
+1400
+1000
 ];
 
 lmb_3 = [158
@@ -794,6 +819,16 @@ lmb_3 = [158
 276
 314
 313
+144
+213
+90
+269
+273
+278
+273
+272
+280
+336
 ];
 
 l_4 = [750
@@ -822,7 +857,7 @@ lmb_4 = [255
 [r4,p4]=corrcoef(l_4,lmb_4)
 
 
-[r1,p1]=corrcoef(l_1(end-5:end),lmb_1(end-5:end))
-[r2,p2]=corrcoef(l_2(9:end-1),lmb_2(9:end-1))
-[r3,p3]=corrcoef(l_3(2:end-2),lmb_3(2:end-2))
-[r4,p4]=corrcoef(l_4,lmb_4)
+% [r1,p1]=corrcoef(l_1(end-5:end),lmb_1(end-5:end))
+% [r2,p2]=corrcoef(l_2(9:end-1),lmb_2(9:end-1))
+% [r3,p3]=corrcoef(l_3(2:end-2),lmb_3(2:end-2))
+% [r4,p4]=corrcoef(l_4,lmb_4)
