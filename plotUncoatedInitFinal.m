@@ -27,6 +27,7 @@ xPlot_un = psp.unStart:pix_to_nm:length(un)*pix_to_nm+psp.unStart-pix_to_nm;
 xPlot_init = psp.initStart:pix_to_nm:length(init)*pix_to_nm+psp.initStart-pix_to_nm;
 xPlot_drop = psp.dropStart:pix_to_nm:length(drop)*pix_to_nm+psp.dropStart-pix_to_nm;
 
+% 0:pix_to_nm:size(y,2)*pix_to_nm-pix_to_nm
 % center around 25nm for uncoated
 un = un-mean(un)+25;
 
@@ -55,6 +56,8 @@ end
 
 plot(xPlot_drop,drop,psp.dropColor,'LineWidth',psp.lw);
 
+mt_length = max(xPlot_drop)-min(xPlot_drop);
+
 % lgd = legend({'Uncoated','Initially coated','After droplet formation'},...
 %     'Position',[.63 .37 .1 .1]);
 % legend boxoff
@@ -72,6 +75,8 @@ set(gca, 'XTick', psp.xTicks)
 simplePlotFormat( psp.xAxisLabel, psp.yAxisLabel, psp.xafz, psp.yafz, psp.tvfz, psp.axesLw, psp.doLatex )
 
 if psp.doSave == 1
+    
+    save([psp.saveDirMain,psp.fname,'_length_nm.mat'],'mt_length')
     
     saveCurrentFigure_fig_pdf_svg_png_jpg_eps(gcf,[psp.saveDirMain,psp.fname,'_lineScans'])
 
